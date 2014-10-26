@@ -8,6 +8,9 @@
 # Java class files
 *.class
 
+#Java classpath
+*.classpath
+
 # Generated files
 bin/
 gen/
@@ -37,7 +40,8 @@ proguard/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
