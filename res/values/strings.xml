@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HVS</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="testbutton">Hohl Testdaten</string>
+    <string name="title_activity_temp_result">TempResultActivity</string>
+    <string name="title_activity_alle_ligen">AlleLigenActivity</string>
+    <string name="alleLigenTemp">Übersicht über alle Ligen im HVS</string>
+    <string name="title_activity_liga">LigaActivity</string>
+    <string name="ligaTitel">DEFAULT Titel der Liga</string>
+    <string name="spiel_datum"><b>Datum</b></string>
+    <string name="heimteam"><b>Heim</b></string>
+    <string name="gastteam"><b>Gast</b></string>
+    <string name="ergebnis"><b>Ergebnis</b></string>
+    <string name="liga_maennlich"><b>Männer</b></string>
+    <string name="liga_weiblich"><b>Frauen</b></string>
+    <string name="loading_0">Loading (0%)</string>
+    <string name="weiterAlleLigen">Weiter zu allen Ligen</string>
+    <string name="auswahl">Bitte wählen Sie die Ligen aus, die sie benutzen möchten</string>
+    <string name="initialData">Datenabgleich starten</string>
+
+</resources>
