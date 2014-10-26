@@ -4,9 +4,18 @@
     tools:context="com.example.hvs.AlleLigenActivity" >
 
     <item
+        android:id="@+id/addLiga"
+        android:title="@string/addLiga"
+        android:icon="@drawable/abc_ic_commit_search_api_holo_light"
+        app:showAsAction="always" />
+    
+    <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never"/>
+    
+    
+        
 
 </menu>

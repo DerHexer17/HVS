@@ -41,6 +41,7 @@ public class LigaActivity extends ActionBarActivity {
 		
 		dbh = new DatabaseHelper(getApplicationContext());
 		
+		//Der Spinner für die Auswahl der einzelnen Spieltage
 		addSpieltageToSpinner(dbh.getSpieltage(ligaNr), dbh.getAllLeagueTeams(ligaNr));
 		Spinner spinnerSpieltage = (Spinner) findViewById(R.id.spinnerSpieltage);
 		spinnerSpieltage.setOnItemSelectedListener(new CustomOnItemSelectedListener(dbh, ligaNr, this));

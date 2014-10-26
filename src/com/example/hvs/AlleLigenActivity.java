@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AlleLigenActivity extends ActionBarActivity {
 
@@ -29,8 +30,16 @@ public class AlleLigenActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alle_ligen);
 		dbh = new DatabaseHelper(getApplicationContext());
+		
+		//Alle Ligen bedeutet nur Ligen, die initialisiert wurden
 		alleLigen = dbh.getAlleLigen();
 		TableLayout table = (TableLayout) findViewById(R.id.tabelleAlleLigen);
+		
+		/*
+		 * Pro Liga ein Button, der in einer Tabelle angeordnet wird
+		 * Außerdem wird ein passender onClickListener hinzugefügt
+		 */
+		
 		for(Liga l : alleLigen){
 			Button bt = new Button(getApplicationContext());
 			TableRow row = new TableRow(getApplicationContext());
@@ -46,7 +55,6 @@ public class AlleLigenActivity extends ActionBarActivity {
 	            	 bundle.putInt("nummer", ligaNr);
 	            	 intent.putExtras(bundle);
 	            	 Liga l = dbh.getLiga(ligaNr);
-	            	 //new AsyncHttpTask(getApplicationContext(), ligaNr, true, dbh).execute(l.getLink());
 	            	 startActivity(intent);
 	             }
 	         });
@@ -65,19 +73,15 @@ public class AlleLigenActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	
-	public void callLiga(View view){
-		Intent intent = new Intent(getApplicationContext(), LigaActivity.class);
-		intent.putExtra("ligaID", 10007);
-		startActivity(intent);
+		// Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.addLiga:
+	        	Toast.makeText(getApplicationContext(), 
+	    				"Add Button erfolgreich gedrückt",
+	    				Toast.LENGTH_SHORT).show();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 }

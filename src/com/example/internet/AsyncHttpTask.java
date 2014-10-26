@@ -174,7 +174,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	        			prüfung.set(s.getDateYear(), s.getDateMonth(), s.getDateDay());
 	        			long millisec = prüfung.getTimeInMillis()-aktuell.getTimeInMillis();
 	        			
-	        			if(millisec > 86400000){
+	        			if(millisec > 86400000){//Ist genau die Millisekundenzahl eines Tages
 	        				if(spieltagsNr>0){
 	        					dbh.createSpieltag(spieltag);
 	        				}
@@ -196,19 +196,20 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	        			dbh.createSpiel(s);
 	        	}
 	        	dbh.createSpieltag(spieltag);
-	        	Log.d("Spieltag", "SpieltagsNr = "+spieltagsNr);
-	        	Log.d(TAG, "Alle Spiele in die Datenbank geschrieben, insgesamt "+z+" Datensätze neu hinzu");
+	        	
         	}
-        	//setProgressBarIndeterminateVisibility(false);
-        	//mDialog.dismiss();
+        	
+        	//Update des Ladestandes
         	TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
         	double ladestatus = iteration/numberOfIterations;
         	ladestatus = ladestatus*100;
         	ladestatus = Math.round(ladestatus);
         	loadingText.setText("Loading ("+ladestatus+"%)");
         	
+        	//Wenn alle Daten abgeglichen wurden gehts in die Verzweigung
         	if(iteration == numberOfIterations){
-	        	Button bt = (Button) activity.findViewById(R.id.button2);
+	        	//Der Button um zur Übersicht der Ligen zu gelangen wird eingeblendet
+        		Button bt = (Button) activity.findViewById(R.id.button2);
 	        	bt.setVisibility(View.VISIBLE);
 	        	bt.setText("Weiter zu allen Ligen");
 	        	

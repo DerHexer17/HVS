@@ -42,7 +42,6 @@ import android.widget.Toast;
 public class StartActivity extends ActionBarActivity {
 
 	DatabaseHelper dbh;
-	String TAG = "Initial";
 	int ladestatus;
 	List<Liga> ligenGlobal;
 	
@@ -56,13 +55,12 @@ public class StartActivity extends ActionBarActivity {
 		
 		//Erster Logeintrag. Vorerst rudimentär, aber wichtig, um zu prüfen, ob wir die Daten vom HVS einmal komplett holen müssen
 		dbh.createLog("App gestartet");
-		Log.d(TAG, "Log Eintrag in DB geschrieben");
 		
-		/*
 		if(dbh.getAllLogs().size()>1){
 			callAlleLigen(findViewById(R.id.button1));
-		}*/
+		}
 		
+		//Vorläufige Liste aller Ligen, die wir anbieten
 		List<Liga> ligen = new ArrayList<Liga>();
 				
 		Liga sac = new Liga();
@@ -73,8 +71,7 @@ public class StartActivity extends ActionBarActivity {
 		sac.setGeschlecht("männlich");
 		sac.setSaison("2014/2015");
 		sac.setPokal(0);
-		ligen.add(sac);
-		
+		ligen.add(sac);		
 		
 		Liga sacw = new Liga();
 		sacw.setLigaNr(10001);
@@ -126,6 +123,7 @@ public class StartActivity extends ActionBarActivity {
 		vbww.setPokal(0);
 		ligen.add(vbww);
 		
+		//Anzeige der verfügbaren Liste in Tabelle mit CheckBox
 		TableLayout ligenauswahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
 		for(Liga l : ligen){
 			TableRow tr = new TableRow(getApplicationContext());
@@ -140,6 +138,7 @@ public class StartActivity extends ActionBarActivity {
 			
 		}
 		
+		//Die Liste unserer Ligen brauchen wir global in der Activity
 		ligenGlobal = ligen;
 	}
 
@@ -170,6 +169,7 @@ public class StartActivity extends ActionBarActivity {
 		this.ladestatus = ladestatus;
 	}
 
+	//Diese Methode startet die Datenabfrage und ist mit einem Button verknüpft. Vielleicht später auch ohne Button automatisierbar
 	public void dataTest(View view){
 		
 		if(isNetworkAvailable()==false){
@@ -177,13 +177,10 @@ public class StartActivity extends ActionBarActivity {
 		}
 		
 		initial();
-        
-        
-        //Button bt = (Button) findViewById(R.id.button2);
-        //bt.setText("Jetzt zur nächsten Activity");
+
 	}
 	
-	//Einfacher Check, ob das Internet zur Verfügung steht
+	//Einfacher Check, ob das Internet zur Verfügung steht (Hilfsmethode)
 	public boolean isNetworkAvailable() {
     ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
     NetworkInfo networkInfo = cm.getActiveNetworkInfo();
@@ -195,6 +192,7 @@ public class StartActivity extends ActionBarActivity {
     return false;
 	} 
 	
+	//Start der nächsten Activity mit Anzeige aller geladenen Ligen
 	public void callAlleLigen(View view){
 		Intent intent = new Intent(getApplicationContext(), AlleLigenActivity.class);
 		Bundle bundle = new Bundle();
@@ -202,12 +200,18 @@ public class StartActivity extends ActionBarActivity {
 		startActivity(intent);
 	}
 	
+	//Die Hauptmethode, in der wir die Daten aus dem Internet holen
 	public void initial(){
+		//Mit dieser Liste füttern wir dann gleich unsere AsyncHttpTask
 		List<Liga> initialLigen = new ArrayList<Liga>();
 		
+		//Unsere Tabelle mit den Checkboxen um zu sehen, welche Ligen für den Datenaustausch gewählt wurden
 		TableLayout ligenwahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
 		
+		//Um unnötige Nutzerinteraktionen zu vermeiden, blenden wir diese Tabelle jetzt aus
 		ligenwahl.setVisibility(View.INVISIBLE);
+		
+		//Wir iterieren durch die Tabelle und wählen alle gecheckten Ligen aus und packen sie in die Liste für die AsyncTask
 		for(int i = 0; i < ligenwahl.getChildCount(); i++){
 			TableRow temptr = (TableRow) ligenwahl.getChildAt(i);
 			CheckBox tempcb = (CheckBox) temptr.getChildAt(0);
@@ -217,7 +221,7 @@ public class StartActivity extends ActionBarActivity {
 			}
 		}
 		
-		
+		//Jetzt speichern wir alle Ligen in der Datenbank (Mit Vermerk, ob mit dem Web abgeglichen oder nicht)
 		for(Liga l : ligenGlobal){
 			dbh.createLiga(l);
 		}
@@ -227,6 +231,7 @@ public class StartActivity extends ActionBarActivity {
 				Toast.LENGTH_SHORT).show();
 		int iteration = 0;
 		
+		//Ein bischen GUI Kram (Ladestatus, ausblenden jetzt unötiger Texte und Buttons
 		TextView loading = (TextView) findViewById(R.id.textView1);
 		loading.setText("Loading (0%)");
 		loading.setTextSize(20);
@@ -235,9 +240,8 @@ public class StartActivity extends ActionBarActivity {
 		Button datenabgleich = (Button) findViewById(R.id.button1);
 		datenabgleich.setVisibility(View.INVISIBLE);
 		
-		
+		//Der eigentliche Austausch mit dem Web pro Liga
 		for(Liga l : initialLigen){
-			//dbh.createLiga(l);
 			iteration++;
 			new AsyncHttpTask(getApplicationContext(), l.getLigaNr(), false, dbh, this, iteration, initialLigen.size()).execute(l.getLink());
 		}

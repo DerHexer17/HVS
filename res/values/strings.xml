@@ -20,5 +20,6 @@
     <string name="weiterAlleLigen">Weiter zu allen Ligen</string>
     <string name="auswahl">Bitte wählen Sie die Ligen aus, die sie benutzen möchten</string>
     <string name="initialData">Datenabgleich starten</string>
+    <string name="addLiga">Neue Liga hinzufügen</string>
 
 </resources>

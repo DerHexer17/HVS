@@ -46,12 +46,6 @@ public class CustomOnItemSelectedListener implements OnItemSelectedListener{
 			listeSpieleListener(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()), a);
 		}
 		
-		
-		/*Toast.makeText(parent.getContext(), 
-				"Größe der Abfrage : " + dbh.getAllMatchdayGames(ligaNr, spieltagsNr).size(),
-				Toast.LENGTH_SHORT).show();
-		*/
-		
 	}
 
 	@Override
@@ -60,6 +54,11 @@ public class CustomOnItemSelectedListener implements OnItemSelectedListener{
 
 	}
 
+	/*
+	 * Würde diese Methode lieber in der passenden Activity ausführen, aber die Connection kriegt er nicht hin
+	 * Hier werden alle Spiele des ausgewählten Spieltags angezeigt
+	 * Oder alle Spieler einer Mannschaft
+	 */
 	public void listeSpieleListener(List<Spiel> spiele, Activity a){
 		TableLayout table = (TableLayout) a.findViewById(R.id.tableAlleSpiele);
 		if(table.getChildCount()>1){
