@@ -56,72 +56,80 @@ public class StartActivity extends ActionBarActivity {
 		//Erster Logeintrag. Vorerst rudimentär, aber wichtig, um zu prüfen, ob wir die Daten vom HVS einmal komplett holen müssen
 		dbh.createLog("App gestartet");
 		
-		if(dbh.getAllLogs().size()>1){
-			callAlleLigen(findViewById(R.id.button1));
-		}
-		
 		//Vorläufige Liste aller Ligen, die wir anbieten
 		List<Liga> ligen = new ArrayList<Liga>();
 				
-		Liga sac = new Liga();
-		sac.setLigaNr(10000);
-		sac.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10000&titel=Sachsenliga%20%20M%E4nner%20%202014/15");
-		sac.setName("Sachsenliga");
-		sac.setEbene("HVS");
-		sac.setGeschlecht("männlich");
-		sac.setSaison("2014/2015");
-		sac.setPokal(0);
-		ligen.add(sac);		
-		
-		Liga sacw = new Liga();
-		sacw.setLigaNr(10001);
-		sacw.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10001&titel=Sachsenliga%20%20Frauen%20%202014/15");
-		sacw.setName("Sachsenliga");
-		sacw.setEbene("HVS");
-		sacw.setGeschlecht("weiblich");
-		sacw.setSaison("2014/2015");
-		sacw.setPokal(0);
-		ligen.add(sacw);
-		
-		Liga vbo = new Liga();
-		vbo.setLigaNr(10007);
-		vbo.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10007&titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20Ost%202014/15");
-		vbo.setName("Verbandsliga Sachsen-Ost");
-		vbo.setEbene("HVS");
-		vbo.setGeschlecht("männlich");
-		vbo.setSaison("2014/2015");
-		vbo.setPokal(0);
-		ligen.add(vbo);
-		
-		Liga vbw = new Liga();
-		vbw.setLigaNr(10008);
-		vbw.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10008&titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20West%202014/15");
-		vbw.setName("Verbandsliga Sachsen-West");
-		vbw.setEbene("HVS");
-		vbw.setGeschlecht("männlich");
-		vbw.setSaison("2014/2015");
-		vbw.setPokal(0);
-		ligen.add(vbw);
-		
-		Liga vbow = new Liga();
-		vbow.setLigaNr(10009);
-		vbow.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10009&titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20Ost%202014/15");
-		vbow.setName("Verbandsliga Sachsen-Ost");
-		vbow.setEbene("HVS");
-		vbow.setGeschlecht("weiblich");
-		vbow.setSaison("2014/2015");
-		vbow.setPokal(0);
-		ligen.add(vbow);
-		
-		Liga vbww = new Liga();
-		vbww.setLigaNr(10010);
-		vbww.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10010&titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20West%202014/15");
-		vbww.setName("Verbandsliga Sachsen-West");
-		vbww.setEbene("HVS");
-		vbww.setGeschlecht("weiblich");
-		vbww.setSaison("2014/2015");
-		vbww.setPokal(0);
-		ligen.add(vbww);
+		if(dbh.getAllLogs().size()>1 && getIntent().getIntExtra("add", 0) == 0){
+			callAlleLigen(findViewById(R.id.button1));
+		}else if(dbh.getAllLogs().size()>1 && getIntent().getIntExtra("add", 0) == 1){
+			ligen = dbh.getAlleLigenNochNichtVorhanden();
+		}else{
+			Liga sac = new Liga();
+			sac.setLigaNr(10000);
+			sac.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10000&titel=Sachsenliga%20%20M%E4nner%20%202014/15");
+			sac.setName("Sachsenliga");
+			sac.setEbene("HVS");
+			sac.setGeschlecht("männlich");
+			sac.setSaison("2014/2015");
+			sac.setPokal(0);
+			sac.setInitial("Nein");
+			ligen.add(sac);		
+			
+			Liga sacw = new Liga();
+			sacw.setLigaNr(10001);
+			sacw.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10001&titel=Sachsenliga%20%20Frauen%20%202014/15");
+			sacw.setName("Sachsenliga");
+			sacw.setEbene("HVS");
+			sacw.setGeschlecht("weiblich");
+			sacw.setSaison("2014/2015");
+			sacw.setPokal(0);
+			sacw.setInitial("Nein");
+			ligen.add(sacw);
+			
+			Liga vbo = new Liga();
+			vbo.setLigaNr(10007);
+			vbo.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10007&titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20Ost%202014/15");
+			vbo.setName("Verbandsliga Sachsen-Ost");
+			vbo.setEbene("HVS");
+			vbo.setGeschlecht("männlich");
+			vbo.setSaison("2014/2015");
+			vbo.setPokal(0);
+			vbo.setInitial("Nein");
+			ligen.add(vbo);
+			
+			Liga vbw = new Liga();
+			vbw.setLigaNr(10008);
+			vbw.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10008&titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20West%202014/15");
+			vbw.setName("Verbandsliga Sachsen-West");
+			vbw.setEbene("HVS");
+			vbw.setGeschlecht("männlich");
+			vbw.setSaison("2014/2015");
+			vbw.setPokal(0);
+			vbw.setInitial("Nein");		
+			ligen.add(vbw);
+			
+			Liga vbow = new Liga();
+			vbow.setLigaNr(10009);
+			vbow.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10009&titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20Ost%202014/15");
+			vbow.setName("Verbandsliga Sachsen-Ost");
+			vbow.setEbene("HVS");
+			vbow.setGeschlecht("weiblich");
+			vbow.setSaison("2014/2015");
+			vbow.setPokal(0);
+			vbow.setInitial("Nein");
+			ligen.add(vbow);
+			
+			Liga vbww = new Liga();
+			vbww.setLigaNr(10010);
+			vbww.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10010&titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20West%202014/15");
+			vbww.setName("Verbandsliga Sachsen-West");
+			vbww.setEbene("HVS");
+			vbww.setGeschlecht("weiblich");
+			vbww.setSaison("2014/2015");
+			vbww.setPokal(0);
+			vbww.setInitial("Nein");
+			ligen.add(vbww);
+		}		
 		
 		//Anzeige der verfügbaren Liste in Tabelle mit CheckBox
 		TableLayout ligenauswahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
@@ -134,8 +142,7 @@ public class StartActivity extends ActionBarActivity {
 			tr.addView(cb);
 			tr.addView(text);
 			ligenauswahl.addView(tr);
-			l.setInitial("Nein");
-			
+						
 		}
 		
 		//Die Liste unserer Ligen brauchen wir global in der Activity
@@ -222,8 +229,14 @@ public class StartActivity extends ActionBarActivity {
 		}
 		
 		//Jetzt speichern wir alle Ligen in der Datenbank (Mit Vermerk, ob mit dem Web abgeglichen oder nicht)
-		for(Liga l : ligenGlobal){
-			dbh.createLiga(l);
+		if(dbh.getAllLogs().size()== 1){
+			for(Liga l : ligenGlobal){
+				dbh.createLiga(l);
+			}
+		}else{
+			for(Liga l : ligenGlobal){
+				dbh.updateLigaInitial(l);
+			}
 		}
 		
 		Toast.makeText(getApplicationContext(), 
