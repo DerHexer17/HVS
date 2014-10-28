@@ -50,5 +50,4 @@
                 android:value="com.example.hvs.AlleLigenActivity" />
         </activity>
     </application>
-
 </manifest>
