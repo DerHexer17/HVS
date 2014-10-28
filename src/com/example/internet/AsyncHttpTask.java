@@ -67,7 +67,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 		this.update = update;
 		this.dbh = dbh;
 		this.activity = activity;
-		this.iteration = this.iteration+iteration;
+		this.iteration = iteration;
 		this.numberOfIterations = numberOfIterations;
 	}
 	
@@ -132,7 +132,6 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
                 	spiele = htmlparser.updateHtmlParsing(response, ligaNr, c);
                 }
                 result = 1; // Successful
-                numberOfIterations = numberOfIterations*spiele.size();
 
             }else{
                 result = 0; //"Failed to fetch data!";
@@ -195,20 +194,17 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	        			
 	        			s.setSpieltagsNr(spieltagsNr);
 	        			dbh.createSpiel(s);
-	        			iteration++;
-	        			this.iteration=iteration;
-	        			//Update des Ladestandes
-	                	TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
-	                	double ladestatus = iteration/numberOfIterations;
-	                	ladestatus = ladestatus*100;
-	                	ladestatus = Math.round(ladestatus);
-	                	loadingText.setText("Loading ("+ladestatus+"%)");
 	        	}
 	        	dbh.createSpieltag(spieltag);
 	        	
         	}
         	
-        	
+        	//Update des Ladestandes
+        	TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
+        	double ladestatus = iteration/numberOfIterations;
+        	ladestatus = ladestatus*100;
+        	ladestatus = Math.round(ladestatus);
+        	loadingText.setText("Loading ("+ladestatus+"%)");
         	
         	//Wenn alle Daten abgeglichen wurden gehts in die Verzweigung
         	if(iteration == numberOfIterations){
