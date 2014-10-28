@@ -203,6 +203,7 @@ public class StartActivity extends ActionBarActivity {
 	public void callAlleLigen(View view){
 		Intent intent = new Intent(getApplicationContext(), AlleLigenActivity.class);
 		Bundle bundle = new Bundle();
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 		
 		startActivity(intent);
 	}

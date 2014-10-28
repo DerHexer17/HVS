@@ -29,6 +29,7 @@ public class AlleLigenActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_alle_ligen);
+		getIntent();
 		dbh = new DatabaseHelper(getApplicationContext());
 		
 		//Alle Ligen bedeutet nur Ligen, die initialisiert wurden
