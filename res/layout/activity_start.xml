@@ -42,7 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
         android:text="@+id/weiterAlleLigen"
-        android:visibility="invisible"
         android:onClick="callAlleLigen" />
 
 </LinearLayout>

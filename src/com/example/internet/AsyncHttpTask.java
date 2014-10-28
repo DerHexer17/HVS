@@ -22,6 +22,7 @@ import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.HTMLParser;
 import com.example.datahandling.Spiel;
 import com.example.datahandling.Spieltag;
+import com.example.hvs.AlleLigenActivity;
 import com.example.hvs.R;
 import com.example.hvs.StartActivity;
 import com.example.hvs.TempResultActivity;
@@ -209,10 +210,12 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
         	//Wenn alle Daten abgeglichen wurden gehts in die Verzweigung
         	if(iteration == numberOfIterations){
 	        	//Der Button um zur Übersicht der Ligen zu gelangen wird eingeblendet
-        		Button bt = (Button) activity.findViewById(R.id.button2);
-	        	bt.setVisibility(View.VISIBLE);
-	        	bt.setText("Weiter zu allen Ligen");
-	        	
+        		//Button bt = (Button) activity.findViewById(R.id.button2);
+	        	//bt.setVisibility(View.VISIBLE);
+	        	//bt.setText("Weiter zu allen Ligen");
+	        	Intent intent = new Intent(mContext, AlleLigenActivity.class);
+	        	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+	        	mContext.startActivity(intent);
         	}
         	
         }else{

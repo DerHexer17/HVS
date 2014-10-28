@@ -17,7 +17,7 @@
     <string name="liga_maennlich"><b>Männer</b></string>
     <string name="liga_weiblich"><b>Frauen</b></string>
     <string name="loading_0">Loading (0%)</string>
-    <string name="weiterAlleLigen">Weiter zu allen Ligen</string>
+    <string name="weiterAlleLigen">Doch kein Datenabgleich</string>
     <string name="auswahl">Bitte wählen Sie die Ligen aus, die sie benutzen möchten</string>
     <string name="initialData">Datenabgleich starten</string>
     <string name="addLiga">Neue Liga hinzufügen</string>

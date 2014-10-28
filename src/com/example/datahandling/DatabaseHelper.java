@@ -461,6 +461,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             	l.setSaison(c.getString(c.getColumnIndex(LIGA_JUGEND)));
             	l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
             	l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
+            	l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
             	
                 alleLigen.add(l);
             } while (c.moveToNext());
@@ -486,6 +487,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             	l.setSaison(c.getString(c.getColumnIndex(LIGA_SAISON)));
             	l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
             	l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
+            	l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
             	
                 
         }else{
@@ -493,6 +495,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         	return l;
         }
         return l;
+    }
+    
+    public List<Liga> getAlleLigenNochNichtVorhanden() {
+        List<Liga> alleLigenNichtVorhanden = new ArrayList<Liga>();
+        String selectQuery = "SELECT  * FROM " + TABLE_LIGA + " WHERE " + LIGA_INITIAL + " = 'Nein'";
+     
+        Log.d(TAG, selectQuery);
+     
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+     
+        // looping through all rows and adding to list
+        if (c.moveToFirst()) {
+            do {
+                // adding to alleLogs list
+            	Liga l = new Liga();
+            	l.setLigaNr(c.getInt(c.getColumnIndex(LIGA_NR)));
+            	l.setName(c.getString(c.getColumnIndex(LIGA_NAME)));
+            	l.setEbene(c.getString(c.getColumnIndex(LIGA_EBENE)));
+            	l.setGeschlecht(c.getString(c.getColumnIndex(LIGA_GESCHLECHT)));
+            	l.setJugend(c.getString(c.getColumnIndex(LIGA_JUGEND)));
+            	l.setSaison(c.getString(c.getColumnIndex(LIGA_JUGEND)));
+            	l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
+            	l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
+            	l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
+            	
+                alleLigenNichtVorhanden.add(l);
+            } while (c.moveToNext());
+        }
+     
+        return alleLigenNichtVorhanden;
+    }
+    
+    public void updateLigaInitial(Liga liga){
+    	SQLiteDatabase db = this.getReadableDatabase();
+    	String sql = "UPDATE " + TABLE_LIGA + " SET " + LIGA_INITIAL + " = '" +
+    	liga.getInitial() + "' WHERE " + LIGA_NR + " = " + liga.getLigaNr();
+    	db.execSQL(sql);
     }
     
     public long createSpieltag(Spieltag spieltag) {

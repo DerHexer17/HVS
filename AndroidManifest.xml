@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".StartActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,17 +30,11 @@
             android:name=".TempResultActivity"
             android:label="@string/title_activity_temp_result"
             android:parentActivityName=".StartActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hvs.StartActivity" />
         </activity>
         <activity
             android:name=".AlleLigenActivity"
-            android:label="@string/title_activity_alle_ligen"
-            android:parentActivityName=".StartActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hvs.StartActivity" />
+            android:label="@string/title_activity_alle_ligen" >
+
         </activity>
         <activity
             android:name=".LigaActivity"
