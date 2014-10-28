@@ -253,6 +253,8 @@ public class StartActivity extends ActionBarActivity {
 		hinweis.setText("Bitte haben Sie einen Moment Geduld");
 		Button datenabgleich = (Button) findViewById(R.id.button1);
 		datenabgleich.setVisibility(View.INVISIBLE);
+		Button keinDatenabgleich = (Button) findViewById(R.id.button2);
+		keinDatenabgleich.setVisibility(View.INVISIBLE);
 		
 		//Der eigentliche Austausch mit dem Web pro Liga
 		for(Liga l : initialLigen){
