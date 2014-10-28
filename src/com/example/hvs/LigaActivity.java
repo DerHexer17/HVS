@@ -17,12 +17,15 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 public class LigaActivity extends ActionBarActivity {
 
@@ -67,6 +70,8 @@ public class LigaActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+
 	
 	//Kann die weg?? Aktuell wird diese Methode im Spinner onClickListener ausgeführt...
 	public void listeSpiele(List<Spiel> spiele){
@@ -126,5 +131,42 @@ public class LigaActivity extends ActionBarActivity {
 			android.R.layout.simple_spinner_item, spieltageText);
 		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerSpieltage.setAdapter(dataAdapter);
+	}
+	
+	class CustomOnItemSelectedListener implements OnItemSelectedListener{
+
+		DatabaseHelper dbh;
+		int ligaNr;
+		Activity a;
+
+		
+		public CustomOnItemSelectedListener(DatabaseHelper dbh, int ligaNr, Activity a){
+			this.dbh = dbh;
+			this.ligaNr = ligaNr;
+			this.a = a;
+		}
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int pos,long id) {
+			// TODO Auto-generated method stub
+			if(parent.getItemAtPosition(pos).toString().split("\\.").length>1){
+				int spieltagsNr = Integer.parseInt(parent.getItemAtPosition(pos).toString().split("\\.")[0]);
+				
+				listeSpiele(dbh.getAllMatchdayGames(ligaNr, spieltagsNr));
+			}else if(parent.getItemAtPosition(pos).toString().contains("Teamauswahl")){
+				Toast.makeText(parent.getContext(), 
+						"Die Auswahl führt zu nix",
+						Toast.LENGTH_SHORT).show();
+			}else{
+				listeSpiele(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()));
+			}
+			
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+
+		}
 	}
 }
