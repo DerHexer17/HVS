@@ -71,35 +71,38 @@ public class LigaActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	//Kann die weg?? Aktuell wird diese Methode im Spinner onClickListener ausgeführt...
+	//Auflistung der ausgewählten Spiele
 	public void listeSpiele(List<Spiel> spiele){
 		TableLayout table = (TableLayout) findViewById(R.id.tableAlleSpiele);
-		for(Spiel s : spiele){
-			TableRow row = new TableRow(getApplicationContext());
-			TextView field1 = new TextView(getApplicationContext());
-			ArrayList<TextView> formatArray = new ArrayList<TextView>();
-			field1.setText(s.getDateDay()+"."+s.getDateMonth()+"."+String.valueOf(s.getDateYear()).split("0")[1]);
-			formatArray.add(field1);
-			TextView field2 = new TextView(getApplicationContext());
-			field2.setText(s.getTeamHeim());
-			formatArray.add(field2);
-			TextView field3 = new TextView(getApplicationContext());
-			field3.setText(s.getTeamGast());
-			formatArray.add(field3);
-			TextView field4 = new TextView(getApplicationContext());
-			field4.setText(s.getToreHeim()+":"+s.getToreGast());
-			formatArray.add(field4);
-			
-			for(TextView t : formatArray){
-				t.setTextColor(Color.BLACK);
-				t.setPadding(5, 5, 5, 5);
-				t.setGravity(Gravity.CENTER);
-				row.addView(t);
+			if(table.getChildCount()>1){
+				table.removeViews(1, table.getChildCount()-1);
 			}
-			row.setPadding(0, 0, 0, 10);
-			row.setBackgroundResource(R.drawable.table_back);
-			table.addView(row);
-		}	
+			for(Spiel s : spiele){
+				TableRow row = new TableRow(getApplicationContext());
+				TextView field1 = new TextView(getApplicationContext());
+				ArrayList<TextView> formatArray = new ArrayList<TextView>();
+				field1.setText(s.getDateDay()+"."+s.getDateMonth()+"."+String.valueOf(s.getDateYear()).split("0")[1]);
+				formatArray.add(field1);
+				TextView field2 = new TextView(getApplicationContext());
+				field2.setText(s.getTeamHeim());
+				formatArray.add(field2);
+				TextView field3 = new TextView(getApplicationContext());
+				field3.setText(s.getTeamGast());
+				formatArray.add(field3);
+				TextView field4 = new TextView(getApplicationContext());
+				field4.setText(s.getToreHeim()+":"+s.getToreGast());
+				formatArray.add(field4);
+				
+				for(TextView t : formatArray){
+					t.setTextColor(Color.BLACK);
+					t.setPadding(5, 5, 5, 5);
+					t.setGravity(Gravity.CENTER);
+					row.addView(t);
+				}
+				row.setPadding(0, 0, 0, 10);
+				row.setBackgroundResource(R.drawable.table_back);
+				table.addView(row);
+			}	
 	}
 	
 	public void addSpieltageToSpinner(List<Spieltag> spieltage, List<String> teams){
