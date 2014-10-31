@@ -31,12 +31,14 @@ public class LigaActivity extends ActionBarActivity {
 
 	DatabaseHelper dbh;
 	String TAG = "liga";
+	int ligaNr;
 	public static Activity ligaActivity;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_liga);
+		this.ligaNr = getIntent().getIntExtra("nummer", 0);
 		Intent intent = getIntent();
 		TextView tv = (TextView) findViewById(R.id.textViewLiga);
 		int ligaNr = intent.getIntExtra("nummer", 0);
@@ -61,14 +63,15 @@ public class LigaActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (item.getItemId()) {
+        case R.id.tabelle:
+        	Intent intent = new Intent(getApplicationContext(), TabelleActivity.class);
+        	intent.putExtra("ligaNr", ligaNr);
+    		startActivity(intent);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 	
 	//Auflistung der ausgewählten Spiele
