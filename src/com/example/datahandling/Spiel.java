@@ -2,7 +2,6 @@ package com.example.datahandling;
 
 public class Spiel {
 	
-	private String sourceHTML;
 	private int spielNr;
 	private int dateDay;
 	private int dateMonth;
@@ -24,16 +23,7 @@ public class Spiel {
 	public Spiel(){
 		
 	}
-	public Spiel(String sourceHtml){
-		this.sourceHTML=sourceHtml;	
-	}
 	
-	public String getSourceHTML() {
-		return sourceHTML;
-	}
-	public void setSourceHTML(String sourceHTML) {
-		this.sourceHTML = sourceHTML;
-	}
 	public int getSpielNr() {
 		return spielNr;
 	}

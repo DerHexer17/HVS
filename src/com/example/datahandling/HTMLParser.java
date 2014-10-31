@@ -16,73 +16,41 @@ public class HTMLParser {
 	String TAG = "HTML";
 	private ArrayList <Spiel> alleSpiele;
 	private ArrayList <String> trimHTMLList;
-	private ArrayList <Spiel> alleSpieleSource;
+
 	DatabaseHelper dbh;
 	
-	public ArrayList<Spiel> getAlleSpiele() {
-		return alleSpiele;
-	}
-
-	public void setAlleSpiele(ArrayList<Spiel> alleSpiele) {
-		this.alleSpiele = alleSpiele;
-	}
-
-	public ArrayList<String> getTrimHTMLList() {
-		return trimHTMLList;
-	}
-
-	public void setTrimHTMLList(ArrayList<String> trimHTMLList) {
-		this.trimHTMLList = trimHTMLList;
-	}
-
-	public ArrayList<Spiel> getAlleSpieleSource() {
-		return alleSpieleSource;
-	}
-
-	public void setAlleSpieleSource(ArrayList<Spiel> alleSpieleSource) {
-		this.alleSpieleSource = alleSpieleSource;
-	}
 
 	/* Main Method for Parsing the HTML from "Liste aller Spiele" */
 	public ArrayList<Spiel> initialHTMLParsing(String source, int ligaNr){
-		
 		//Split the Source into the Rows of the Table of all Games
 		String[] trimHTML = source.split("</tr>");
 		trimHTML = trimHTML[1].split("</TR>");
 		trimHTMLList = new ArrayList<String>();
-		alleSpieleSource = new ArrayList<Spiel>();
 		
 		//Need to delete just the last position of the array
 		for(int i = 0; i<trimHTML.length-1; i++){
 			trimHTMLList.add(trimHTML[i]);
 		}
-		
-		//Create an Object for every game with the source code of the table row as an parameter
-		for(String s : trimHTMLList){
-			Spiel spiel = new Spiel(s);
-			spiel.setLigaNr(ligaNr);
-			this.alleSpieleSource.add(spiel);
-		}
 
 		alleSpiele = new ArrayList<Spiel>();
 		
 		//Call splitTableRow for every Game-Object
-		for(Spiel s : alleSpieleSource){
-			splitTableRow(s);
-			
+		for(String s : trimHTMLList){
+			Spiel spiel = splitTableRow(s);
+			spiel.setLigaNr(ligaNr);
+			alleSpiele.add(spiel);
 		}
 		
-		//splitTableRow(alleSpieleSource.get(15));
-		
 		Log.d(TAG, "Size von alleSpiele: "+alleSpiele.size());
-		return getAlleSpiele();
 		
+		return alleSpiele;
 	}
 	
 	/* Method for parsing one source table row into needed parameters of a game */
-	public void splitTableRow(Spiel spiel){
-		String[] tds = spiel.getSourceHTML().split("</TD");
-				
+	public Spiel splitTableRow(String spielSource){
+		String[] tds = spielSource.split("</TD");
+		Spiel spiel = new Spiel();
+		
 		//A temporary Array for all the needed parsing
 		String[] temp;
 		
@@ -165,18 +133,15 @@ public class HTMLParser {
 		//We need the League Number as well!
 		//spiel.setLigaNr(10007);
 
-		alleSpiele.add(spiel);
-				
+		return spiel;	
 	}
 	
 	public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c){
-	
 		
 		//Split the Source into the Rows of the Table of all Games
 		String[] trimHTML = source.split("</tr>");
 		trimHTML = trimHTML[1].split("</TR>");
 		trimHTMLList = new ArrayList<String>();
-		alleSpieleSource = new ArrayList<Spiel>();
 			
 		//Need to delete just the last position of the array
 		for(int i = 0; i<trimHTML.length-1; i++){
@@ -236,25 +201,21 @@ public class HTMLParser {
     		durchlauf2++;
         }
 		
+        /*
+         * genauso angepasst wie die initiale
+         * Hier fehlte das splitTableRow. Wird die update überhaupt schon aufgerufen?
+         */
 		Log.d(TAG, "Neue Size aller Spiele: "+trimHTMLList.size());
-				
-		//Create an Object for every game with the source code of the table row as an parameter
+			
+		alleSpiele = new ArrayList<Spiel>();
+
 		for(String s : trimHTMLList){
-			Spiel spiel = new Spiel(s);
-			this.alleSpieleSource.add(spiel);
+			Spiel spiel = splitTableRow(s);
+			spiel.setLigaNr(ligaNr);
+			alleSpiele.add(spiel);
 		}
 
-		alleSpiele = new ArrayList<Spiel>();
-		
-		//Call splitTableRow for every Game-Object
-		for(Spiel s : alleSpieleSource){
-			String[] tds = s.getSourceHTML().split("</TD");
-			
-			//A temporary Array for all the needed parsing
-			String[] temp;
-					
-		}
-		return alleSpieleSource;
+		return alleSpiele;
 	}
 		
 	
