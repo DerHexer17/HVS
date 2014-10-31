@@ -23,7 +23,8 @@
 	    <TableLayout
 	        android:id="@+id/tableTabelle"
 	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content" >
+	        android:layout_height="wrap_content"
+	        android:shrinkColumns="1" >
 	
 	        <TableRow android:id="@+id/ueberschriftTabelle" >
 	
@@ -49,8 +50,7 @@
 	                android:id="@+id/tabelle_tore"
 	                android:text="@string/tabelle_tore"
 	                android:textStyle="bold"
-	                android:gravity="center"
-	                android:layout_marginLeft="10dp" />
+	                android:gravity="center" />
 	        </TableRow>
 	    </TableLayout>
     </ScrollView>

@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TAG = "DatabaseHelper";
  
     // Database Version
-    private static final int DATABASE_VERSION = 6;
+    private static final int DATABASE_VERSION = 7;
  
     // Database Name
     private static final String DATABASE_NAME = "hvsData";
@@ -283,8 +283,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     
     public List<Spiel> getAllTeamGames(int ligaNr, String teamname) {
         List<Spiel> ligaSpieleTeam = new ArrayList<Spiel>();
-        String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr +
-        		" AND " + SPIEL_TEAM_HEIM + " = '" + teamname + "' OR " + SPIEL_TEAM_GAST + " = '" + teamname + "'";
+        String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_TEAM_HEIM + " = '" + teamname +
+        		"' AND " + SPIEL_LIGA_NR + " = " + ligaNr + " OR " + SPIEL_TEAM_GAST + " = '" + teamname +
+        		"' AND " + SPIEL_LIGA_NR + " = " + ligaNr;
      
         Log.d(TAG, selectQuery);
      
