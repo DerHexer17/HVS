@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -198,8 +199,8 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	}
 
 	private String convertInputStreamToString(InputStream inputStream) throws IOException {
-
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+		Charset charset = Charset.forName("iso-8859-1");
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, charset));
 
 		String line = "";
 		String result = "";
