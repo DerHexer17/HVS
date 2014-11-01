@@ -1,26 +1,11 @@
 package com.example.internet;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.util.Map;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.example.hvs.R;
-
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.widget.TextView;
 
 public class DataHVS {
 	
@@ -67,5 +52,5 @@ public class DataHVS {
 		        }
 		    }
 		  }
-	} 
+	}
 }
