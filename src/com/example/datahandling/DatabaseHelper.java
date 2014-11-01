@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 6;
+	private static final int DATABASE_VERSION = 7;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -76,35 +76,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String SPIELTAG_SAISON = "spieltag_saison";
 
 	// Table Create Statements
-	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE "
-			+ TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR
-			+ " INTEGER, " + SPIEL_DATE + " TEXT, " + SPIEL_TIME + " TEXT, "
-			+ SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, "
-			+ SPIEL_TORE_HEIM + " INTEGER, " + SPIEL_TORE_GAST + " INTEGER, "
-			+ SPIEL_PUNKTE_HEIM + " INTEGER, " + SPIEL_PUNKTE_GAST
-			+ " INTEGER, " + SPIEL_SR + " TEXT, " + SPIEL_HALLE + " TEXT, "
-			+ SPIEL_LIGA_NR + " INTEGER, " + SPIEL_SPIELTAG_NR + " INTEGER, "
-			+ SPIEL_SPIELTAG_ID + " INTEGER, " + KEY_CREATED_AT + " TEXT" + ")";
+	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE " + TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR + " INTEGER, " + SPIEL_DATE + " TEXT, " + SPIEL_TIME + " TEXT, " + SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, " + SPIEL_TORE_HEIM + " INTEGER, "
+			+ SPIEL_TORE_GAST + " INTEGER, " + SPIEL_PUNKTE_HEIM + " INTEGER, " + SPIEL_PUNKTE_GAST + " INTEGER, " + SPIEL_SR + " TEXT, " + SPIEL_HALLE + " TEXT, " + SPIEL_LIGA_NR + " INTEGER, " + SPIEL_SPIELTAG_NR + " INTEGER, " + SPIEL_SPIELTAG_ID + " INTEGER, " + KEY_CREATED_AT + " TEXT" + ")";
 
-	private static final String CREATE_TABLE_LOG = "CREATE TABLE " + TABLE_LOG
-			+ "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LOG_ACTIVITY
-			+ " TEXT, " + LOG_DATE + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
+	private static final String CREATE_TABLE_LOG = "CREATE TABLE " + TABLE_LOG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LOG_ACTIVITY + " TEXT, " + LOG_DATE + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
-	private static final String CREATE_TABLE_LIGA = "CREATE TABLE "
-			+ TABLE_LIGA + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LIGA_NR
-			+ " INTEGER, " + LIGA_NAME + " TEXT, " + LIGA_EBENE + " TEXT, "
-			+ LIGA_GESCHLECHT + " TEXT, " + LIGA_JUGEND + " TEXT, "
-			+ LIGA_SAISON + " TEXT, " + LIGA_LINK + " TEXT, " + LIGA_POKAL
-			+ " INTEGER, " + LIGA_INITIAL + " TEXT, " + KEY_CREATED_AT
-			+ " TEXT" + ")";
+	private static final String CREATE_TABLE_LIGA = "CREATE TABLE " + TABLE_LIGA + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LIGA_NR + " INTEGER, " + LIGA_NAME + " TEXT, " + LIGA_EBENE + " TEXT, " + LIGA_GESCHLECHT + " TEXT, " + LIGA_JUGEND + " TEXT, " + LIGA_SAISON + " TEXT, " + LIGA_LINK
+			+ " TEXT, " + LIGA_POKAL + " INTEGER, " + LIGA_INITIAL + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
-	private static final String CREATE_TABLE_SPIELTAG = "CREATE TABLE "
-			+ TABLE_SPIELTAG + "(" + KEY_ID + " INTEGER PRIMARY KEY, "
-			+ SPIELTAG_ID + " INTEGER, " + SPIELTAG_LIGA_NR + " INTEGER, "
-			+ SPIELTAG_SPIELTAG_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NAME
-			+ " TEXT, " + SPIELTAG_DATUM_BEGINN + " TEXT, "
-			+ SPIELTAG_DATUM_ENDE + " TEXT, " + SPIELTAG_SAISON + " TEXT, "
-			+ KEY_CREATED_AT + " TEXT" + ")";
+	private static final String CREATE_TABLE_SPIELTAG = "CREATE TABLE " + TABLE_SPIELTAG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIELTAG_ID + " INTEGER, " + SPIELTAG_LIGA_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NAME + " TEXT, " + SPIELTAG_DATUM_BEGINN
+			+ " TEXT, " + SPIELTAG_DATUM_ENDE + " TEXT, " + SPIELTAG_SAISON + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
 	public static DatabaseHelper getInstance(Context context) {
 		if (sInstance == null) {
@@ -145,9 +126,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		for (Spiel spiel : spiele) {
 			ContentValues values = new ContentValues();
 			values.put(SPIEL_NR, spiel.getSpielNr());
-			values.put(SPIEL_DATE,
-					spiel.getDateYear() + "-" + spiel.getDateMonth() + "-"
-							+ spiel.getDateDay());
+			values.put(SPIEL_DATE, spiel.getDateYear() + "-" + spiel.getDateMonth() + "-" + spiel.getDateDay());
 			values.put(SPIEL_TIME, spiel.getTime());
 			values.put(SPIEL_TEAM_HEIM, spiel.getTeamHeim());
 			values.put(SPIEL_TEAM_GAST, spiel.getTeamGast());
@@ -223,8 +202,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	// ALL GETTER
 	public List<Spiel> getAllGames(int ligaNr) {
 		List<Spiel> ligaSpiele = new ArrayList<Spiel>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE "
-				+ SPIEL_LIGA_NR + " = " + ligaNr;
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr;
 
 		Log.d(TAG, selectQuery);
 
@@ -235,8 +213,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE))
-						.split("-");
+				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
 				s.setDateDay(Integer.parseInt(tempdate[2]));
 				s.setDateMonth(Integer.parseInt(tempdate[1]));
 				s.setDateYear(Integer.parseInt(tempdate[0]));
@@ -265,9 +242,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<String> getAllLeagueTeams(int ligaNr) {
 		List<String> allTeams = new ArrayList<String>();
-		String selectQuery = "SELECT " + SPIEL_TEAM_HEIM + " FROM "
-				+ TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr
-				+ " GROUP BY " + SPIEL_TEAM_HEIM;
+		String selectQuery = "SELECT " + SPIEL_TEAM_HEIM + " FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " GROUP BY " + SPIEL_TEAM_HEIM;
 
 		Log.d(TAG, selectQuery);
 
@@ -287,9 +262,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<Spiel> getAllMatchdayGames(int ligaNr, int spieltagsNr) {
 		List<Spiel> ligaSpieleMatchday = new ArrayList<Spiel>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE "
-				+ SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_SPIELTAG_NR
-				+ " = " + spieltagsNr;
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_SPIELTAG_NR + " = " + spieltagsNr;
 
 		Log.d(TAG, selectQuery);
 
@@ -300,8 +273,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE))
-						.split("-");
+				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
 				s.setDateDay(Integer.parseInt(tempdate[2]));
 				s.setDateMonth(Integer.parseInt(tempdate[1]));
 				s.setDateYear(Integer.parseInt(tempdate[0]));
@@ -330,10 +302,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<Spiel> getAllTeamGames(int ligaNr, String teamname) {
 		List<Spiel> ligaSpieleTeam = new ArrayList<Spiel>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE "
-				+ SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TEAM_HEIM
-				+ " = '" + teamname + "' OR " + SPIEL_TEAM_GAST + " = '"
-				+ teamname + "'";
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_TEAM_HEIM + " = '" + teamname + "' AND " + SPIEL_LIGA_NR + " = " + ligaNr + " OR " + SPIEL_TEAM_GAST + " = '" + teamname + "' AND " + SPIEL_LIGA_NR + " = " + ligaNr;
 
 		Log.d(TAG, selectQuery);
 
@@ -344,8 +313,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE))
-						.split("-");
+				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
 				s.setDateDay(Integer.parseInt(tempdate[2]));
 				s.setDateMonth(Integer.parseInt(tempdate[1]));
 				s.setDateYear(Integer.parseInt(tempdate[0]));
@@ -394,8 +362,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<Liga> getAlleLigen() {
 		List<Liga> alleLigen = new ArrayList<Liga>();
-		String selectQuery = "SELECT  * FROM " + TABLE_LIGA + " WHERE "
-				+ LIGA_INITIAL + " = 'Ja'";
+		String selectQuery = "SELECT  * FROM " + TABLE_LIGA + " WHERE " + LIGA_INITIAL + " = 'Ja'";
 
 		Log.d(TAG, selectQuery);
 
@@ -426,8 +393,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<Liga> getAlleLigenNochNichtVorhanden() {
 		List<Liga> alleLigenNichtVorhanden = new ArrayList<Liga>();
-		String selectQuery = "SELECT  * FROM " + TABLE_LIGA + " WHERE "
-				+ LIGA_INITIAL + " = 'Nein'";
+		String selectQuery = "SELECT  * FROM " + TABLE_LIGA + " WHERE " + LIGA_INITIAL + " = 'Nein'";
 
 		Log.d(TAG, selectQuery);
 
@@ -458,8 +424,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<Spieltag> getAllSpieltageForLiga(int ligaNr) {
 		List<Spieltag> ligaSpieltage = new ArrayList<Spieltag>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELTAG + " WHERE "
-				+ SPIELTAG_LIGA_NR + " = " + ligaNr;
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELTAG + " WHERE " + SPIELTAG_LIGA_NR + " = " + ligaNr;
 
 		Log.d(TAG, selectQuery);
 
@@ -472,14 +437,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				Spieltag s = new Spieltag();
 				s.setSpieltags_ID(c.getInt(c.getColumnIndex(SPIELTAG_ID)));
 				s.setLigaNr(c.getInt(c.getColumnIndex(SPIELTAG_LIGA_NR)));
-				s.setSpieltags_Nr(c.getInt(c
-						.getColumnIndex(SPIELTAG_SPIELTAG_NR)));
-				s.setSpieltags_Name(c.getString(c
-						.getColumnIndex(SPIELTAG_SPIELTAG_NAME)));
-				s.setDatumBeginn(c.getString(c
-						.getColumnIndex(SPIELTAG_DATUM_BEGINN)));
-				s.setDatumEnde(c.getString(c
-						.getColumnIndex(SPIELTAG_DATUM_ENDE)));
+				s.setSpieltags_Nr(c.getInt(c.getColumnIndex(SPIELTAG_SPIELTAG_NR)));
+				s.setSpieltags_Name(c.getString(c.getColumnIndex(SPIELTAG_SPIELTAG_NAME)));
+				s.setDatumBeginn(c.getString(c.getColumnIndex(SPIELTAG_DATUM_BEGINN)));
+				s.setDatumEnde(c.getString(c.getColumnIndex(SPIELTAG_DATUM_ENDE)));
 				s.setSaison(c.getString(c.getColumnIndex(SPIELTAG_SAISON)));
 				// td.setCreatedAt(c.getString(c.getColumnIndex(KEY_CREATED_AT)));
 
@@ -494,9 +455,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	// TODO: Keine Cursor weitergeben!
 	public Cursor getAllPlayedGames(int ligaNr) {
 		List<Spiel> ligaSpiele = new ArrayList<Spiel>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE "
-				+ SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TORE_HEIM
-				+ " != 0";
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TORE_HEIM + " != 0";
 
 		Log.d(TAG, selectQuery);
 
@@ -508,8 +467,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	// GETTER
 	public Liga getLiga(int ligaNr) {
-		String selectQuery = "SELECT * FROM " + TABLE_LIGA + " WHERE "
-				+ LIGA_NR + " = " + ligaNr;
+		String selectQuery = "SELECT * FROM " + TABLE_LIGA + " WHERE " + LIGA_NR + " = " + ligaNr;
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
@@ -537,9 +495,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<String> getTabelle(int ligaNr) {
 		List<String> tabelle = new ArrayList<String>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE "
-				+ SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TORE_HEIM
-				+ " != 0";
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TORE_HEIM + " != 0";
 
 		Log.d(TAG, selectQuery);
 
@@ -549,11 +505,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		// looping through all rows and adding to list
 		if (c.moveToFirst()) {
 			do {
-				String spiel = c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM))
-						+ " gegen "
-						+ c.getString(c.getColumnIndex(SPIEL_TEAM_GAST))
-						+ " | " + c.getInt(c.getColumnIndex(SPIEL_TORE_HEIM))
-						+ " : " + c.getInt(c.getColumnIndex(SPIEL_TORE_GAST));
+				String spiel = c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)) + " gegen " + c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)) + " | " + c.getInt(c.getColumnIndex(SPIEL_TORE_HEIM)) + " : " + c.getInt(c.getColumnIndex(SPIEL_TORE_GAST));
 
 				// td.setCreatedAt(c.getString(c.getColumnIndex(KEY_CREATED_AT)));
 
@@ -568,9 +520,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	// CHECKER
 	public boolean gameAlreadyExists(Spiel spiel) {
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE "
-				+ SPIEL_LIGA_NR + " = " + spiel.getLigaNr() + " AND "
-				+ SPIEL_NR + " = " + spiel.getSpielNr();
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + spiel.getLigaNr() + " AND " + SPIEL_NR + " = " + spiel.getSpielNr();
 
 		Log.d(TAG, selectQuery);
 
@@ -589,9 +539,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	// UPDATER
 	public void updateLigaInitial(Liga liga) {
 		SQLiteDatabase db = this.getReadableDatabase();
-		String sql = "UPDATE " + TABLE_LIGA + " SET " + LIGA_INITIAL + " = '"
-				+ liga.getInitial() + "' WHERE " + LIGA_NR + " = "
-				+ liga.getLigaNr();
+		String sql = "UPDATE " + TABLE_LIGA + " SET " + LIGA_INITIAL + " = '" + liga.getInitial() + "' WHERE " + LIGA_NR + " = " + liga.getLigaNr();
 		db.execSQL(sql);
 		db.close();
 	}

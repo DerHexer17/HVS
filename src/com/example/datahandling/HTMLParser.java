@@ -127,8 +127,7 @@ public class HTMLParser {
 		return spiel;
 	}
 
-	public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr,
-			Cursor c) {
+	public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c) {
 
 		// Split the Source into the Rows of the Table of all Games
 		String[] trimHTML = source.split("</tr>");

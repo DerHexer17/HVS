@@ -46,10 +46,8 @@ public class AlleLigenActivity extends ActionBarActivity {
 				public void onClick(View v) {
 					// Perform action on click
 					Button b = (Button) v;
-					int ligaNr = Integer.parseInt(b.getHint().toString()
-							.split(":")[1]);
-					Intent intent = new Intent(getApplicationContext(),
-							LigaActivity.class);
+					int ligaNr = Integer.parseInt(b.getHint().toString().split(":")[1]);
+					Intent intent = new Intent(getApplicationContext(), LigaActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putInt("nummer", ligaNr);
 					intent.putExtras(bundle);
@@ -75,12 +73,9 @@ public class AlleLigenActivity extends ActionBarActivity {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
 		case R.id.addLiga:
-			Intent intent = new Intent(getApplicationContext(),
-					StartActivity.class);
+			Intent intent = new Intent(getApplicationContext(), StartActivity.class);
 			intent.putExtra("add", 1);
-			Toast.makeText(getApplicationContext(),
-					"Intent intExtra: " + intent.getIntExtra("add", 1),
-					Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "Intent intExtra: " + intent.getIntExtra("add", 1), Toast.LENGTH_SHORT).show();
 			startActivity(intent);
 			return true;
 		default:

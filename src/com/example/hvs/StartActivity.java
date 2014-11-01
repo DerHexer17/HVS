@@ -43,11 +43,9 @@ public class StartActivity extends ActionBarActivity {
 		// Vorläufige Liste aller Ligen, die wir anbieten
 		List<Liga> ligen = new ArrayList<Liga>();
 
-		if (dbh.getAllLogs().size() > 1
-				&& getIntent().getIntExtra("add", 0) == 0) {
+		if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 0) {
 			callAlleLigen(findViewById(R.id.button1));
-		} else if (dbh.getAllLogs().size() > 1
-				&& getIntent().getIntExtra("add", 0) == 1) {
+		} else if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 1) {
 			ligen = dbh.getAlleLigenNochNichtVorhanden();
 		} else {
 			Liga sac = new Liga();
@@ -171,7 +169,7 @@ public class StartActivity extends ActionBarActivity {
 	public boolean isNetworkAvailable() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-		
+
 		if (networkInfo != null && networkInfo.isConnected()) {
 			return true;
 		}
@@ -180,10 +178,8 @@ public class StartActivity extends ActionBarActivity {
 
 	// Start der nächsten Activity mit Anzeige aller geladenen Ligen
 	public void callAlleLigen(View view) {
-		Intent intent = new Intent(getApplicationContext(),
-				AlleLigenActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-				| Intent.FLAG_ACTIVITY_NEW_TASK);
+		Intent intent = new Intent(getApplicationContext(), AlleLigenActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		startActivity(intent);
 	}
@@ -213,11 +209,7 @@ public class StartActivity extends ActionBarActivity {
 			}
 		}
 
-		Toast.makeText(
-				getApplicationContext(),
-				"Anzahl ausgewählter Ligen: " + initialLigen.size()
-						+ "Anzahl Ligen insgesamt: " + ligenGlobal.size(),
-				Toast.LENGTH_SHORT).show();
+		Toast.makeText(getApplicationContext(), "Anzahl ausgewählter Ligen: " + initialLigen.size() + "Anzahl Ligen insgesamt: " + ligenGlobal.size(), Toast.LENGTH_SHORT).show();
 		int iteration = 0;
 
 		TextView loading = (TextView) findViewById(R.id.textView1);
@@ -232,9 +224,7 @@ public class StartActivity extends ActionBarActivity {
 
 		for (Liga l : initialLigen) {
 			iteration++;
-			new AsyncHttpTask(getApplicationContext(), l.getLigaNr(), false,
-					dbh, this, iteration, initialLigen.size()).execute(l
-					.getLink());
+			new AsyncHttpTask(getApplicationContext(), l.getLigaNr(), false, dbh, this, iteration, initialLigen.size()).execute(l.getLink());
 		}
 
 	}

@@ -38,9 +38,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	DatabaseHelper dbh;
 
-	public AsyncHttpTask(Context context, int ligaNr, boolean update,
-			DatabaseHelper dbh, Activity activity, double iteration,
-			double numberOfIterations) {
+	public AsyncHttpTask(Context context, int ligaNr, boolean update, DatabaseHelper dbh, Activity activity, double iteration, double numberOfIterations) {
 		mContext = context;
 		this.ligaNr = ligaNr;
 		this.update = update;
@@ -74,8 +72,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			urlConnection = (HttpURLConnection) url.openConnection();
 
 			/* optional request header */
-			urlConnection
-					.setRequestProperty("Content-Type", "application/json");
+			urlConnection.setRequestProperty("Content-Type", "application/json");
 
 			/* optional request header */
 			urlConnection.setRequestProperty("Accept", "application/json");
@@ -90,8 +87,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			/* 200 represents HTTP OK */
 			if (statusCode == 200) {
 
-				inputStream = new BufferedInputStream(
-						urlConnection.getInputStream());
+				inputStream = new BufferedInputStream(urlConnection.getInputStream());
 
 				response = convertInputStreamToString(inputStream);
 
@@ -104,8 +100,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 					long startTime = System.currentTimeMillis();
 					spiele = htmlparser.initialHTMLParsing(response, ligaNr);
 					long diff = System.currentTimeMillis() - startTime;
-					Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff)
-							+ "ms");
+					Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff) + "ms");
 				} else {
 					/*
 					 * TODO: Update noch nicht implementiert!
@@ -144,10 +139,8 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				GregorianCalendar prüfung = new GregorianCalendar(2014, 9, 1);
 				long startTime = System.currentTimeMillis();
 				for (Spiel s : this.spiele) {
-					prüfung.set(s.getDateYear(), s.getDateMonth(),
-							s.getDateDay());
-					long millisec = prüfung.getTimeInMillis()
-							- aktuell.getTimeInMillis();
+					prüfung.set(s.getDateYear(), s.getDateMonth(), s.getDateDay());
+					long millisec = prüfung.getTimeInMillis() - aktuell.getTimeInMillis();
 
 					if (millisec > 86400000) {// Ist genau die Millisekundenzahl
 												// eines Tages
@@ -160,19 +153,14 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 						spieltag.setLigaNr(ligaNr);
 						spieltag.setSpieltags_Nr(spieltagsNr);
 						spieltag.setSpieltags_Name(spieltagsNr + ". Spieltag");
-						spieltag.setDatumBeginn(s.getDateYear() + "-"
-								+ s.getDateMonth() + "-" + s.getDateDay());
-						spieltag.setDatumEnde(s.getDateYear() + "-"
-								+ s.getDateMonth() + "-" + s.getDateDay());
+						spieltag.setDatumBeginn(s.getDateYear() + "-" + s.getDateMonth() + "-" + s.getDateDay());
+						spieltag.setDatumEnde(s.getDateYear() + "-" + s.getDateMonth() + "-" + s.getDateDay());
 						spieltag.setSaison(saison);
-						aktuell.set(s.getDateYear(), s.getDateMonth(),
-								s.getDateDay());
+						aktuell.set(s.getDateYear(), s.getDateMonth(), s.getDateDay());
 
 					} else if (millisec == 86400000) {
-						spieltag.setDatumEnde(s.getDateYear() + "-"
-								+ s.getDateMonth() + "-" + s.getDateDay());
-						aktuell.set(s.getDateYear(), s.getDateMonth(),
-								s.getDateDay());
+						spieltag.setDatumEnde(s.getDateYear() + "-" + s.getDateMonth() + "-" + s.getDateDay());
+						aktuell.set(s.getDateYear(), s.getDateMonth(), s.getDateDay());
 					}
 
 					s.setSpieltagsNr(spieltagsNr);
@@ -185,8 +173,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			}
 
 			// Update des Ladestandes
-			TextView loadingText = (TextView) activity
-					.findViewById(R.id.textView1);
+			TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
 			double ladestatus = iteration / numberOfIterations;
 			ladestatus = ladestatus * 100;
 			ladestatus = Math.round(ladestatus);
@@ -200,8 +187,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				// bt.setVisibility(View.VISIBLE);
 				// bt.setText("Weiter zu allen Ligen");
 				Intent intent = new Intent(mContext, AlleLigenActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-						| Intent.FLAG_ACTIVITY_NEW_TASK);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				mContext.startActivity(intent);
 			}
 
@@ -211,11 +197,9 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 		}
 	}
 
-	private String convertInputStreamToString(InputStream inputStream)
-			throws IOException {
+	private String convertInputStreamToString(InputStream inputStream) throws IOException {
 
-		BufferedReader bufferedReader = new BufferedReader(
-				new InputStreamReader(inputStream));
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
 		String line = "";
 		String result = "";

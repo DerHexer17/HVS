@@ -43,12 +43,9 @@ public class LigaActivity extends ActionBarActivity {
 		dbh = DatabaseHelper.getInstance(getApplicationContext());
 
 		// Der Spinner für die Auswahl der einzelnen Spieltage
-		addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr),
-				dbh.getAllLeagueTeams(ligaNr));
+		addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr), dbh.getAllLeagueTeams(ligaNr));
 		Spinner spinnerSpieltage = (Spinner) findViewById(R.id.spinnerSpieltage);
-		spinnerSpieltage
-				.setOnItemSelectedListener(new CustomOnItemSelectedListener(
-						dbh, ligaNr, this));
+		spinnerSpieltage.setOnItemSelectedListener(new CustomOnItemSelectedListener(dbh, ligaNr, this));
 
 	}
 
@@ -79,8 +76,7 @@ public class LigaActivity extends ActionBarActivity {
 			TableRow row = new TableRow(getApplicationContext());
 			TextView field1 = new TextView(getApplicationContext());
 			ArrayList<TextView> formatArray = new ArrayList<TextView>();
-			field1.setText(s.getDateDay() + "." + s.getDateMonth() + "."
-					+ String.valueOf(s.getDateYear()).split("0")[1]);
+			field1.setText(s.getDateDay() + "." + s.getDateMonth() + "." + String.valueOf(s.getDateYear()).split("0")[1]);
 			formatArray.add(field1);
 			TextView field2 = new TextView(getApplicationContext());
 			field2.setText(s.getTeamHeim());
@@ -104,25 +100,18 @@ public class LigaActivity extends ActionBarActivity {
 		}
 	}
 
-	public void addSpieltageToSpinner(List<Spieltag> spieltage,
-			List<String> teams) {
+	public void addSpieltageToSpinner(List<Spieltag> spieltage, List<String> teams) {
 		Spinner spinnerSpieltage = (Spinner) findViewById(R.id.spinnerSpieltage);
 		List<String> spieltageText = new ArrayList<String>();
 
 		// Eine gut lesbare Liste aller Spieltage wird erzeugt
 		for (Spieltag sp : spieltage) {
-			String datumBeginn = sp.getDatumBeginn().split("-")[2] + "."
-					+ sp.getDatumBeginn().split("-")[1] + "."
-					+ sp.getDatumBeginn().split("-")[0].split("0")[1];
+			String datumBeginn = sp.getDatumBeginn().split("-")[2] + "." + sp.getDatumBeginn().split("-")[1] + "." + sp.getDatumBeginn().split("-")[0].split("0")[1];
 			String datumEnde = "";
-			if (Integer.parseInt(sp.getDatumBeginn().split("-")[2]) != Integer
-					.parseInt(sp.getDatumEnde().split("-")[2])) {
-				datumEnde = " - " + sp.getDatumEnde().split("-")[2] + "."
-						+ sp.getDatumEnde().split("-")[1] + "."
-						+ sp.getDatumEnde().split("-")[0].split("0")[1];
+			if (Integer.parseInt(sp.getDatumBeginn().split("-")[2]) != Integer.parseInt(sp.getDatumEnde().split("-")[2])) {
+				datumEnde = " - " + sp.getDatumEnde().split("-")[2] + "." + sp.getDatumEnde().split("-")[1] + "." + sp.getDatumEnde().split("-")[0].split("0")[1];
 			}
-			spieltageText.add(sp.getSpieltags_Name() + " (" + datumBeginn
-					+ datumEnde + ")");
+			spieltageText.add(sp.getSpieltags_Name() + " (" + datumBeginn + datumEnde + ")");
 		}
 
 		// Die Liste wird um eine Auswahl je Team erweitert
@@ -133,10 +122,8 @@ public class LigaActivity extends ActionBarActivity {
 
 		// Jetzt wird die Liste dem Adapter übergeben und mit dem Spinner
 		// verknüpft
-		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, spieltageText);
-		dataAdapter
-				.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spieltageText);
+		dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinnerSpieltage.setAdapter(dataAdapter);
 	}
 
@@ -146,29 +133,23 @@ public class LigaActivity extends ActionBarActivity {
 		int ligaNr;
 		Activity a;
 
-		public CustomOnItemSelectedListener(DatabaseHelper dbh, int ligaNr,
-				Activity a) {
+		public CustomOnItemSelectedListener(DatabaseHelper dbh, int ligaNr, Activity a) {
 			this.dbh = dbh;
 			this.ligaNr = ligaNr;
 			this.a = a;
 		}
 
 		@Override
-		public void onItemSelected(AdapterView<?> parent, View view, int pos,
-				long id) {
+		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 			// TODO Auto-generated method stub
 			if (parent.getItemAtPosition(pos).toString().split("\\.").length > 1) {
-				int spieltagsNr = Integer.parseInt(parent
-						.getItemAtPosition(pos).toString().split("\\.")[0]);
+				int spieltagsNr = Integer.parseInt(parent.getItemAtPosition(pos).toString().split("\\.")[0]);
 
 				listeSpiele(dbh.getAllMatchdayGames(ligaNr, spieltagsNr));
-			} else if (parent.getItemAtPosition(pos).toString()
-					.contains("Teamauswahl")) {
-				Toast.makeText(parent.getContext(), "Die Auswahl führt zu nix",
-						Toast.LENGTH_SHORT).show();
+			} else if (parent.getItemAtPosition(pos).toString().contains("Teamauswahl")) {
+				Toast.makeText(parent.getContext(), "Die Auswahl führt zu nix", Toast.LENGTH_SHORT).show();
 			} else {
-				listeSpiele(dbh.getAllTeamGames(ligaNr, parent
-						.getItemAtPosition(pos).toString()));
+				listeSpiele(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()));
 			}
 
 		}
