@@ -72,14 +72,16 @@ public class AlleLigenActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle presses on the action bar items
 		switch (item.getItemId()) {
-		case R.id.addLiga:
-			Intent intent = new Intent(getApplicationContext(), StartActivity.class);
-			intent.putExtra("add", 1);
-			Toast.makeText(getApplicationContext(), "Intent intExtra: " + intent.getIntExtra("add", 1), Toast.LENGTH_SHORT).show();
-			startActivity(intent);
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
+	        case R.id.addLiga:
+	        	Intent intent = new Intent(getApplicationContext(), StartActivity.class);
+	    		intent.putExtra("add", 1);
+	    		Toast.makeText(getApplicationContext(), 
+	    				"Intent intExtra: "+intent.getIntExtra("add", 1),
+	    				Toast.LENGTH_SHORT).show();
+	    		startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 }

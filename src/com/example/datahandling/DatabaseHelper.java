@@ -302,8 +302,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<Spiel> getAllTeamGames(int ligaNr, String teamname) {
 		List<Spiel> ligaSpieleTeam = new ArrayList<Spiel>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_TEAM_HEIM + " = '" + teamname + "' AND " + SPIEL_LIGA_NR + " = " + ligaNr + " OR " + SPIEL_TEAM_GAST + " = '" + teamname + "' AND " + SPIEL_LIGA_NR + " = " + ligaNr;
-
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_TEAM_HEIM + " = '" + teamname +
+        		"' AND " + SPIEL_LIGA_NR + " = " + ligaNr + " OR " + SPIEL_TEAM_GAST + " = '" + teamname +
+        		"' AND " + SPIEL_LIGA_NR + " = " + ligaNr;
+        		
 		Log.d(TAG, selectQuery);
 
 		SQLiteDatabase db = this.getReadableDatabase();

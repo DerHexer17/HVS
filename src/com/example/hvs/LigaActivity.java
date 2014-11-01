@@ -29,12 +29,14 @@ public class LigaActivity extends ActionBarActivity {
 
 	DatabaseHelper dbh;
 	String TAG = "liga";
+	int ligaNr;
 	public static Activity ligaActivity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_liga);
+		this.ligaNr = getIntent().getIntExtra("nummer", 0);
 		Intent intent = getIntent();
 		TextView tv = (TextView) findViewById(R.id.textViewLiga);
 		int ligaNr = intent.getIntExtra("nummer", 0);
@@ -58,20 +60,23 @@ public class LigaActivity extends ActionBarActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		switch (item.getItemId()) {
+        case R.id.tabelle:
+        	Intent intent = new Intent(getApplicationContext(), TabelleActivity.class);
+        	intent.putExtra("ligaNr", ligaNr);
+    		startActivity(intent);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
 		}
-		return super.onOptionsItemSelected(item);
 	}
 
-	// Kann die weg?? Aktuell wird diese Methode im Spinner onClickListener
-	// ausgeführt...
+	// Auflistung der ausgewählten Spiele
 	public void listeSpiele(List<Spiel> spiele) {
 		TableLayout table = (TableLayout) findViewById(R.id.tableAlleSpiele);
+		if (table.getChildCount() > 1) {
+			table.removeViews(1, table.getChildCount() - 1);
+		}
 		for (Spiel s : spiele) {
 			TableRow row = new TableRow(getApplicationContext());
 			TextView field1 = new TextView(getApplicationContext());
@@ -127,11 +132,12 @@ public class LigaActivity extends ActionBarActivity {
 		spinnerSpieltage.setAdapter(dataAdapter);
 	}
 
-	class CustomOnItemSelectedListener implements OnItemSelectedListener {
+	public class CustomOnItemSelectedListener implements OnItemSelectedListener {
 
 		DatabaseHelper dbh;
 		int ligaNr;
 		Activity a;
+
 
 		public CustomOnItemSelectedListener(DatabaseHelper dbh, int ligaNr, Activity a) {
 			this.dbh = dbh;
@@ -147,7 +153,9 @@ public class LigaActivity extends ActionBarActivity {
 
 				listeSpiele(dbh.getAllMatchdayGames(ligaNr, spieltagsNr));
 			} else if (parent.getItemAtPosition(pos).toString().contains("Teamauswahl")) {
-				Toast.makeText(parent.getContext(), "Die Auswahl führt zu nix", Toast.LENGTH_SHORT).show();
+				Toast.makeText(parent.getContext(),
+						 "Die Auswahl führt zu nix",
+						  Toast.LENGTH_SHORT).show();
 			} else {
 				listeSpiele(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()));
 			}

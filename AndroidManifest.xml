@@ -34,7 +34,6 @@
         <activity
             android:name=".AlleLigenActivity"
             android:label="@string/title_activity_alle_ligen" >
-
         </activity>
         <activity
             android:name=".LigaActivity"
@@ -44,5 +43,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hvs.AlleLigenActivity" />
         </activity>
+        <activity
+            android:name=".TabelleActivity"
+            android:label="@string/title_activity_tabelle"
+            android:parentActivityName=".LigaActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hvs.LigaActivity" />
+        </activity>
+        
     </application>
+
 </manifest>
