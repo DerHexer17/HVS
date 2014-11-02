@@ -104,16 +104,6 @@ public class HTMLParser {
 			sr = 6;
 		}
 
-		/*
-		 * Parsing the points temp = tds[6].split("</FONT"); temp =
-		 * temp[0].split(">"); String tempPoints = temp[temp.length-1];
-		 * if(tempPoints.equals(":")){ Log.d(TAG,
-		 * "Keine Punkte, Spiel wurde noch nicht gespielt"); }else{ temp =
-		 * tempPoints.split(":");
-		 * spiel.setPunkteHeim(Integer.parseInt(temp[0].trim()));
-		 * spiel.setPunkteGast(Integer.parseInt(temp[1].trim())); }
-		 */
-
 		// Parsing the hyperlink to field
 		temp = tds[sr].split("</FONT>");
 		temp = temp[0].split("<a href=");
@@ -126,9 +116,10 @@ public class HTMLParser {
 
 		return spiel;
 	}
+	/*
+	public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c) {
 
-	/*public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c) {
-
+		
 		// Split the Source into the Rows of the Table of all Games
 		String[] trimHTML = source.split("</tr>");
 		trimHTML = trimHTML[1].split("</TR>");
@@ -207,5 +198,6 @@ public class HTMLParser {
 
 		return alleSpiele;
 	}*/
+	
 
 }
