@@ -105,10 +105,10 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				} else {
 					/*
 					 * TODO: Update noch nicht implementiert!
-					 */
+					 
 					Cursor c = dbh.getAllPlayedGames(ligaNr);
 					HTMLParser htmlparser = new HTMLParser();
-					spiele = htmlparser.updateHtmlParsing(response, ligaNr, c);
+					spiele = htmlparser.updateHtmlParsing(response, ligaNr, c);*/
 				}
 				result = 1; // Successful
 
