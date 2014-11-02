@@ -51,7 +51,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hvs.LigaActivity" />
         </activity>
-        
+        <activity
+            android:name=".UpdateActivity"
+            android:label="@string/title_activity_update" >
+        </activity>
     </application>
 
 </manifest>

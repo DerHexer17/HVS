@@ -45,8 +45,6 @@ public class StartActivity extends ActionBarActivity {
 
 		if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 0) {
 			callAlleLigen(findViewById(R.id.button1));
-		} else if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 1) {
-			ligen = dbh.getAlleLigenNochNichtVorhanden();
 		} else {
 			Liga sac = new Liga();
 			sac.setLigaNr(10000);
@@ -198,16 +196,11 @@ public class StartActivity extends ActionBarActivity {
 				ligenGlobal.get(i).setInitial("Ja");
 			}
 		}
-
-		if (dbh.getAllLogs().size() == 1) {
-			for (Liga l : ligenGlobal) {
-				dbh.addLiga(l);
-			}
-		} else {
-			for (Liga l : ligenGlobal) {
-				dbh.updateLigaInitial(l);
-			}
+		
+		for (Liga l : ligenGlobal) {
+			dbh.addLiga(l);
 		}
+		
 
 		Toast.makeText(getApplicationContext(), "Anzahl ausgewählter Ligen: " + initialLigen.size() + "Anzahl Ligen insgesamt: " + ligenGlobal.size(), Toast.LENGTH_SHORT).show();
 		int iteration = 0;

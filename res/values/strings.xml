@@ -27,5 +27,6 @@
     <string name="tabelle_team">Mannschaft</string>
     <string name="tabelle_punkte">Punkte</string>
     <string name="tabelle_tore">Tore</string>
+    <string name="title_activity_update">UpdateActivity</string>
 
 </resources>

@@ -127,7 +127,7 @@ public class HTMLParser {
 		return spiel;
 	}
 
-	public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c) {
+	/*public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c) {
 
 		// Split the Source into the Rows of the Table of all Games
 		String[] trimHTML = source.split("</tr>");
@@ -139,11 +139,11 @@ public class HTMLParser {
 			trimHTMLList.add(trimHTML[i]);
 		}
 
-		/*
+		
 		 * So einfach gehts leider nicht! Ich brauche die jeweiligen
 		 * Spielnummern. Also spielNr = Tore vorhanden kann weg Rest bleibt.
 		 * Suche nach Updates dann Datumsabhängig machen!
-		 */
+		 
 
 		// looping through all rows and adding to list
 		Log.d(TAG, "Cursor ist da, Size: " + c.getCount());
@@ -191,10 +191,10 @@ public class HTMLParser {
 			durchlauf2++;
 		}
 
-		/*
+		
 		 * genauso angepasst wie die initiale Hier fehlte das splitTableRow.
 		 * Wird die update überhaupt schon aufgerufen?
-		 */
+		 
 		Log.d(TAG, "Neue Size aller Spiele: " + trimHTMLList.size());
 
 		alleSpiele = new ArrayList<Spiel>();
@@ -206,6 +206,6 @@ public class HTMLParser {
 		}
 
 		return alleSpiele;
-	}
+	}*/
 
 }
