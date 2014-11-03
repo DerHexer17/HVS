@@ -24,7 +24,7 @@
 	        android:id="@+id/tableTabelle"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
-	        android:shrinkColumns="1" >
+	        android:shrinkColumns="1,2" >
 	
 	        <TableRow android:id="@+id/ueberschriftTabelle" >
 	

@@ -81,7 +81,8 @@ public class LigaActivity extends ActionBarActivity {
 			TableRow row = new TableRow(getApplicationContext());
 			TextView field1 = new TextView(getApplicationContext());
 			ArrayList<TextView> formatArray = new ArrayList<TextView>();
-			field1.setText(s.getDateDay() + "." + s.getDateMonth() + "." + String.valueOf(s.getDateYear()).split("0")[1]);
+			field1.setText(s.getDateDay() + "." + s.getDateMonth() + "." + String.valueOf(s.getDateYear()).split("0")[1]
+					+ "\n(" + s.getTime() + ")");
 			formatArray.add(field1);
 			TextView field2 = new TextView(getApplicationContext());
 			field2.setText(s.getTeamHeim());
