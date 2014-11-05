@@ -80,6 +80,10 @@ public class AlleLigenActivity extends ActionBarActivity {
 	    				Toast.LENGTH_SHORT).show();
 	    		startActivity(intent);
 	            return true;
+	        case R.id.ligenSwipe:
+	        		Intent intent2 = new Intent(getApplicationContext(), LigawahlActivity.class);
+	        		startActivity(intent2);
+	        		return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

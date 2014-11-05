@@ -27,5 +27,8 @@
     <string name="tabelle_team">Mannschaft</string>
     <string name="tabelle_punkte">Punkte</string>
     <string name="tabelle_tore">Tore</string>
+    <string name="title_activity_ligawahl">LigawahlActivity</string>
+    <string name="title_section1">Männer</string>
+    <string name="title_section2">Frauen</string>
 
 </resources>

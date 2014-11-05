@@ -51,6 +51,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hvs.LigaActivity" />
         </activity>
+        <activity
+            android:name=".LigawahlActivity"
+            android:label="@string/title_activity_ligawahl" >
+        </activity>
         
     </application>
 

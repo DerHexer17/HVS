@@ -9,6 +9,12 @@
         android:icon="@drawable/abc_ic_commit_search_api_holo_light"
         app:showAsAction="always" />
     
+    <item 
+        android:id="@+id/ligenSwipe"
+        android:orderInCategory="90"
+        android:title="Zum Swipe Menü"
+        app:showAsAction="never" />
+    
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
