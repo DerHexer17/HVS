@@ -16,7 +16,7 @@ import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.HTMLParser;
 import com.example.datahandling.Spiel;
 import com.example.datahandling.Spieltag;
-import com.example.hvs.AlleLigenActivity;
+
 import com.example.hvs.LigawahlActivity;
 import com.example.hvs.R;
 import android.app.Activity;

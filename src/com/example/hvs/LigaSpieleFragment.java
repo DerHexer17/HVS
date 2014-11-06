@@ -6,7 +6,7 @@ import java.util.List;
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Spiel;
 import com.example.datahandling.Spieltag;
-import com.example.hvs.LigaActivity.CustomOnItemSelectedListener;
+
 
 import android.app.Activity;
 import android.content.Intent;
