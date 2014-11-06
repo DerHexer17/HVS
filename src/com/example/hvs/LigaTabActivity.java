@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class LigawahlActivity extends ActionBarActivity implements
+public class LigaTabActivity extends ActionBarActivity implements
 		ActionBar.TabListener {
 
 	/**
@@ -29,6 +29,7 @@ public class LigawahlActivity extends ActionBarActivity implements
 	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
+	int ligaNr;
 
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -38,9 +39,10 @@ public class LigawahlActivity extends ActionBarActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_ligawahl);
+		setContentView(R.layout.activity_liga_tab);
 		
-		this.setTitle("Auswahl der Liga");
+		ligaNr = getIntent().getIntExtra("nummer", 0);
+		this.setTitle(getIntent().getStringExtra("liganame"));
 
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
@@ -81,7 +83,7 @@ public class LigawahlActivity extends ActionBarActivity implements
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.ligawahl, menu);
+		getMenuInflater().inflate(R.menu.liga_tab, menu);
 		return true;
 	}
 
@@ -132,9 +134,9 @@ public class LigawahlActivity extends ActionBarActivity implements
 			// below).
 			switch(position){
 			case 0:
-				return new LigenMenFragment(getApplicationContext());
+				return new LigaSpieleFragment();
 			case 1:
-				return new LigenWomenFragment(getApplicationContext());
+				return new LigaTabelleFragment();
 			default:
 				return PlaceholderFragment.newInstance(position + 1);
 			}
@@ -144,7 +146,7 @@ public class LigawahlActivity extends ActionBarActivity implements
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 2;
+			return 3;
 		}
 
 		@Override
@@ -152,9 +154,11 @@ public class LigawahlActivity extends ActionBarActivity implements
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1);
+				return getString(R.string.liga_tab1);
 			case 1:
-				return getString(R.string.title_section2);
+				return getString(R.string.liga_tab2);
+			case 2:
+				return getString(R.string.liga_tab3);
 			}
 			return null;
 		}
@@ -187,7 +191,7 @@ public class LigawahlActivity extends ActionBarActivity implements
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_ligawahl,
+			View rootView = inflater.inflate(R.layout.fragment_liga_tab,
 					container, false);
 			return rootView;
 		}

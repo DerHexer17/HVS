@@ -178,7 +178,7 @@ public class StartActivity extends ActionBarActivity {
 
 	// Start der nächsten Activity mit Anzeige aller geladenen Ligen
 	public void callAlleLigen(View view) {
-		Intent intent = new Intent(getApplicationContext(), AlleLigenActivity.class);
+		Intent intent = new Intent(getApplicationContext(), LigawahlActivity.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
 		startActivity(intent);

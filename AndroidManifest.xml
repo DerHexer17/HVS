@@ -55,6 +55,14 @@
             android:name=".LigawahlActivity"
             android:label="@string/title_activity_ligawahl" >
         </activity>
+        <activity
+            android:name=".LigaTabActivity"
+            android:label="@string/title_activity_liga_tab"
+            android:parentActivityName=".LigawahlActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hvs.LigawahlActivity" />
+        </activity>
         
     </application>
 

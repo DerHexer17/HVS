@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/tabelleLayout"
+    android:id="@+id/ligaLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,45 +11,46 @@
     tools:context="com.example.hvs.LigaActivity" >
 
     <TextView
-        android:id="@+id/ligaNrTabelle_alt"
+        android:id="@+id/textViewLiga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="Titel der Liga" />
     
+    <Spinner 
+        android:id="@+id/spinnerSpieltage"
+        android:layout_width="fill_parent"
+    	android:layout_height="wrap_content" />
+	
     <ScrollView
-        android:id="@+id/scrollTableTabelle_alt"
+        android:id="@+id/scrollTableGames"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 	    <TableLayout
-	        android:id="@+id/tableTabelle_alt"
+	        android:id="@+id/tableAlleSpiele"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:shrinkColumns="1,2" >
 	
-	        <TableRow android:id="@+id/ueberschriftTabelle" >
+	        <TableRow android:id="@+id/ueberschrift" >
 	
 	            <TextView
-	                android:id="@+id/tabelle_rang"
-	                android:text="@string/tabelle_rang"
-	                android:textStyle="bold"
+	                android:id="@+id/spiel_datum"
+	                android:text="@string/spiel_datum"
 	                android:gravity="center" />
 	
 	            <TextView
-	                android:id="@+id/tabelle_team"
-	                android:text="@string/tabelle_team"
-	                android:textStyle="bold"
+	                android:id="@+id/heimteam"
+	                android:text="@string/heimteam"
 	                android:gravity="center" />
 	
 	            <TextView
-	                android:id="@+id/tabelle_punkte"
-	                android:text="@string/tabelle_punkte"
-	                android:textStyle="bold"
+	                android:id="@+id/gastteam"
+	                android:text="@string/gastteam"
 	                android:gravity="center" />
 	
 	            <TextView
-	                android:id="@+id/tabelle_tore"
-	                android:text="@string/tabelle_tore"
-	                android:textStyle="bold"
+	                android:id="@+id/ergebnis"
+	                android:text="@string/ergebnis"
 	                android:gravity="center" />
 	        </TableRow>
 	    </TableLayout>

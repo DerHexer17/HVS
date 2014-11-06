@@ -17,6 +17,7 @@ import com.example.datahandling.HTMLParser;
 import com.example.datahandling.Spiel;
 import com.example.datahandling.Spieltag;
 import com.example.hvs.AlleLigenActivity;
+import com.example.hvs.LigawahlActivity;
 import com.example.hvs.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -187,7 +188,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				// Button bt = (Button) activity.findViewById(R.id.button2);
 				// bt.setVisibility(View.VISIBLE);
 				// bt.setText("Weiter zu allen Ligen");
-				Intent intent = new Intent(mContext, AlleLigenActivity.class);
+				Intent intent = new Intent(mContext, LigawahlActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				mContext.startActivity(intent);
 			}

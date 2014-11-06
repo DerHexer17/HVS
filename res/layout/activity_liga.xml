@@ -11,22 +11,22 @@
     tools:context="com.example.hvs.LigaActivity" >
 
     <TextView
-        android:id="@+id/textViewLiga"
+        android:id="@+id/textViewLiga_alt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Titel der Liga" />
     
     <Spinner 
-        android:id="@+id/spinnerSpieltage"
+        android:id="@+id/spinnerSpieltage_alt"
         android:layout_width="fill_parent"
     	android:layout_height="wrap_content" />
 	
     <ScrollView
-        android:id="@+id/scrollTableGames"
+        android:id="@+id/scrollTableGames_alt"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 	    <TableLayout
-	        android:id="@+id/tableAlleSpiele"
+	        android:id="@+id/tableAlleSpiele_alt"
 	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:shrinkColumns="1,2" >
