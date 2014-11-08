@@ -29,7 +29,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
-	private Context mContext;
+
 	ArrayList<Spiel> spiele;
 	ProgressDialog mDialog;
 	int ligaNr;
@@ -40,8 +40,8 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	DatabaseHelper dbh;
 
-	public AsyncHttpTask(Context context, int ligaNr, boolean update, DatabaseHelper dbh, Activity activity, double iteration, double numberOfIterations) {
-		mContext = context;
+	public AsyncHttpTask(int ligaNr, boolean update, DatabaseHelper dbh, Activity activity, double iteration, double numberOfIterations) {
+
 		this.ligaNr = ligaNr;
 		this.update = update;
 		this.dbh = dbh;
@@ -188,9 +188,9 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				// Button bt = (Button) activity.findViewById(R.id.button2);
 				// bt.setVisibility(View.VISIBLE);
 				// bt.setText("Weiter zu allen Ligen");
-				Intent intent = new Intent(mContext, LigawahlActivity.class);
+				Intent intent = new Intent(activity.getApplicationContext(), LigawahlActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-				mContext.startActivity(intent);
+				activity.getApplicationContext().startActivity(intent);
 			}
 
 		} else {

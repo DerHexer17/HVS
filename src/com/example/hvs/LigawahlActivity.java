@@ -132,9 +132,9 @@ public class LigawahlActivity extends ActionBarActivity implements
 			// below).
 			switch(position){
 			case 0:
-				return new LigenMenFragment(getApplicationContext());
+				return new LigenMenFragment();
 			case 1:
-				return new LigenWomenFragment(getApplicationContext());
+				return new LigenWomenFragment();
 			default:
 				return PlaceholderFragment.newInstance(position + 1);
 			}

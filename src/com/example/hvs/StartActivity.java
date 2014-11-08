@@ -8,6 +8,7 @@ import com.example.internet.AsyncHttpTask;
 import android.support.v7.app.ActionBarActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -222,9 +223,13 @@ public class StartActivity extends ActionBarActivity {
 		Button keinDatenabgleich = (Button) findViewById(R.id.button2);
 		keinDatenabgleich.setVisibility(View.INVISIBLE);
 
+		//Screen Rotation aus gestellt. Per default wird sonst nämlich die Activity neu gestartet, springt dann also
+		//direkt zur Ligenübersicht, ohne aber die Daten schon geholt zu haben
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+		
 		for (Liga l : initialLigen) {
 			iteration++;
-			new AsyncHttpTask(getApplicationContext(), l.getLigaNr(), false, dbh, this, iteration, initialLigen.size()).execute(l.getLink());
+			new AsyncHttpTask(l.getLigaNr(), false, dbh, this, iteration, initialLigen.size()).execute(l.getLink());
 		}
 
 	}

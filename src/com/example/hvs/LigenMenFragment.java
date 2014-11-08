@@ -24,12 +24,9 @@ import android.widget.Toast;
 public class LigenMenFragment extends Fragment {
 	
 	DatabaseHelper dbh;
-	Context mContext;
+
 	List<Liga> alleLigenMen;
-	
-	public LigenMenFragment(Context mContext){
-		this.mContext = mContext;
-	}
+
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +42,7 @@ public class LigenMenFragment extends Fragment {
     }
 	
 	public void ligenAnzeigen(View view){
-		dbh = DatabaseHelper.getInstance(mContext);
+		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 
 		// Alle Ligen bedeutet nur Ligen, die initialisiert wurden
 		alleLigenMen = dbh.getAlleLigen();
@@ -54,8 +51,8 @@ public class LigenMenFragment extends Fragment {
 		
 		for (Liga l : alleLigenMen) {
 			if(l.getGeschlecht().contains("männlich")){
-				TextView bt = new TextView(mContext);
-				TableRow row = new TableRow(mContext);
+				TextView bt = new TextView(getActivity().getApplicationContext());
+				TableRow row = new TableRow(getActivity().getApplicationContext());
 				row.setPadding(20, 20, 20, 20);
 				
 				bt.setText(l.getName());
@@ -70,7 +67,7 @@ public class LigenMenFragment extends Fragment {
 						// Perform action on click
 						TextView b = (TextView) v;
 						int ligaNr = Integer.parseInt(b.getHint().toString().split(":")[1]);
-						Intent intent = new Intent(mContext, LigaTabActivity.class);
+						Intent intent = new Intent(getActivity().getApplicationContext(), LigaTabActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putString("liganame", (String) b.getText());
 						bundle.putInt("nummer", ligaNr);
