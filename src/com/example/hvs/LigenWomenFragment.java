@@ -5,11 +5,14 @@ import java.util.List;
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
 
+import android.R.drawable;
+import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,14 +51,19 @@ public class LigenWomenFragment extends Fragment {
 			if(l.getGeschlecht().contains("weiblich")){
 				TextView bt = new TextView(getActivity().getApplicationContext());
 				TableRow row = new TableRow(getActivity().getApplicationContext());
-				row.setPadding(20, 20, 20, 20);
+				LayoutParams lp = new LayoutParams(-1, -2);
+
+				row.setPadding(20, 10, 20, 10);
+				row.setLayoutParams(lp);
+				row.setGravity(Gravity.CENTER);
 				
 				bt.setText(l.getName());
 				bt.setHint("ligaNr:" + l.getLigaNr());
 				bt.setTextColor(Color.BLACK);
 				bt.setPadding(10, 10, 10, 10);
-				bt.setTextSize(20);
-				//bt.setBackgroundResource(R.drawable.table_back);
+				bt.setTextSize(17);
+				bt.setGravity(Gravity.CENTER);
+				bt.setBackgroundResource(drawable.btn_default);
 				bt.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
