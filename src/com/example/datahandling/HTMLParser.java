@@ -116,11 +116,10 @@ public class HTMLParser {
 
 		return spiel;
 	}
-
 	/*
 	public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c) {
 
-		/*
+		
 		// Split the Source into the Rows of the Table of all Games
 		String[] trimHTML = source.split("</tr>");
 		trimHTML = trimHTML[1].split("</TR>");
@@ -198,8 +197,6 @@ public class HTMLParser {
 		}
 
 		return alleSpiele;
-	
-	
 	}*/
 	
 

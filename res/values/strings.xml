@@ -27,6 +27,7 @@
     <string name="tabelle_team">Mannschaft</string>
     <string name="tabelle_punkte">Punkte</string>
     <string name="tabelle_tore">Tore</string>
+<<<<<<< HEAD
     <string name="title_activity_ligawahl">LigawahlActivity</string>
     <string name="title_section1">Männer</string>
     <string name="title_section2">Frauen</string>
@@ -34,5 +35,8 @@
     <string name="liga_tab1">Spiele</string>
     <string name="liga_tab2">Tabelle</string>
     <string name="liga_tab3">Statistik</string>
+=======
+    <string name="title_activity_update">UpdateActivity</string>
+>>>>>>> origin/master
 
 </resources>

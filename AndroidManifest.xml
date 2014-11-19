@@ -52,6 +52,7 @@
                 android:value="com.example.hvs.LigaActivity" />
         </activity>
         <activity
+<<<<<<< HEAD
             android:name=".LigawahlActivity"
             android:label="@string/title_activity_ligawahl" >
         </activity>
@@ -64,6 +65,11 @@
                 android:value="com.example.hvs.LigawahlActivity" />
         </activity>
         
+=======
+            android:name=".UpdateActivity"
+            android:label="@string/title_activity_update" >
+        </activity>
+>>>>>>> origin/master
     </application>
 
 </manifest>

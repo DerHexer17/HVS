@@ -454,7 +454,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return ligaSpieltage;
 	}
 
-	// TODO: Keine Cursor weitergeben!
+/*	// TODO: Keine Cursor weitergeben!
 	public Cursor getAllPlayedGames(int ligaNr) {
 		List<Spiel> ligaSpiele = new ArrayList<Spiel>();
 		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TORE_HEIM + " != 0";
@@ -465,7 +465,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Cursor c = db.rawQuery(selectQuery, null);
 		c.close();
 		return c;
-	}
+	}*/
 
 	// GETTER
 	public Liga getLiga(int ligaNr) {
@@ -495,30 +495,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return l;
 	}
 
-	public List<String> getTabelle(int ligaNr) {
-		List<String> tabelle = new ArrayList<String>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TORE_HEIM + " != 0";
-
-		Log.d(TAG, selectQuery);
-
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery(selectQuery, null);
-
-		// looping through all rows and adding to list
-		if (c.moveToFirst()) {
-			do {
-				String spiel = c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)) + " gegen " + c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)) + " | " + c.getInt(c.getColumnIndex(SPIEL_TORE_HEIM)) + " : " + c.getInt(c.getColumnIndex(SPIEL_TORE_GAST));
-
-				// td.setCreatedAt(c.getString(c.getColumnIndex(KEY_CREATED_AT)));
-
-				// adding to todo list
-				tabelle.add(spiel);
-				Log.d("tabelle", spiel);
-			} while (c.moveToNext());
-		}
-		c.close();
-		return tabelle;
-	}
 
 	// CHECKER
 	public boolean gameAlreadyExists(Spiel spiel) {
