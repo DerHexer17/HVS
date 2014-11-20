@@ -39,5 +39,6 @@
     <string name="title_activity_spiel">SpielActivity</string>
     <string name="title_section3">Section 3</string>
     <string name="kalenderApi">Spiel in Kalender übernehmen</string>
+    <string name="goToMaps">Zeig die Halle in Google Maps an</string>
 
 </resources>

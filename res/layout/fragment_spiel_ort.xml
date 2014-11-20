@@ -18,7 +18,13 @@
         android:textSize="15sp"
         android:text="Wer gegen wen" />
     
-
-
-
+    <Button
+        android:id="@+id/halleInGoogleMaps"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:text="@string/goToMaps"
+        android:onClick="goToMaps" />
+    
 </LinearLayout>

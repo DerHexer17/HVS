@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
@@ -242,6 +243,19 @@ public class SpielActivity extends ActionBarActivity implements
 		// Making it private and shown as busy
 		intent.putExtra(Events.ACCESS_LEVEL, Events.ACCESS_PRIVATE);
 		intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);*/
+		startActivity(intent);
+	}
+	
+	public void goToMaps(View v){
+		Intent intent = new Intent(Intent.ACTION_VIEW);
+		String mapsString = "";
+		String[] temp = halle.getStrasse().split(" ");
+		for(int i = 0; i<temp.length; i++){
+			mapsString = mapsString+"+"+temp[i];
+		}
+		mapsString = "geo:0,0?q="+mapsString+"+"+halle.getHausnummer()+"+"+halle.getOrt();
+		//geo:0,0?q=my+street+address
+		intent.setData(Uri.parse(mapsString));
 		startActivity(intent);
 	}
 
