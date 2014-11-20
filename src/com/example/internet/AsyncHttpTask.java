@@ -103,6 +103,9 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 					HTMLParser htmlparser = new HTMLParser();
 					long startTime = System.currentTimeMillis();
 					spiele = htmlparser.initialHTMLParsing(response, ligaNr);
+					
+					//Hier holen wir uns nur eine Map der Hallen, die noch neu hinzukommen sollen
+					//Das eigentliche Parsen findet weiter unten in PostExecute statt
 					neueHallen = htmlparser.getHallenLinkListe(dbh.getAlleHallen());
 					long diff = System.currentTimeMillis() - startTime;
 					Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff) + "ms");
@@ -176,10 +179,9 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				long diff = System.currentTimeMillis() - startTime;
 				Log.d("BENNI", "DB Exec Time: " + Long.toString(diff) + "ms");
 				
-				int x=1;
-				for(String s : neueHallen.values()){
-					Log.d("HHH", "Hallenlink "+x+s);
-					x++;
+
+				for(int i : neueHallen.keySet()){
+					new AsyncHttpTaskHallen(activity, dbh, i).execute(neueHallen.get(i));
 				}
 			}
 

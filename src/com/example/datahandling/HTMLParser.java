@@ -112,16 +112,20 @@ public class HTMLParser {
 			sr = 6;
 		}
 
-		// Parsing the hyperlink to field
+		// Hier werden die Hallen-Informationen geparst
 		temp = tds[sr].split("</FONT>");
 		temp = temp[0].split("<a href=");
 		temp = temp[1].split(">");
 		
+		//Zuerst die Hallennummer
 		int tempHallenNr = Integer.parseInt(temp[1].split("<")[0]);
 		//temp = temp[0].split("\\.\\.");
+		
+		//Dann noch der Link zur Halle
 		String tempHallenLink = temp[0].split("\\.\\.")[1].split(" ")[0];
 		spiel.setHalle(tempHallenNr);
 
+		//Hallennummer und -link werden dann in eine Map gepackt, die wir für das parsen der Hallen an sich benötigen
 		this.hallenMap.put(tempHallenNr, "http://hvs-handball.de"+tempHallenLink);
 		// We need the League Number as well!
 		// spiel.setLigaNr(10007);
@@ -129,6 +133,7 @@ public class HTMLParser {
 		return spiel;
 	}
 	
+	//Diese Methode wird separat aus dem AsyncHttpTask aufgerufen um erstmal eine Liste der Hallen zu erzeugen, die neu geparst werden müssen
 	public Map<Integer, String> getHallenLinkListe(List<Halle> alleHallen){
 		
 		for(Halle h : alleHallen){
@@ -144,6 +149,37 @@ public class HTMLParser {
 		return neueHallen;*/
 		
 		return this.hallenMap;
+	}
+	
+	public Halle hallenHTMLParsing(String s, int hallenNr){
+		Halle h = new Halle();
+		h.setHallenNr(hallenNr);
+		h.setName(s.split("text-g1\">")[1].split("<")[0]);
+		
+		String tempAdresse = s.split("t12b\">")[1].split("<")[0];
+		String[] tempHausnummer = tempAdresse.split(",")[0].split(" ");
+		
+		/*
+		 * Teilweise sind die Straßen ungenau auf der Website eingetragen
+		 * Entweder ohne Leerzeichen zwischen Straße und Nummer
+		 * oder ganz ohne Nummer
+		 * Das müssen wir hier abfangen
+		 */
+		try{
+			h.setHausnummer(Integer.parseInt(tempHausnummer[tempHausnummer.length-1]));
+			Integer hs = Integer.valueOf(h.getHausnummer());
+			h.setStrasse(tempAdresse.split(",")[0].split(hs.toString())[0].trim());
+		}catch(NumberFormatException ex){
+			Log.d("Hallen", "Bei der Hausnummer von Halle "+h.getName()+" gab es Probleme");
+			h.setStrasse(tempAdresse.split(",")[0].trim());
+		}		
+		
+		h.setPlz(tempAdresse.split(",")[1].split(" ")[1]);
+		String[] tempPlz = tempAdresse.split(",")[1].split(h.getPlz());
+		
+		h.setOrt(tempPlz[tempPlz.length-1].trim());
+				
+		return h;
 	}
 
 	/*
