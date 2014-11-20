@@ -1,6 +1,7 @@
 package com.example.hvs;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.example.datahandling.DatabaseHelper;
@@ -46,9 +47,10 @@ public class LigaSpieleFragment extends Fragment {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 
 		// Der Spinner für die Auswahl der einzelnen Spieltage
-		addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr), dbh.getAllLeagueTeams(ligaNr), rootView);
+		int positionAktuellerSpieltag = addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr), dbh.getAllLeagueTeams(ligaNr), rootView);
 		Spinner spinnerSpieltage = (Spinner) rootView.findViewById(R.id.spinnerSpieltage);
 		spinnerSpieltage.setOnItemSelectedListener(new CustomOnItemSelectedListener(dbh, ligaNr, rootView));
+		spinnerSpieltage.setSelection(positionAktuellerSpieltag);
 		this.rootView = rootView;
         return rootView;
     }
@@ -106,9 +108,12 @@ public class LigaSpieleFragment extends Fragment {
 			}
 		}
 
-		public void addSpieltageToSpinner(List<Spieltag> spieltage, List<String> teams, View v) {
+		public int addSpieltageToSpinner(List<Spieltag> spieltage, List<String> teams, View v) {
 			Spinner spinnerSpieltage = (Spinner) v.findViewById(R.id.spinnerSpieltage);
 			List<String> spieltageText = new ArrayList<String>();
+			int i=0;
+			long jetzt = System.currentTimeMillis();
+			long spieltag;
 
 			// Eine gut lesbare Liste aller Spieltage wird erzeugt
 			for (Spieltag sp : spieltage) {
@@ -118,6 +123,12 @@ public class LigaSpieleFragment extends Fragment {
 					datumEnde = " - " + sp.getDatumEnde().split("-")[2] + "." + sp.getDatumEnde().split("-")[1] + "." + sp.getDatumEnde().split("-")[0].split("0")[1];
 				}
 				spieltageText.add(sp.getSpieltags_Name() + " (" + datumBeginn + datumEnde + ")");
+				
+				GregorianCalendar spieltagCalendar = new GregorianCalendar(Integer.parseInt(sp.getDatumBeginn().split("-")[0]), Integer.parseInt(sp.getDatumBeginn().split("-")[1]), Integer.parseInt(sp.getDatumBeginn().split("-")[2]));
+				spieltag = spieltagCalendar.getTimeInMillis();
+				if(jetzt-spieltag > 0){//86400000*2){
+					i++;
+				}
 			}
 
 			// Die Liste wird um eine Auswahl je Team erweitert
@@ -131,6 +142,8 @@ public class LigaSpieleFragment extends Fragment {
 			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, spieltageText);
 			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinnerSpieltage.setAdapter(dataAdapter);
+			
+			return i;
 		}
 
 		public class CustomOnItemSelectedListener implements OnItemSelectedListener {
