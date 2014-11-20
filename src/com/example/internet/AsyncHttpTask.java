@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.HTMLParser;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	ArrayList<Spiel> spiele;
+	Map<Integer, String> neueHallen;
 	ProgressDialog mDialog;
 	int ligaNr;
 	boolean update;
@@ -101,6 +103,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 					HTMLParser htmlparser = new HTMLParser();
 					long startTime = System.currentTimeMillis();
 					spiele = htmlparser.initialHTMLParsing(response, ligaNr);
+					neueHallen = htmlparser.getHallenLinkListe(dbh.getAlleHallen());
 					long diff = System.currentTimeMillis() - startTime;
 					Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff) + "ms");
 				} else {
@@ -172,6 +175,12 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				dbh.addSpieleForSpieltag(spieleOfSpieltag);
 				long diff = System.currentTimeMillis() - startTime;
 				Log.d("BENNI", "DB Exec Time: " + Long.toString(diff) + "ms");
+				
+				int x=1;
+				for(String s : neueHallen.values()){
+					Log.d("HHH", "Hallenlink "+x+s);
+					x++;
+				}
 			}
 
 			// Update des Ladestandes

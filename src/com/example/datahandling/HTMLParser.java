@@ -1,7 +1,12 @@
 package com.example.datahandling;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
 
@@ -10,6 +15,7 @@ public class HTMLParser {
 	String TAG = "HTML";
 	private ArrayList<Spiel> alleSpiele;
 	private ArrayList<String> trimHTMLList;
+	private Map<Integer, String> hallenMap;
 
 	DatabaseHelper dbh;
 
@@ -26,6 +32,7 @@ public class HTMLParser {
 		}
 
 		alleSpiele = new ArrayList<Spiel>();
+		this.hallenMap = new HashMap<Integer, String>();
 
 		// Call splitTableRow for every Game-Object
 		for (String s : trimHTMLList) {
@@ -36,6 +43,7 @@ public class HTMLParser {
 
 		Log.d(TAG, "Size von alleSpiele: " + alleSpiele.size());
 
+		
 		return alleSpiele;
 	}
 
@@ -108,13 +116,34 @@ public class HTMLParser {
 		temp = tds[sr].split("</FONT>");
 		temp = temp[0].split("<a href=");
 		temp = temp[1].split(">");
-		temp = temp[0].split("\\.\\.");
-		spiel.setHalle("www.hvs-handball.de" + temp[1]);
+		
+		int tempHallenNr = Integer.parseInt(temp[1].split("<")[0]);
+		//temp = temp[0].split("\\.\\.");
+		String tempHallenLink = temp[0].split("\\.\\.")[1].split(" ")[0];
+		spiel.setHalle(tempHallenNr);
 
+		this.hallenMap.put(tempHallenNr, "http://hvs-handball.de"+tempHallenLink);
 		// We need the League Number as well!
 		// spiel.setLigaNr(10007);
 
 		return spiel;
+	}
+	
+	public Map<Integer, String> getHallenLinkListe(List<Halle> alleHallen){
+		
+		for(Halle h : alleHallen){
+			this.hallenMap.remove(h.getHallenNr());
+		}
+		
+		/*
+		List<String> neueHallen = new ArrayList<String>();
+
+		for(String s : (String[]) this.hallenMap.values().toArray()){
+			neueHallen.add(s);
+		}
+		return neueHallen;*/
+		
+		return this.hallenMap;
 	}
 
 	/*
