@@ -63,7 +63,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hvs.LigawahlActivity" />
         </activity>
-        
+        <activity
+            android:name=".SpielActivity"
+            android:label="@string/title_activity_spiel"
+            android:parentActivityName=".LigaTabActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hvs.LigaTabActivity" />
+        </activity>
     </application>
 
 </manifest>

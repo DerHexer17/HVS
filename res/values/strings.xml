@@ -34,5 +34,10 @@
     <string name="liga_tab1">Spiele</string>
     <string name="liga_tab2">Tabelle</string>
     <string name="liga_tab3">Statistik</string>
+    <string name="spiel_tab1">Details</string>
+    <string name="spiel_tab2">Spielort</string>
+    <string name="title_activity_spiel">SpielActivity</string>
+    <string name="title_section3">Section 3</string>
+    <string name="kalenderApi">Spiel in Kalender übernehmen</string>
 
 </resources>

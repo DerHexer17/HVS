@@ -84,6 +84,24 @@ public class LigaSpieleFragment extends Fragment {
 				}
 				row.setPadding(0, 0, 0, 10);
 				row.setBackgroundResource(R.drawable.table_back);
+				row.setContentDescription(ligaNr+";"+s.getSpielNr());
+				row.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// Perform action on click
+
+						int ligaNr = Integer.parseInt(v.getContentDescription().toString().split(";")[0]);
+						int spielNr = Integer.parseInt(v.getContentDescription().toString().split(";")[1]);
+						Intent intent = new Intent(getActivity().getApplicationContext(), SpielActivity.class);
+						Bundle bundle = new Bundle();
+						//bundle.putString("liganame", (String) b.getText());
+						bundle.putInt("liganummer", ligaNr);
+						bundle.putInt("spielnummer", spielNr);
+						intent.putExtras(bundle);
+
+						startActivity(intent);
+					}
+				});
 				table.addView(row);
 			}
 		}

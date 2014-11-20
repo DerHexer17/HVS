@@ -272,6 +272,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		c.close();
 		return ligaSpiele;
 	}
+	
+	public Spiel getGame(int ligaNr, int spielNr){
+		Spiel s = new Spiel();
+		
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr +
+				" AND " + SPIEL_NR + " = " + spielNr;
+
+		Log.d(TAG, selectQuery);
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+		
+		if (c.moveToFirst()) {
+
+			String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
+			s.setDateDay(Integer.parseInt(tempdate[2]));
+			s.setDateMonth(Integer.parseInt(tempdate[1]));
+			s.setDateYear(Integer.parseInt(tempdate[0]));
+			s.setTime(c.getString(c.getColumnIndex(SPIEL_TIME)));
+			s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
+			s.setTeamHeim(c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)));
+			s.setTeamGast(c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)));
+			s.setToreHeim(c.getInt(c.getColumnIndex(SPIEL_TORE_HEIM)));
+			s.setToreGast(c.getInt(c.getColumnIndex(SPIEL_TORE_GAST)));
+			s.setPunkteHeim(c.getInt(c.getColumnIndex(SPIEL_PUNKTE_HEIM)));
+			s.setPunkteGast(c.getInt(c.getColumnIndex(SPIEL_PUNKTE_GAST)));
+			s.setSchiedsrichter(c.getString(c.getColumnIndex(SPIEL_SR)));
+			s.setHalle(c.getInt(c.getColumnIndex(SPIEL_HALLE)));
+			s.setLigaNr(c.getInt(c.getColumnIndex(SPIEL_LIGA_NR)));
+			s.setSpieltagsNr(c.getInt(c.getColumnIndex(SPIEL_SPIELTAG_NR)));
+
+			// td.setCreatedAt(c.getString(c.getColumnIndex(KEY_CREATED_AT)));
+
+		} else {
+			Log.d(TAG, "Liga nicht gefunden!");
+			return s;
+		}
+		c.close();
+			
+		return s;
+	}
 
 	public List<String> getAllLeagueTeams(int ligaNr) {
 		List<String> allTeams = new ArrayList<String>();
