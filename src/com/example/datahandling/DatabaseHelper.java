@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 10;
+	private static final int DATABASE_VERSION = 11;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -30,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TABLE_LOG = "log";
 	private static final String TABLE_LIGA = "liga";
 	private static final String TABLE_SPIELTAG = "spieltag";
+	private static final String TABLE_HALLE = "halle";
 
 	// Common column names
 	private static final String KEY_ID = "id";
@@ -74,6 +75,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String SPIELTAG_DATUM_BEGINN = "spieltag_datum_beginn";
 	private static final String SPIELTAG_DATUM_ENDE = "spieltag_datum_ende";
 	private static final String SPIELTAG_SAISON = "spieltag_saison";
+	
+	//HALLE Table - column names
+	private static final String HALLE_NR = "halle_nr";
+	private static final String HALLE_NAME = "halle_name";
+	private static final String HALLE_STRASSE = "halle_strasse";
+	private static final String HALLE_HAUSNUMMER = "halle_hausnummer";
+	private static final String HALLE_PLZ = "halle_plz";
+	private static final String HALLE_ORT = "halle_ort";
 
 	// Table Create Statements
 	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE " + TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR + " INTEGER, " + SPIEL_DATE + " TEXT, " + SPIEL_TIME + " TEXT, " + SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, " + SPIEL_TORE_HEIM + " INTEGER, "
@@ -87,6 +96,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_SPIELTAG = "CREATE TABLE " + TABLE_SPIELTAG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIELTAG_ID + " INTEGER, " + SPIELTAG_LIGA_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NAME + " TEXT, " + SPIELTAG_DATUM_BEGINN
 			+ " TEXT, " + SPIELTAG_DATUM_ENDE + " TEXT, " + SPIELTAG_SAISON + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
+	private static final String CREATE_TABLE_HALLE = "CREATE TABLE " + TABLE_HALLE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + 
+			HALLE_NR + " INTEGER, " + HALLE_NAME + " TEXT, " + HALLE_STRASSE + " TEXT, " + HALLE_HAUSNUMMER + " INTEGER, " + 
+			HALLE_PLZ + " TEXT, " + HALLE_ORT + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
+	
 	public static DatabaseHelper getInstance(Context context) {
 		if (sInstance == null) {
 			sInstance = new DatabaseHelper(context.getApplicationContext());
@@ -106,6 +119,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL(CREATE_TABLE_LOG);
 		db.execSQL(CREATE_TABLE_LIGA);
 		db.execSQL(CREATE_TABLE_SPIELTAG);
+		db.execSQL(CREATE_TABLE_HALLE);
 	}
 
 	@Override
@@ -115,6 +129,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOG);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_LIGA);
 		db.execSQL("DROP TABLE IF EXISTS " + TABLE_SPIELTAG);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_HALLE);
 		// create new tables
 		onCreate(db);
 	}
@@ -197,6 +212,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		long liga_id = db.insert(TABLE_LIGA, null, values);
 		db.close();
 		return liga_id;
+	}
+	
+	public long addHalle(Halle halle) {
+		SQLiteDatabase db = this.getWritableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(HALLE_NR, halle.getHallenNr());
+		values.put(HALLE_NAME, halle.getName());
+		values.put(HALLE_STRASSE, halle.getStrasse());
+		values.put(HALLE_HAUSNUMMER, halle.getHausnummer());
+		values.put(HALLE_PLZ, halle.getPlz());
+		values.put(HALLE_ORT, halle.getOrt());
+		// values.put(KEY_CREATED_AT, new Date().);
+
+		// insert row
+		long halle_id = db.insert(TABLE_HALLE, null, values);
+		db.close();
+		return halle_id;
 	}
 
 	// ALL GETTER
@@ -493,6 +526,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		c.close();
 		return l;
+	}
+	
+	public Halle getHalle(int hallenNr) {
+		String selectQuery = "SELECT * FROM " + TABLE_HALLE + " WHERE " + HALLE_NR + " = " + hallenNr;
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+		Halle h = new Halle();;
+		// looping through all rows and adding to list
+		if (c.moveToFirst()) {
+
+			h.setHallenNr(c.getInt(c.getColumnIndex(HALLE_NR)));
+			h.setName(c.getString(c.getColumnIndex(HALLE_NAME)));
+			h.setStrasse(c.getString(c.getColumnIndex(HALLE_STRASSE)));
+			h.setHausnummer(c.getInt(c.getColumnIndex(HALLE_HAUSNUMMER)));
+			h.setPlz(c.getString(c.getColumnIndex(HALLE_PLZ)));
+			h.setOrt(c.getString(c.getColumnIndex(HALLE_ORT)));
+
+		} else {
+			Log.d(TAG, "Halle nicht gefunden!");
+			return h;
+		}
+		c.close();
+		return h;
 	}
 
 	public List<String> getTabelle(int ligaNr) {
