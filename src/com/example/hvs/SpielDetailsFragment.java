@@ -45,7 +45,7 @@ public class SpielDetailsFragment extends Fragment{
         
         titel.setText(spiel.getTeamHeim()+" - "+spiel.getTeamGast());
         datum.setText("Datum: "+spiel.getDateDay()+"."+spiel.getDateMonth()+"."+spiel.getDateYear()+", "+spiel.getTime()+" Uhr");
-        textHalle.setText("Spielhalle: "+halle.getName()+" ("+halle.getStrasse()+" "+halle.getHausnummer()+" in "+halle.getPlz()+" "+halle.getOrt()+")");
+        textHalle.setText("Spielhalle: "+halle.getName()+" ("+halle.kompletteAdresse()+")");
 
 		//dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 

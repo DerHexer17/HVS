@@ -48,7 +48,11 @@ public class Halle {
 	
 	public String kompletteAdresse(){
 		String adresse;
-		adresse = this.getStrasse()+" "+this.getHausnummer()+", "+this.getPlz()+" "+this.getOrt();
+		if(this.getHausnummer()==0){
+			adresse = this.getStrasse()+", "+this.getPlz()+" "+this.getOrt();
+		}else{
+			adresse = this.getStrasse()+" "+this.getHausnummer()+", "+this.getPlz()+" "+this.getOrt();
+		}
 		return adresse;
 	}
 	

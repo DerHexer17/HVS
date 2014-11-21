@@ -253,7 +253,11 @@ public class SpielActivity extends ActionBarActivity implements
 		for(int i = 0; i<temp.length; i++){
 			mapsString = mapsString+"+"+temp[i];
 		}
-		mapsString = "geo:0,0?q="+mapsString+"+"+halle.getHausnummer()+"+"+halle.getOrt();
+		if(halle.getHausnummer()==0){
+			mapsString = "geo:0,0?q="+mapsString+"+"+"+"+halle.getOrt();
+		}else{
+			mapsString = "geo:0,0?q="+mapsString+"+"+halle.getHausnummer()+"+"+halle.getOrt();
+		}
 		//geo:0,0?q=my+street+address
 		intent.setData(Uri.parse(mapsString));
 		startActivity(intent);

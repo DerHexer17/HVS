@@ -15,19 +15,23 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:gravity="center"
         android:textSize="15sp"
+        android:textStyle="bold"
         android:text="Wer gegen wen" />
     
     <TextView 
         android:id="@+id/spielDetailsDatum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
         android:text="datum des Spiels" />
     
     <TextView 
         android:id="@+id/spielDetailsHalle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="10dp"
         android:text="halle des Spiels" />
     
     <Button
@@ -35,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/kalenderApi"
+        android:layout_marginTop="10dp"
         android:onClick="insertIntoCalendar" />
 
 </LinearLayout>
