@@ -77,7 +77,11 @@ public class LigaSpieleFragment extends Fragment {
 				field3.setText(s.getTeamGast());
 				formatArray.add(field3);
 				TextView field4 = new TextView(getActivity().getApplicationContext());
-				field4.setText(s.getToreHeim() + ":" + s.getToreGast());
+				if(s.getToreHeim()==0 && s.getToreGast()==0){
+					field4.setText(":");
+				}else{
+					field4.setText(s.getToreHeim() + ":" + s.getToreGast());
+				}
 				formatArray.add(field4);
 
 				for (TextView t : formatArray) {
@@ -188,6 +192,7 @@ public class LigaSpieleFragment extends Fragment {
 					listeSpiele(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()));
 					
 					ll.setVisibility(View.INVISIBLE);
+					
 
 				}
 				
