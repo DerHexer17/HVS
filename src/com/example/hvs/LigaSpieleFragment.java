@@ -12,14 +12,18 @@ import com.example.datahandling.Spieltag;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -32,6 +36,8 @@ public class LigaSpieleFragment extends Fragment {
 	View rootView;
 	int ligaNr;
 	DatabaseHelper dbh;
+	int indexLetzterSpieltag;
+	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -39,10 +45,6 @@ public class LigaSpieleFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_liga_spiele, container, false);
          
         this.ligaNr = getActivity().getIntent().getIntExtra("nummer", 0);
-		Intent intent = getActivity().getIntent();
-		TextView tv = (TextView) rootView.findViewById(R.id.textViewLiga);
-		int ligaNr = intent.getIntExtra("nummer", 0);
-		tv.setText("Liganummer: " + ligaNr);
 
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 
@@ -132,6 +134,8 @@ public class LigaSpieleFragment extends Fragment {
 					i++;
 				}
 			}
+			
+			indexLetzterSpieltag = spieltageText.size()-1;
 
 			// Die Liste wird um eine Auswahl je Team erweitert
 			spieltageText.add("- - - - - - Teamauswahl - - - - - -");
@@ -164,16 +168,36 @@ public class LigaSpieleFragment extends Fragment {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				// TODO Auto-generated method stub
+				LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.ligaLayoutSpieltageButtons);
+				Button bt1 = (Button) rootView.findViewById(R.id.buttonVorherigerSpieltag);
+				Button bt2 = (Button) rootView.findViewById(R.id.buttonNaechsterSpieltag);
+				
 				if (parent.getItemAtPosition(pos).toString().split("\\.").length > 1) {
 					int spieltagsNr = Integer.parseInt(parent.getItemAtPosition(pos).toString().split("\\.")[0]);
 
 					listeSpiele(dbh.getAllMatchdayGames(ligaNr, spieltagsNr));
+					
+					ll.setVisibility(View.VISIBLE);
 				} else if (parent.getItemAtPosition(pos).toString().contains("Teamauswahl")) {
 					Toast.makeText(parent.getContext(),
 							 "Die Auswahl führt zu nix",
 							  Toast.LENGTH_SHORT).show();
+					ll.setVisibility(View.INVISIBLE);
+					
 				} else {
 					listeSpiele(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()));
+					
+					ll.setVisibility(View.INVISIBLE);
+
+				}
+				
+				if(pos ==0){					
+					bt1.setVisibility(View.INVISIBLE);
+				}else if(pos == indexLetzterSpieltag){
+					bt2.setVisibility(View.INVISIBLE);
+				}else{	
+					bt1.setVisibility(View.VISIBLE);
+					bt2.setVisibility(View.VISIBLE);
 				}
 
 			}

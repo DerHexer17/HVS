@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class SpielActivity extends ActionBarActivity implements
@@ -262,5 +263,7 @@ public class SpielActivity extends ActionBarActivity implements
 		intent.setData(Uri.parse(mapsString));
 		startActivity(intent);
 	}
+	
+	
 
 }

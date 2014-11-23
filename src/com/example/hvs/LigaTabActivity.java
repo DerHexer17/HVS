@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 public class LigaTabActivity extends ActionBarActivity implements
@@ -43,6 +44,7 @@ public class LigaTabActivity extends ActionBarActivity implements
 		
 		ligaNr = getIntent().getIntExtra("nummer", 0);
 		this.setTitle(getIntent().getStringExtra("liganame"));
+		
 
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
@@ -197,4 +199,14 @@ public class LigaTabActivity extends ActionBarActivity implements
 		}
 	}
 
+	//Hier die Methoden, damit auf Button klick zum nächsten oder vorherigen Spieltag gesprungen wird
+	public void vorherigerSpieltag(View view){
+		Spinner sp = (Spinner) findViewById(R.id.spinnerSpieltage);
+		sp.setSelection(sp.getSelectedItemPosition()-1);
+	}
+	
+	public void naechsterSpieltag(View view){
+		Spinner sp = (Spinner) findViewById(R.id.spinnerSpieltage);
+		sp.setSelection(sp.getSelectedItemPosition()+1);
+	}
 }
