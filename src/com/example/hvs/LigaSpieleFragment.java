@@ -50,7 +50,7 @@ public class LigaSpieleFragment extends Fragment {
 		int positionAktuellerSpieltag = addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr), dbh.getAllLeagueTeams(ligaNr), rootView);
 		Spinner spinnerSpieltage = (Spinner) rootView.findViewById(R.id.spinnerSpieltage);
 		spinnerSpieltage.setOnItemSelectedListener(new CustomOnItemSelectedListener(dbh, ligaNr, rootView));
-		spinnerSpieltage.setSelection(positionAktuellerSpieltag);
+		spinnerSpieltage.setSelection(positionAktuellerSpieltag+2);
 		this.rootView = rootView;
         return rootView;
     }
@@ -114,6 +114,7 @@ public class LigaSpieleFragment extends Fragment {
 			int i=0;
 			long jetzt = System.currentTimeMillis();
 			long spieltag;
+			long diff;
 
 			// Eine gut lesbare Liste aller Spieltage wird erzeugt
 			for (Spieltag sp : spieltage) {
@@ -126,7 +127,8 @@ public class LigaSpieleFragment extends Fragment {
 				
 				GregorianCalendar spieltagCalendar = new GregorianCalendar(Integer.parseInt(sp.getDatumBeginn().split("-")[0]), Integer.parseInt(sp.getDatumBeginn().split("-")[1]), Integer.parseInt(sp.getDatumBeginn().split("-")[2]));
 				spieltag = spieltagCalendar.getTimeInMillis();
-				if(jetzt-spieltag > 0){//86400000*2){
+				diff = jetzt-spieltag;
+				if(diff > 86400000){//86400000*2){
 					i++;
 				}
 			}

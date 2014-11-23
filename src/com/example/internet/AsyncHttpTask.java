@@ -50,14 +50,14 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 		this.activity = activity;
 		this.iteration = iteration;
 		this.numberOfIterations = numberOfIterations;
-	}
+		
+	}	
 
 	@Override
 	protected void onPreExecute() {
+
 		super.onPreExecute();
-		// mDialog = new ProgressDialog(mContext);
-		// mDialog.setMessage("Please wait...");
-		// mDialog.show();
+
 	}
 
 	@Override
@@ -208,6 +208,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			String TAG = "PostExecute";
 			Log.e(TAG, "Failed to fetch data!");
 		}
+
 	}
 
 	private String convertInputStreamToString(InputStream inputStream) throws IOException {

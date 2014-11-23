@@ -34,6 +34,13 @@
         android:paddingTop="10dp"
         android:text="halle des Spiels" />
     
+    <TextView 
+        android:id="@+id/spielDetailsSR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:text="halle des Spiels" />
+    
     <Button
         android:id="@+id/kalenderApi"
         android:layout_width="wrap_content"

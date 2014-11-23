@@ -42,13 +42,13 @@ public class SpielDetailsFragment extends Fragment{
         TextView titel = (TextView) rootView.findViewById(R.id.textTitelSpielDetail);
         TextView datum = (TextView) rootView.findViewById(R.id.spielDetailsDatum);
         TextView textHalle = (TextView) rootView.findViewById(R.id.spielDetailsHalle);
+        TextView textSR = (TextView) rootView.findViewById(R.id.spielDetailsSR);
         
         titel.setText(spiel.getTeamHeim()+" - "+spiel.getTeamGast());
         datum.setText("Datum: "+spiel.getDateDay()+"."+spiel.getDateMonth()+"."+spiel.getDateYear()+", "+spiel.getTime()+" Uhr");
         textHalle.setText("Spielhalle: "+halle.getName()+" ("+halle.kompletteAdresse()+")");
-
-		//dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
-
+        textSR.setText("Schiedsrichter: "+spiel.getSchiedsrichter());
+        
 		return rootView;
     }
 	

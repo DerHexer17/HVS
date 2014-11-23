@@ -6,6 +6,8 @@ import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
 import com.example.internet.AsyncHttpTask;
 import android.support.v7.app.ActionBarActivity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -164,6 +166,7 @@ public class StartActivity extends ActionBarActivity {
 			return;
 		}
 		initial();
+		
 	}
 
 	// Einfacher Check, ob das Internet zur Verfügung steht (Hilfsmethode)
