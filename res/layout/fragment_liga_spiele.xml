@@ -20,6 +20,30 @@
         android:id="@+id/spinnerSpieltage"
         android:layout_width="fill_parent"
     	android:layout_height="wrap_content" />
+    
+    <LinearLayout 
+	    android:id="@+id/ligaLayoutSpieltageButtons"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        
+        <Button
+        android:id="@+id/buttonVorherigerSpieltag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:text="@string/vorherigerSpieltag" />
+        
+        <Button
+        android:id="@+id/buttonNaechsterSpieltag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:text="@string/naechsterSpieltag" />
+            
+    </LinearLayout>
 	
     <ScrollView
         android:id="@+id/scrollTableGames"

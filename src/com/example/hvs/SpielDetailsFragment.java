@@ -49,6 +49,10 @@ public class SpielDetailsFragment extends Fragment{
         textHalle.setText("Spielhalle: "+halle.getName()+" ("+halle.kompletteAdresse()+")");
         textSR.setText("Schiedsrichter: "+spiel.getSchiedsrichter());
         
+        if(textSR.getText().toString().split(" ")[1].equals("null")){
+        	textSR.setText("Schiedsrichter: noch nicht angesetzt");
+        }
+        
 		return rootView;
     }
 	
