@@ -36,8 +36,6 @@ public class LigaTabelleFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_liga_tabelle, container, false);
          
         this.ligaNr = getActivity().getIntent().getIntExtra("nummer", 0);
-		TextView tv = (TextView) rootView.findViewById(R.id.ligaNrTabelle);
-		tv.setText("Liganummer: "+getActivity().getIntent().getIntExtra("nummer", 0));
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 		
 		SortedSet<Tabellenrang> tabellenPositionen = (SortedSet<Tabellenrang>) getTabellenPositionen();

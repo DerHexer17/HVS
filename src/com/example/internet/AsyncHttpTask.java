@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.HTMLParser;
@@ -31,6 +32,7 @@ import android.widget.TextView;
 public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	ArrayList<Spiel> spiele;
+	Map<Integer, String> neueHallen;
 	ProgressDialog mDialog;
 	int ligaNr;
 	boolean update;
@@ -48,14 +50,14 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 		this.activity = activity;
 		this.iteration = iteration;
 		this.numberOfIterations = numberOfIterations;
-	}
+		
+	}	
 
 	@Override
 	protected void onPreExecute() {
+
 		super.onPreExecute();
-		// mDialog = new ProgressDialog(mContext);
-		// mDialog.setMessage("Please wait...");
-		// mDialog.show();
+
 	}
 
 	@Override
@@ -101,6 +103,10 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 					HTMLParser htmlparser = new HTMLParser();
 					long startTime = System.currentTimeMillis();
 					spiele = htmlparser.initialHTMLParsing(response, ligaNr);
+					
+					//Hier holen wir uns nur eine Map der Hallen, die noch neu hinzukommen sollen
+					//Das eigentliche Parsen findet weiter unten in PostExecute statt
+					neueHallen = htmlparser.getHallenLinkListe(dbh.getAlleHallen());
 					long diff = System.currentTimeMillis() - startTime;
 					Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff) + "ms");
 				} else {
@@ -172,6 +178,11 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				dbh.addSpieleForSpieltag(spieleOfSpieltag);
 				long diff = System.currentTimeMillis() - startTime;
 				Log.d("BENNI", "DB Exec Time: " + Long.toString(diff) + "ms");
+				
+
+				for(int i : neueHallen.keySet()){
+					new AsyncHttpTaskHallen(activity, dbh, i).execute(neueHallen.get(i));
+				}
 			}
 
 			// Update des Ladestandes
@@ -197,6 +208,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			String TAG = "PostExecute";
 			Log.e(TAG, "Failed to fetch data!");
 		}
+
 	}
 
 	private String convertInputStreamToString(InputStream inputStream) throws IOException {

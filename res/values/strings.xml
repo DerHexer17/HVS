@@ -35,4 +35,12 @@
     <string name="liga_tab2">Tabelle</string>
     <string name="liga_tab3">Statistik</string>
     <string name="title_activity_update">UpdateActivity</string>
+    <string name="spiel_tab1">Details</string>
+    <string name="spiel_tab2">Spielort</string>
+    <string name="title_activity_spiel">SpielActivity</string>
+    <string name="title_section3">Section 3</string>
+    <string name="kalenderApi">Spiel in Kalender übernehmen</string>
+    <string name="goToMaps">Zeig die Halle in Google Maps an</string>
+    <string name="naechsterSpieltag">Nächster Spieltag</string>
+    <string name="vorherigerSpieltag">Vorheriger Spieltag</string>
 </resources>

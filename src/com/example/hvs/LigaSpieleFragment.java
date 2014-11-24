@@ -1,6 +1,7 @@
 package com.example.hvs;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.example.datahandling.DatabaseHelper;
@@ -11,14 +12,18 @@ import com.example.datahandling.Spieltag;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -31,6 +36,8 @@ public class LigaSpieleFragment extends Fragment {
 	View rootView;
 	int ligaNr;
 	DatabaseHelper dbh;
+	int indexLetzterSpieltag;
+	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -38,17 +45,14 @@ public class LigaSpieleFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_liga_spiele, container, false);
          
         this.ligaNr = getActivity().getIntent().getIntExtra("nummer", 0);
-		Intent intent = getActivity().getIntent();
-		TextView tv = (TextView) rootView.findViewById(R.id.textViewLiga);
-		int ligaNr = intent.getIntExtra("nummer", 0);
-		tv.setText("Liganummer: " + ligaNr);
 
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 
 		// Der Spinner für die Auswahl der einzelnen Spieltage
-		addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr), dbh.getAllLeagueTeams(ligaNr), rootView);
+		int positionAktuellerSpieltag = addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr), dbh.getAllLeagueTeams(ligaNr), rootView);
 		Spinner spinnerSpieltage = (Spinner) rootView.findViewById(R.id.spinnerSpieltage);
 		spinnerSpieltage.setOnItemSelectedListener(new CustomOnItemSelectedListener(dbh, ligaNr, rootView));
+		spinnerSpieltage.setSelection(positionAktuellerSpieltag+2);
 		this.rootView = rootView;
         return rootView;
     }
@@ -73,7 +77,11 @@ public class LigaSpieleFragment extends Fragment {
 				field3.setText(s.getTeamGast());
 				formatArray.add(field3);
 				TextView field4 = new TextView(getActivity().getApplicationContext());
-				field4.setText(s.getToreHeim() + ":" + s.getToreGast());
+				if(s.getToreHeim()==0 && s.getToreGast()==0){
+					field4.setText(":");
+				}else{
+					field4.setText(s.getToreHeim() + ":" + s.getToreGast());
+				}
 				formatArray.add(field4);
 
 				for (TextView t : formatArray) {
@@ -84,13 +92,35 @@ public class LigaSpieleFragment extends Fragment {
 				}
 				row.setPadding(0, 0, 0, 10);
 				row.setBackgroundResource(R.drawable.table_back);
+				row.setContentDescription(ligaNr+";"+s.getSpielNr());
+				row.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// Perform action on click
+
+						int ligaNr = Integer.parseInt(v.getContentDescription().toString().split(";")[0]);
+						int spielNr = Integer.parseInt(v.getContentDescription().toString().split(";")[1]);
+						Intent intent = new Intent(getActivity().getApplicationContext(), SpielActivity.class);
+						Bundle bundle = new Bundle();
+						//bundle.putString("liganame", (String) b.getText());
+						bundle.putInt("liganummer", ligaNr);
+						bundle.putInt("spielnummer", spielNr);
+						intent.putExtras(bundle);
+
+						startActivity(intent);
+					}
+				});
 				table.addView(row);
 			}
 		}
 
-		public void addSpieltageToSpinner(List<Spieltag> spieltage, List<String> teams, View v) {
+		public int addSpieltageToSpinner(List<Spieltag> spieltage, List<String> teams, View v) {
 			Spinner spinnerSpieltage = (Spinner) v.findViewById(R.id.spinnerSpieltage);
 			List<String> spieltageText = new ArrayList<String>();
+			int i=0;
+			long jetzt = System.currentTimeMillis();
+			long spieltag;
+			long diff;
 
 			// Eine gut lesbare Liste aller Spieltage wird erzeugt
 			for (Spieltag sp : spieltage) {
@@ -100,7 +130,16 @@ public class LigaSpieleFragment extends Fragment {
 					datumEnde = " - " + sp.getDatumEnde().split("-")[2] + "." + sp.getDatumEnde().split("-")[1] + "." + sp.getDatumEnde().split("-")[0].split("0")[1];
 				}
 				spieltageText.add(sp.getSpieltags_Name() + " (" + datumBeginn + datumEnde + ")");
+				
+				GregorianCalendar spieltagCalendar = new GregorianCalendar(Integer.parseInt(sp.getDatumBeginn().split("-")[0]), Integer.parseInt(sp.getDatumBeginn().split("-")[1]), Integer.parseInt(sp.getDatumBeginn().split("-")[2]));
+				spieltag = spieltagCalendar.getTimeInMillis();
+				diff = jetzt-spieltag;
+				if(diff > 86400000){//86400000*2){
+					i++;
+				}
 			}
+			
+			indexLetzterSpieltag = spieltageText.size()-1;
 
 			// Die Liste wird um eine Auswahl je Team erweitert
 			spieltageText.add("- - - - - - Teamauswahl - - - - - -");
@@ -113,6 +152,8 @@ public class LigaSpieleFragment extends Fragment {
 			ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, spieltageText);
 			dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			spinnerSpieltage.setAdapter(dataAdapter);
+			
+			return i;
 		}
 
 		public class CustomOnItemSelectedListener implements OnItemSelectedListener {
@@ -131,16 +172,37 @@ public class LigaSpieleFragment extends Fragment {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 				// TODO Auto-generated method stub
+				LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.ligaLayoutSpieltageButtons);
+				Button bt1 = (Button) rootView.findViewById(R.id.buttonVorherigerSpieltag);
+				Button bt2 = (Button) rootView.findViewById(R.id.buttonNaechsterSpieltag);
+				
 				if (parent.getItemAtPosition(pos).toString().split("\\.").length > 1) {
 					int spieltagsNr = Integer.parseInt(parent.getItemAtPosition(pos).toString().split("\\.")[0]);
 
 					listeSpiele(dbh.getAllMatchdayGames(ligaNr, spieltagsNr));
+					
+					ll.setVisibility(View.VISIBLE);
 				} else if (parent.getItemAtPosition(pos).toString().contains("Teamauswahl")) {
 					Toast.makeText(parent.getContext(),
 							 "Die Auswahl führt zu nix",
 							  Toast.LENGTH_SHORT).show();
+					ll.setVisibility(View.INVISIBLE);
+					
 				} else {
 					listeSpiele(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()));
+					
+					ll.setVisibility(View.INVISIBLE);
+					
+
+				}
+				
+				if(pos ==0){					
+					bt1.setVisibility(View.INVISIBLE);
+				}else if(pos == indexLetzterSpieltag){
+					bt2.setVisibility(View.INVISIBLE);
+				}else{	
+					bt1.setVisibility(View.VISIBLE);
+					bt2.setVisibility(View.VISIBLE);
 				}
 
 			}

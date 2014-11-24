@@ -9,17 +9,39 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.hvs.LigaActivity" >
-
-    <TextView
-        android:id="@+id/textViewLiga"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Titel der Liga" />
-    
+  
     <Spinner 
         android:id="@+id/spinnerSpieltage"
         android:layout_width="fill_parent"
     	android:layout_height="wrap_content" />
+    
+    <LinearLayout 
+	    android:id="@+id/ligaLayoutSpieltageButtons"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal" >
+        
+        <Button
+        android:id="@+id/buttonVorherigerSpieltag"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:layout_weight="1"
+        android:text="@string/vorherigerSpieltag"
+        android:onClick="vorherigerSpieltag" />
+        
+        <Button
+        android:id="@+id/buttonNaechsterSpieltag"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="15sp"
+        android:layout_weight="1"
+        android:text="@string/naechsterSpieltag"
+        android:onClick="naechsterSpieltag" />
+            
+    </LinearLayout>
 	
     <ScrollView
         android:id="@+id/scrollTableGames"

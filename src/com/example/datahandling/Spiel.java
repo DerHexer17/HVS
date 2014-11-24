@@ -15,7 +15,7 @@ public class Spiel {
 	private int punkteHeim;
 	private int punkteGast;
 	private String schiedsrichter;
-	private String halle;
+	private int halle;
 	private int ligaNr;
 	private int spieltagsNr;
 	private int spieltagsID;
@@ -128,11 +128,11 @@ public class Spiel {
 		this.schiedsrichter = schiedsrichter;
 	}
 
-	public String getHalle() {
+	public int getHalle() {
 		return halle;
 	}
 
-	public void setHalle(String halle) {
+	public void setHalle(int halle) {
 		this.halle = halle;
 	}
 
