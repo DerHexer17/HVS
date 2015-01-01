@@ -1,7 +1,5 @@
 package com.example.hvs;
 
-import java.util.Locale;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -151,7 +149,6 @@ public class LigaTabActivity extends ActionBarActivity implements
 
 		@Override
 		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
 				return getString(R.string.liga_tab1);
