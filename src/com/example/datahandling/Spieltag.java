@@ -1,13 +1,16 @@
 package com.example.datahandling;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Spieltag {
 
 	private int spieltags_ID;
 	private int ligaNr;
 	private int spieltags_Nr;
 	private String spieltags_Name;
-	private String datumBeginn;
-	private String datumEnde;
+	private Date datumBeginn;
+	private Date datumEnde;
 	private String saison;
 
 	public int getSpieltags_ID() {
@@ -42,19 +45,19 @@ public class Spieltag {
 		this.spieltags_Name = spieltags_Name;
 	}
 
-	public String getDatumBeginn() {
+	public Date getDatumBeginn() {
 		return datumBeginn;
 	}
 
-	public void setDatumBeginn(String datumBeginn) {
+	public void setDatumBeginn(Date datumBeginn) {
 		this.datumBeginn = datumBeginn;
 	}
 
-	public String getDatumEnde() {
+	public Date getDatumEnde() {
 		return datumEnde;
 	}
 
-	public void setDatumEnde(String datumEnde) {
+	public void setDatumEnde(Date datumEnde) {
 		this.datumEnde = datumEnde;
 	}
 

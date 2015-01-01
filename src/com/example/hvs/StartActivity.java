@@ -2,12 +2,7 @@ package com.example.hvs;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Liga;
-import com.example.internet.AsyncHttpTask;
-import android.support.v7.app.ActionBarActivity;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -15,6 +10,8 @@ import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +21,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Liga;
+import com.example.internet.AsyncHttpTask;
 
 public class StartActivity extends ActionBarActivity {
 
@@ -204,10 +205,8 @@ public class StartActivity extends ActionBarActivity {
 		for (Liga l : ligenGlobal) {
 			dbh.addLiga(l);
 		}
-		
 
 		Toast.makeText(getApplicationContext(), "Anzahl ausgewählter Ligen: " + initialLigen.size() + "Anzahl Ligen insgesamt: " + ligenGlobal.size(), Toast.LENGTH_SHORT).show();
-		int iteration = 0;
 
 		TextView loading = (TextView) findViewById(R.id.textView1);
 		loading.setText("Loading (0%)");
@@ -223,9 +222,10 @@ public class StartActivity extends ActionBarActivity {
 		//direkt zur Ligenübersicht, ohne aber die Daten schon geholt zu haben
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
 		
-		for (Liga l : initialLigen) {
-			iteration++;
-			new AsyncHttpTask(l.getLigaNr(), false, dbh, this, iteration, initialLigen.size()).execute(l.getLink());
+		
+		//nur erste Liga,
+		if(initialLigen.size() != 0){
+			new AsyncHttpTask(initialLigen.get(0).getLigaNr(), false, this, initialLigen).execute(initialLigen.get(0).getLink());
 		}
 
 	}

@@ -55,6 +55,10 @@ public class Halle {
 		}
 		return adresse;
 	}
+	@Override
+	public String toString() {
+		return "Name: "+this.name;
+	}
 	
 	
 }

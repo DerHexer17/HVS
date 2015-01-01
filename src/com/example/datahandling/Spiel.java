@@ -1,13 +1,10 @@
 package com.example.datahandling;
+import java.util.Date;
 
 public class Spiel {
 
 	private int spielNr;
-	private int dateDay;
-	private int dateMonth;
-	private int dateYear;
-	private String date;
-	private String time;
+	private Date date;
 	private String teamHeim;
 	private String teamGast;
 	private int toreHeim;
@@ -32,44 +29,12 @@ public class Spiel {
 		this.spielNr = spielNr;
 	}
 
-	public int getDateDay() {
-		return dateDay;
-	}
-
-	public void setDateDay(int dateDay) {
-		this.dateDay = dateDay;
-	}
-
-	public int getDateMonth() {
-		return dateMonth;
-	}
-
-	public void setDateMonth(int dateMonth) {
-		this.dateMonth = dateMonth;
-	}
-
-	public int getDateYear() {
-		return dateYear;
-	}
-
-	public void setDateYear(int dateYear) {
-		this.dateYear = dateYear;
-	}
-
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
 	}
 
 	public String getTeamHeim() {

@@ -226,8 +226,8 @@ public class SpielActivity extends ActionBarActivity implements
 		//intent.putExtra(Events.DESCRIPTION, "Download Examples");
 
 		// Setting dates
-		GregorianCalendar calDate = new GregorianCalendar(
-				spiel.getDateYear(), spiel.getDateMonth()-1, spiel.getDateDay(), Integer.parseInt(spiel.getTime().split(":")[0]), Integer.parseInt(spiel.getTime().split(":")[1]), 0);
+		GregorianCalendar calDate = new GregorianCalendar();
+		calDate.setTime(spiel.getDate());
 		intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
 		  calDate.getTimeInMillis());
 		intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,

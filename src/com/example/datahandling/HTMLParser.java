@@ -1,10 +1,14 @@
 package com.example.datahandling;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -32,7 +36,7 @@ public class HTMLParser {
 		}
 
 		alleSpiele = new ArrayList<Spiel>();
-		this.hallenMap = new HashMap<Integer, String>();
+		hallenMap = new HashMap<Integer, String>();
 
 		// Call splitTableRow for every Game-Object
 		for (String s : trimHTMLList) {
@@ -43,112 +47,147 @@ public class HTMLParser {
 
 		Log.d(TAG, "Size von alleSpiele: " + alleSpiele.size());
 
-		
 		return alleSpiele;
 	}
-
-	/* Method for parsing one source table row into needed parameters of a game */
+	
 	public Spiel splitTableRow(String spielSource) {
 		String[] tds = spielSource.split("</TD");
 		Spiel spiel = new Spiel();
 
-		// A temporary Array for all the needed parsing
-		String[] temp;
+		String numberStr = tds[0];
+		String dateStr = tds[1];
+		String timeStr = tds[2];
+		String teamHomeStr = tds[3];
+		String teamGuestStr = tds[4];
+		String goalOrRefStr = tds[5];
+		String fieldStr;
+		
+		spiel.setDate(new java.sql.Date(parseDate(dateStr, timeStr).getTime()));
+		
+		spiel.setSpielNr(parseNumber(numberStr));	
 
-		// Parsing the game number
-		temp = tds[0].split("</FONT");
-		temp = temp[0].split(">");
-		spiel.setSpielNr(Integer.parseInt(temp[temp.length - 1]));
+		spiel.setTeamHeim(parseTeam(teamHomeStr));
+		spiel.setTeamGast(parseTeam(teamGuestStr));
 
-		// Parsing the date
-		temp = tds[1].split("</FONT");
-		temp = temp[0].split(">");
-		String tempDate = temp[temp.length - 1];
-		temp = tempDate.split(" ");
-		temp = temp[1].split("\\.");
-		spiel.setDateDay(Integer.parseInt(temp[0]));
-		spiel.setDateMonth(Integer.parseInt(temp[1]));
-		spiel.setDateYear(Integer.parseInt(temp[2]));
-
-		// Parsing the time
-		temp = tds[2].split("</FONT");
-		temp = temp[0].split(">");
-		spiel.setTime(temp[temp.length - 1]);
-
-		// Parsing the home team
-		temp = tds[3].split("</FONT");
-		temp = temp[0].split("</a>");
-		temp = temp[0].split(">");
-		spiel.setTeamHeim(temp[temp.length - 1]);
-
-		// Parsing the guest team
-		temp = tds[4].split("</FONT");
-		temp = temp[0].split("</a>");
-		temp = temp[0].split(">");
-		spiel.setTeamGast(temp[temp.length - 1]);
-
-		int sr = 0;
-		// Parsing the goals and points
-		temp = tds[5].split("</FONT");
-		temp = temp[0].split(">");
-		String tempGoals = temp[temp.length - 1];
-		if (tempGoals.equals(":")) {
-			Log.d(TAG, "Keine Tore, Spiel wurde noch nicht gespielt");
-			sr = 7;
-		} else if (tempGoals.contains(":")) {
-			temp = tempGoals.split(":");
-			spiel.setToreHeim(Integer.parseInt(temp[0].trim()));
-			spiel.setToreGast(Integer.parseInt(temp[1].trim()));
-			temp = tds[6].split("</FONT");
-			temp = temp[0].split(">");
-			String tempPoints = temp[temp.length - 1];
-			temp = tempPoints.split(":");
-			spiel.setPunkteHeim(Integer.parseInt(temp[0].trim()));
-			spiel.setPunkteGast(Integer.parseInt(temp[1].trim()));
-			sr = 7;
-		} else {
-			Log.d(TAG, "Keine Tore, aber SR angesetzt");
-			spiel.setSchiedsrichter(tempGoals);
-			sr = 6;
+		if(!goalOrRefStr.contains(":")){
+			parseReferee(goalOrRefStr);
+			fieldStr = tds[6];
+			spiel.setHalle(parseField(fieldStr));
+		}else{
+			int[] goals = parseGoals(goalOrRefStr);
+			if(goals[0] == -1){
+				fieldStr = tds[7];
+				spiel.setHalle(parseField(fieldStr));
+			}else{
+				String pointsStr = tds[6];
+				int[] points = parsePoints(pointsStr);
+				spiel.setToreHeim(goals[0]);
+				spiel.setToreGast(goals[1]);
+				spiel.setPunkteHeim(points[0]);
+				spiel.setPunkteGast(points[1]);
+			}
 		}
-
-		// Hier werden die Hallen-Informationen geparst
-		temp = tds[sr].split("</FONT>");
-		temp = temp[0].split("<a href=");
-		temp = temp[1].split(">");
-		
-		//Zuerst die Hallennummer
-		int tempHallenNr = Integer.parseInt(temp[1].split("<")[0]);
-		//temp = temp[0].split("\\.\\.");
-		
-		//Dann noch der Link zur Halle
-		String tempHallenLink = temp[0].split("\\.\\.")[1].split(" ")[0];
-		spiel.setHalle(tempHallenNr);
-
-		//Hallennummer und -link werden dann in eine Map gepackt, die wir für das parsen der Hallen an sich benötigen
-		this.hallenMap.put(tempHallenNr, "http://hvs-handball.de"+tempHallenLink);
-		// We need the League Number as well!
-		// spiel.setLigaNr(10007);
 
 		return spiel;
 	}
 	
+	private int parseNumber(String numberStr){
+		String[] temp = numberStr.split("</FONT");
+		temp = temp[0].split(">");
+		return Integer.parseInt(temp[temp.length - 1]);
+	}
+	
+	private Date parseDate(String dateStr, String timeStr){
+		Date date;
+		String[] temp = dateStr.split("</FONT");
+		temp = temp[0].split(">");
+		String tempDate = temp[temp.length - 1];
+		temp = tempDate.split(" ");
+		String partDate = temp[1];
+		
+		temp = timeStr.split("</FONT");
+		temp = temp[0].split(">");
+		String partTime = temp[temp.length - 1];
+		
+		String newDate = partDate + " " + partTime;
+		
+		try{
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+			date = formatter.parse(newDate);
+			return date;
+		}catch(Exception ex){
+			ex.printStackTrace();
+			return null;
+		}
+	}
+	
+	private String parseTeam(String teamStr){
+		String[] temp = teamStr.split("</FONT");
+		temp = temp[0].split("</a>");
+		temp = temp[0].split(">");
+		return temp[temp.length - 1];
+	}
+	
+	private int[] parseGoals(String goalStr){
+		int[] goals = new int[2];
+		String[] temp = goalStr.split("</FONT");
+		temp = temp[0].split(">");
+		String tempGoals = temp[temp.length - 1];
+		if(tempGoals.equals(":")){
+			goals[0] = -1;
+			return goals;
+		}else{
+			temp = tempGoals.split(":");
+			goals[0] = Integer.parseInt(temp[0].trim());
+			goals[1] = Integer.parseInt(temp[1].trim());
+			return goals;
+		}
+	}
+	
+	private String parseReferee(String refStr){
+		String[] temp = refStr.split("</FONT");
+		temp = temp[0].split(">");
+		return temp[temp.length - 1];
+	}
+	
+	private int parseField(String fieldStr){
+
+		String[] temp = fieldStr.split("</FONT>");
+		temp = temp[0].split("<a href=");
+		temp = temp[1].split(">");
+		
+		int tempHallenNr = Integer.parseInt(temp[1].split("<")[0]);
+		
+		String tempHallenLink = temp[0].split("\\.\\.")[1].split(" ")[0];
+		hallenMap.put(tempHallenNr, "http://hvs-handball.de"+tempHallenLink);
+
+		return tempHallenNr;
+	}
+	
+	private int[] parsePoints(String pointsStr){
+		int[] points = new int[2];
+		String[] temp = pointsStr.split("</FONT");
+		temp = temp[0].split(">");
+		String tempPoints = temp[temp.length - 1];
+		temp = tempPoints.split(":");
+		points[0] = Integer.parseInt(temp[0].trim());
+		points[1] = Integer.parseInt(temp[1].trim());
+		return points;
+	}
+
+	
 	//Diese Methode wird separat aus dem AsyncHttpTask aufgerufen um erstmal eine Liste der Hallen zu erzeugen, die neu geparst werden müssen
-	public Map<Integer, String> getHallenLinkListe(List<Halle> alleHallen){
+	public Map<Integer, String> getUnsavedHallenLinkListe(List<Halle> alleHallen){
 		
 		for(Halle h : alleHallen){
-			this.hallenMap.remove(h.getHallenNr());
+			Log.d("Benni", "removed halle: "+h.getHallenNr());
+			hallenMap.remove(h.getHallenNr());
 		}
 		
-		/*
-		List<String> neueHallen = new ArrayList<String>();
-
-		for(String s : (String[]) this.hallenMap.values().toArray()){
-			neueHallen.add(s);
+		for(Entry<Integer, String> e : hallenMap.entrySet()){
+			Log.d("Hallenmap", e.getKey()+", "+e.getValue());
 		}
-		return neueHallen;*/
-		
-		return this.hallenMap;
+		return hallenMap;
 	}
 	
 	public Halle hallenHTMLParsing(String s, int hallenNr){
@@ -167,6 +206,7 @@ public class HTMLParser {
 		 */
 		try{
 			h.setHausnummer(Integer.parseInt(tempHausnummer[tempHausnummer.length-1]));
+			Log.d("Benni", "Hausnummer "+h.getHausnummer());
 			Integer hs = Integer.valueOf(h.getHausnummer());
 			h.setStrasse(tempAdresse.split(",")[0].split(hs.toString())[0].trim());
 		}catch(NumberFormatException ex){
@@ -181,89 +221,5 @@ public class HTMLParser {
 				
 		return h;
 	}
-
-	/*
-	public ArrayList<Spiel> updateHtmlParsing(String source, int ligaNr, Cursor c) {
-
-		
-		// Split the Source into the Rows of the Table of all Games
-		String[] trimHTML = source.split("</tr>");
-		trimHTML = trimHTML[1].split("</TR>");
-		trimHTMLList = new ArrayList<String>();
-
-		// Need to delete just the last position of the array
-		for (int i = 0; i < trimHTML.length - 1; i++) {
-			trimHTMLList.add(trimHTML[i]);
-		}
-
-		
-		 * So einfach gehts leider nicht! Ich brauche die jeweiligen
-		 * Spielnummern. Also spielNr = Tore vorhanden kann weg Rest bleibt.
-		 * Suche nach Updates dann Datumsabhängig machen!
-		 
-
-		// looping through all rows and adding to list
-		Log.d(TAG, "Cursor ist da, Size: " + c.getCount());
-
-		if (c.moveToFirst()) {
-			do {
-				int gespielt = c.getInt(c.getColumnIndex("spiel_nr"));
-				int durchlauf = 0;
-				for (String s : trimHTMLList) {
-					String[] tds = s.split("</TD");
-
-					// A temporary Array for all the needed parsing
-					String[] temp;
-
-					// Parsing the game number
-					temp = tds[0].split("</FONT");
-					temp = temp[0].split(">");
-					if (Integer.parseInt(temp[temp.length - 1]) == gespielt) {
-						trimHTMLList.remove(durchlauf);
-						durchlauf--;
-					}
-					durchlauf++;
-
-				}
-
-			} while (c.moveToNext());
-		}
-
-		Log.d(TAG, "Neue Size aller Spiele: " + trimHTMLList.size());
-
-		int durchlauf2 = 0;
-		for (String st : trimHTMLList) {
-			String[] tdst = st.split("</TD");
-
-			// A temporary Array for all the needed parsing
-			String[] temp1;
-
-			// Parsing the goals and points
-			temp1 = tdst[5].split("</FONT");
-			temp1 = temp1[0].split(">");
-			String tempGoals = temp1[temp1.length - 1];
-			if (tempGoals.equals(":")) {
-				trimHTMLList.remove(durchlauf2);
-			}
-			durchlauf2++;
-		}
-
-		
-		 * genauso angepasst wie die initiale Hier fehlte das splitTableRow.
-		 * Wird die update überhaupt schon aufgerufen?
-		 
-		Log.d(TAG, "Neue Size aller Spiele: " + trimHTMLList.size());
-
-		alleSpiele = new ArrayList<Spiel>();
-
-		for (String s : trimHTMLList) {
-			Spiel spiel = splitTableRow(s);
-			spiel.setLigaNr(ligaNr);
-			alleSpiele.add(spiel);
-		}
-
-		return alleSpiele;
-	}*/
-	
 
 }

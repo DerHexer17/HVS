@@ -9,49 +9,46 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import com.example.datahandling.DBGateway;
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.HTMLParser;
+import com.example.datahandling.Liga;
 import com.example.datahandling.Spiel;
-import com.example.datahandling.Spieltag;
 
 import com.example.hvs.LigawahlActivity;
 import com.example.hvs.R;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.TextView;
 
 public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
-	ArrayList<Spiel> spiele;
-	Map<Integer, String> neueHallen;
-	ProgressDialog mDialog;
-	int ligaNr;
-	boolean update;
-	Activity activity;
-	double numberOfIterations;
-	double iteration;
+	private ArrayList<Spiel> spiele;
+	private List<Liga> ligen;
+	private Map<Integer, String> neueHallen;
+	private ProgressDialog mDialog;
+	private int ligaNr;
+	private boolean update;
+	private Activity activity;
+	private double numberOfIterations;
+	private double iteration;
+	private DatabaseHelper dbh;
 
-	DatabaseHelper dbh;
-
-	public AsyncHttpTask(int ligaNr, boolean update, DatabaseHelper dbh, Activity activity, double iteration, double numberOfIterations) {
+	public AsyncHttpTask(int ligaNr, boolean update, Activity activity, List<Liga> ligen) {
 
 		this.ligaNr = ligaNr;
 		this.update = update;
-		this.dbh = dbh;
 		this.activity = activity;
-		this.iteration = iteration;
-		this.numberOfIterations = numberOfIterations;
-		
-	}	
+		this.ligen = ligen;
+		this.dbh = DatabaseHelper.getInstance(activity);
+	}
 
 	@Override
 	protected void onPreExecute() {
@@ -60,19 +57,20 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	}
 
+
 	@Override
 	protected Integer doInBackground(String... params) {
 		InputStream inputStream = null;
-
 		HttpURLConnection urlConnection = null;
 
 		int result = 0;
+		
 		String response = "Keine Daten";
 
 		try {
-			/* forming th java.net.URL object */
+			/* forming the java.net.URL object */
 			URL url = new URL(params[0]);
-
+			
 			urlConnection = (HttpURLConnection) url.openConnection();
 
 			/* optional request header */
@@ -103,19 +101,19 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 					HTMLParser htmlparser = new HTMLParser();
 					long startTime = System.currentTimeMillis();
 					spiele = htmlparser.initialHTMLParsing(response, ligaNr);
-					
-					//Hier holen wir uns nur eine Map der Hallen, die noch neu hinzukommen sollen
-					//Das eigentliche Parsen findet weiter unten in PostExecute statt
-					neueHallen = htmlparser.getHallenLinkListe(dbh.getAlleHallen());
+
+					// Hier holen wir uns nur eine Map der Hallen, die noch neu
+					// hinzukommen sollen
+					// Das eigentliche Parsen findet weiter unten in PostExecute
+					// statt
+					neueHallen = htmlparser.getUnsavedHallenLinkListe(dbh.getAlleHallen());
+
 					long diff = System.currentTimeMillis() - startTime;
 					Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff) + "ms");
 				} else {
 					/*
 					 * TODO: Update noch nicht implementiert!
 					 */
-					/*Cursor c = dbh.getAllPlayedGames(ligaNr);
-					HTMLParser htmlparser = new HTMLParser();
-					spiele = htmlparser.updateHtmlParsing(response, ligaNr, c);*/
 				}
 				result = 1; // Successful
 
@@ -126,7 +124,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 		} catch (Exception e) {
 			result = 1000;
 			String TAG = "Hauptmethode";
-			Log.d(TAG, e.getLocalizedMessage());
+			Log.d(TAG, e.getMessage());
 		}
 		// StartActivity.setTestDataResult(result);
 
@@ -135,53 +133,16 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	@Override
 	protected void onPostExecute(Integer result) {
+		Log.d("BENNI","Gateway start");
 		if (result == 1) {
 			if (update == false) {
-				int ligaNr = spiele.get(2).getLigaNr();
-				String saison = dbh.getLiga(ligaNr).getSaison();
-				List<Spiel> spieleOfSpieltag = new ArrayList<Spiel>();
-
-				Spieltag spieltag = new Spieltag();
-				int spieltagsNr = 0;
-				GregorianCalendar aktuell = new GregorianCalendar(1970, 1, 1);
-				GregorianCalendar prüfung = new GregorianCalendar(2014, 9, 1);
-				long startTime = System.currentTimeMillis();
-				for (Spiel s : this.spiele) {
-					prüfung.set(s.getDateYear(), s.getDateMonth(), s.getDateDay());
-					long millisec = prüfung.getTimeInMillis() - aktuell.getTimeInMillis();
-
-					if (millisec > 86400000) {// Ist genau die Millisekundenzahl
-												// eines Tages
-						if (spieltagsNr > 0) {
-							dbh.addSpieltag(spieltag);
-							dbh.addSpieleForSpieltag(spieleOfSpieltag);
-							spieleOfSpieltag.clear();
-						}
-						spieltagsNr++;
-						spieltag.setLigaNr(ligaNr);
-						spieltag.setSpieltags_Nr(spieltagsNr);
-						spieltag.setSpieltags_Name(spieltagsNr + ". Spieltag");
-						spieltag.setDatumBeginn(s.getDateYear() + "-" + s.getDateMonth() + "-" + s.getDateDay());
-						spieltag.setDatumEnde(s.getDateYear() + "-" + s.getDateMonth() + "-" + s.getDateDay());
-						spieltag.setSaison(saison);
-						aktuell.set(s.getDateYear(), s.getDateMonth(), s.getDateDay());
-
-					} else if (millisec == 86400000) {
-						spieltag.setDatumEnde(s.getDateYear() + "-" + s.getDateMonth() + "-" + s.getDateDay());
-						aktuell.set(s.getDateYear(), s.getDateMonth(), s.getDateDay());
-					}
-
-					s.setSpieltagsNr(spieltagsNr);
-					spieleOfSpieltag.add(s);
-				}
-				dbh.addSpieltag(spieltag);
-				dbh.addSpieleForSpieltag(spieleOfSpieltag);
-				long diff = System.currentTimeMillis() - startTime;
-				Log.d("BENNI", "DB Exec Time: " + Long.toString(diff) + "ms");
 				
+				DBGateway gate = new DBGateway(activity);
+				gate.saveGamesIntoDB(spiele);
 
-				for(int i : neueHallen.keySet()){
-					new AsyncHttpTaskHallen(activity, dbh, i).execute(neueHallen.get(i));
+				for (Entry<Integer, String> e: neueHallen.entrySet()) {
+					new AsyncHttpTaskHallenFinal(activity, e.getKey()).execute(e.getValue());
+					Log.d("Benni", "Iteration Async: " + e.getKey());
 				}
 			}
 
@@ -191,24 +152,20 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			ladestatus = ladestatus * 100;
 			ladestatus = Math.round(ladestatus);
 			loadingText.setText("Loading (" + ladestatus + "%)");
-
-			// Wenn alle Daten abgeglichen wurden gehts in die Verzweigung
-			if (iteration == numberOfIterations) {
-				// Der Button um zur Übersicht der Ligen zu gelangen wird
-				// eingeblendet
-				// Button bt = (Button) activity.findViewById(R.id.button2);
-				// bt.setVisibility(View.VISIBLE);
-				// bt.setText("Weiter zu allen Ligen");
+			
+			ligen.remove(0);
+			if(ligen.size() != 0){
+				new AsyncHttpTask(ligen.get(0).getLigaNr(), false, activity, ligen).execute(ligen.get(0).getLink());
+			}else{
 				Intent intent = new Intent(activity.getApplicationContext(), LigawahlActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				activity.getApplicationContext().startActivity(intent);
 			}
-
+			
 		} else {
 			String TAG = "PostExecute";
 			Log.e(TAG, "Failed to fetch data!");
 		}
-
 	}
 
 	private String convertInputStreamToString(InputStream inputStream) throws IOException {

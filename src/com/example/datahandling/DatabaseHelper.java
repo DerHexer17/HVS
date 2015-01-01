@@ -1,8 +1,10 @@
 package com.example.datahandling;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -20,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 11;
+	private static final int DATABASE_VERSION = 49;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -39,7 +41,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	// SPIELE Table - column names
 	private static final String SPIEL_NR = "spiel_nr";
 	private static final String SPIEL_DATE = "spiel_date";
-	private static final String SPIEL_TIME = "spiel_time";
 	private static final String SPIEL_TEAM_HEIM = "spiel_team_heim";
 	private static final String SPIEL_TEAM_GAST = "spiel_team_gast";
 	private static final String SPIEL_TORE_HEIM = "spiel_tore_heim";
@@ -85,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String HALLE_ORT = "halle_ort";
 
 	// Table Create Statements
-	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE " + TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR + " INTEGER, " + SPIEL_DATE + " TEXT, " + SPIEL_TIME + " TEXT, " + SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, " + SPIEL_TORE_HEIM + " INTEGER, "
+	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE " + TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR + " INTEGER, " + SPIEL_DATE + " DATE, " + SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, " + SPIEL_TORE_HEIM + " INTEGER, "
 			+ SPIEL_TORE_GAST + " INTEGER, " + SPIEL_PUNKTE_HEIM + " INTEGER, " + SPIEL_PUNKTE_GAST + " INTEGER, " + SPIEL_SR + " TEXT, " + SPIEL_HALLE + " INTEGER, " + SPIEL_LIGA_NR + " INTEGER, " + SPIEL_SPIELTAG_NR + " INTEGER, " + SPIEL_SPIELTAG_ID + " INTEGER, " + KEY_CREATED_AT + " TEXT" + ")";
 
 	private static final String CREATE_TABLE_LOG = "CREATE TABLE " + TABLE_LOG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LOG_ACTIVITY + " TEXT, " + LOG_DATE + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
@@ -141,8 +142,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		for (Spiel spiel : spiele) {
 			ContentValues values = new ContentValues();
 			values.put(SPIEL_NR, spiel.getSpielNr());
-			values.put(SPIEL_DATE, spiel.getDateYear() + "-" + spiel.getDateMonth() + "-" + spiel.getDateDay());
-			values.put(SPIEL_TIME, spiel.getTime());
+			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+			values.put(SPIEL_DATE, formatter.format(spiel.getDate()));
 			values.put(SPIEL_TEAM_HEIM, spiel.getTeamHeim());
 			values.put(SPIEL_TEAM_GAST, spiel.getTeamGast());
 			values.put(SPIEL_TORE_HEIM, spiel.getToreHeim());
@@ -166,8 +167,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put(SPIELTAG_LIGA_NR, spieltag.getLigaNr());
 		values.put(SPIELTAG_SPIELTAG_NR, spieltag.getSpieltags_Nr());
 		values.put(SPIELTAG_SPIELTAG_NAME, spieltag.getSpieltags_Name());
-		values.put(SPIELTAG_DATUM_BEGINN, spieltag.getDatumBeginn());
-		values.put(SPIELTAG_DATUM_ENDE, spieltag.getDatumEnde());
+		SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+		values.put(SPIELTAG_DATUM_BEGINN, formatter.format(spieltag.getDatumBeginn()));
+		values.put(SPIELTAG_DATUM_ENDE, formatter.format(spieltag.getDatumEnde()));
 		values.put(SPIELTAG_SAISON, spieltag.getSaison());
 		// values.put(KEY_CREATED_AT, new Date().);
 
@@ -246,11 +248,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
-				s.setDateDay(Integer.parseInt(tempdate[2]));
-				s.setDateMonth(Integer.parseInt(tempdate[1]));
-				s.setDateYear(Integer.parseInt(tempdate[0]));
-				s.setTime(c.getString(c.getColumnIndex(SPIEL_TIME)));
+				try{
+					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+					s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
 				s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
 				s.setTeamHeim(c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)));
 				s.setTeamGast(c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)));
@@ -286,11 +289,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		
 		if (c.moveToFirst()) {
 
-			String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
-			s.setDateDay(Integer.parseInt(tempdate[2]));
-			s.setDateMonth(Integer.parseInt(tempdate[1]));
-			s.setDateYear(Integer.parseInt(tempdate[0]));
-			s.setTime(c.getString(c.getColumnIndex(SPIEL_TIME)));
+			try{
+				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+				s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
 			s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
 			s.setTeamHeim(c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)));
 			s.setTeamGast(c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)));
@@ -347,11 +351,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
-				s.setDateDay(Integer.parseInt(tempdate[2]));
-				s.setDateMonth(Integer.parseInt(tempdate[1]));
-				s.setDateYear(Integer.parseInt(tempdate[0]));
-				s.setTime(c.getString(c.getColumnIndex(SPIEL_TIME)));
+				try{
+					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+					s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
 				s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
 				s.setTeamHeim(c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)));
 				s.setTeamGast(c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)));
@@ -389,11 +394,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				String[] tempdate = c.getString(c.getColumnIndex(SPIEL_DATE)).split("-");
-				s.setDateDay(Integer.parseInt(tempdate[2]));
-				s.setDateMonth(Integer.parseInt(tempdate[1]));
-				s.setDateYear(Integer.parseInt(tempdate[0]));
-				s.setTime(c.getString(c.getColumnIndex(SPIEL_TIME)));
+				try{
+					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+					s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
 				s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
 				s.setTeamHeim(c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)));
 				s.setTeamGast(c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)));
@@ -515,8 +521,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				s.setLigaNr(c.getInt(c.getColumnIndex(SPIELTAG_LIGA_NR)));
 				s.setSpieltags_Nr(c.getInt(c.getColumnIndex(SPIELTAG_SPIELTAG_NR)));
 				s.setSpieltags_Name(c.getString(c.getColumnIndex(SPIELTAG_SPIELTAG_NAME)));
-				s.setDatumBeginn(c.getString(c.getColumnIndex(SPIELTAG_DATUM_BEGINN)));
-				s.setDatumEnde(c.getString(c.getColumnIndex(SPIELTAG_DATUM_ENDE)));
+				try{
+					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+					s.setDatumBeginn(formatter.parse(c.getString(c.getColumnIndex(SPIELTAG_DATUM_BEGINN))));
+					s.setDatumEnde(formatter.parse(c.getString(c.getColumnIndex(SPIELTAG_DATUM_ENDE))));
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
 				s.setSaison(c.getString(c.getColumnIndex(SPIELTAG_SAISON)));
 				// td.setCreatedAt(c.getString(c.getColumnIndex(KEY_CREATED_AT)));
 

@@ -17,20 +17,18 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class AsyncHttpTaskHallenFinal extends
-		AsyncTask<String, Void, Integer> {
-	
+public class AsyncHttpTaskHallenFinal extends AsyncTask<String, Void, Integer> {
+
 	DatabaseHelper dbh;
 	Activity activity;
 	int hallenNr;
 	Halle halle;
-	
-	public AsyncHttpTaskHallenFinal(Activity a, DatabaseHelper dbh, int i){
+
+	public AsyncHttpTaskHallenFinal(Activity a, int i) {
 		this.activity = a;
-		this.dbh = dbh;
 		this.hallenNr = i;
 	}
-	
+
 	@Override
 	protected Integer doInBackground(String... params) {
 		InputStream inputStream = null;
@@ -41,8 +39,11 @@ public class AsyncHttpTaskHallenFinal extends
 		String response = "Keine Daten";
 
 		try {
-			/* forming th java.net.URL object */
-			URL url = new URL(params[0]);
+			/* forming the java.net.URL object */
+			String urlStr = params[0].replace("index", "Anzeige_home");
+			Log.d("Benni", "urlStr");
+			
+			URL url = new URL(urlStr);
 
 			urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -65,19 +66,18 @@ public class AsyncHttpTaskHallenFinal extends
 				inputStream = new BufferedInputStream(urlConnection.getInputStream());
 
 				response = convertInputStreamToString(inputStream);
-				
+
 				HTMLParser htmlparserHallen = new HTMLParser();
-				
+
 				halle = htmlparserHallen.hallenHTMLParsing(response, hallenNr);
-				
+
 				Log.d("Hallen", halle.getName());
-				
+
 				result = 1; // Successful
 
 			} else {
 				result = 0; // "Failed to fetch data!";
 			}
-
 		} catch (Exception e) {
 			result = 1000;
 			String TAG = "Hauptmethode";
@@ -87,12 +87,13 @@ public class AsyncHttpTaskHallenFinal extends
 
 		return result; // "Failed to fetch data!";
 	}
-	
+
 	@Override
 	protected void onPostExecute(Integer result) {
+		dbh = DatabaseHelper.getInstance(activity);
 		if (result == 1) {
-			 dbh.addHalle(halle);
-
+			dbh.addHalle(halle);
+			Log.d("Benni","Halle: "+halle);
 		} else {
 			String TAG = "PostExecute";
 			Log.e(TAG, "Failed to fetch data!");

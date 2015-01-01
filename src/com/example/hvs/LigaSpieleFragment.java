@@ -1,8 +1,11 @@
 package com.example.hvs;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Spiel;
@@ -67,8 +70,12 @@ public class LigaSpieleFragment extends Fragment {
 				TableRow row = new TableRow(getActivity().getApplicationContext());
 				TextView field1 = new TextView(getActivity().getApplicationContext());
 				ArrayList<TextView> formatArray = new ArrayList<TextView>();
-				field1.setText(s.getDateDay() + "." + s.getDateMonth() + "." + String.valueOf(s.getDateYear()).split("0")[1]
-						+ "\n(" + s.getTime() + ")");
+				try{
+					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+					field1.setText(formatter.format(s.getDate()));
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
 				formatArray.add(field1);
 				TextView field2 = new TextView(getActivity().getApplicationContext());
 				field2.setText(s.getTeamHeim());
@@ -124,14 +131,20 @@ public class LigaSpieleFragment extends Fragment {
 
 			// Eine gut lesbare Liste aller Spieltage wird erzeugt
 			for (Spieltag sp : spieltage) {
-				String datumBeginn = sp.getDatumBeginn().split("-")[2] + "." + sp.getDatumBeginn().split("-")[1] + "." + sp.getDatumBeginn().split("-")[0].split("0")[1];
-				String datumEnde = "";
-				if (Integer.parseInt(sp.getDatumBeginn().split("-")[2]) != Integer.parseInt(sp.getDatumEnde().split("-")[2])) {
-					datumEnde = " - " + sp.getDatumEnde().split("-")[2] + "." + sp.getDatumEnde().split("-")[1] + "." + sp.getDatumEnde().split("-")[0].split("0")[1];
-				}
-				spieltageText.add(sp.getSpieltags_Name() + " (" + datumBeginn + datumEnde + ")");
+				Date datumBeginn = sp.getDatumBeginn();
+				Date datumEnde = sp.getDatumEnde();
+
 				
-				GregorianCalendar spieltagCalendar = new GregorianCalendar(Integer.parseInt(sp.getDatumBeginn().split("-")[0]), Integer.parseInt(sp.getDatumBeginn().split("-")[1]), Integer.parseInt(sp.getDatumBeginn().split("-")[2]));
+				try{
+					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+					spieltageText.add(sp.getSpieltags_Name() + " (" + formatter.format(datumBeginn)+ " - " + formatter.format(datumEnde) + ")");
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
+				
+				
+				GregorianCalendar spieltagCalendar = new GregorianCalendar();
+				spieltagCalendar.setTime(datumBeginn);
 				spieltag = spieltagCalendar.getTimeInMillis();
 				diff = jetzt-spieltag;
 				if(diff > 86400000){//86400000*2){
