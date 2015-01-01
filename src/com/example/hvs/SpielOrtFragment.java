@@ -1,15 +1,15 @@
 package com.example.hvs;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Halle;
-import com.example.datahandling.Spiel;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Halle;
+import com.example.datahandling.Spiel;
 
 public class SpielOrtFragment extends Fragment {
 

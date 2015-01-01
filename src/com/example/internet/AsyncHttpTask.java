@@ -13,32 +13,29 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.util.Log;
+import android.widget.TextView;
+
 import com.example.datahandling.DBGateway;
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.HTMLParser;
 import com.example.datahandling.Liga;
 import com.example.datahandling.Spiel;
-
 import com.example.hvs.LigawahlActivity;
 import com.example.hvs.R;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.os.AsyncTask;
-import android.util.Log;
-import android.widget.TextView;
+import com.example.hvs.StartActivity;
 
 public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	private ArrayList<Spiel> spiele;
 	private List<Liga> ligen;
 	private Map<Integer, String> neueHallen;
-	private ProgressDialog mDialog;
 	private int ligaNr;
 	private boolean update;
 	private Activity activity;
-	private double numberOfIterations;
-	private double iteration;
 	private DatabaseHelper dbh;
 
 	public AsyncHttpTask(int ligaNr, boolean update, Activity activity, List<Liga> ligen) {
@@ -141,19 +138,24 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				gate.saveGamesIntoDB(spiele);
 
 				for (Entry<Integer, String> e: neueHallen.entrySet()) {
-					new AsyncHttpTaskHallenFinal(activity, e.getKey()).execute(e.getValue());
+					new AsyncHttpTaskHallen(activity, e.getKey()).execute(e.getValue());
 					Log.d("Benni", "Iteration Async: " + e.getKey());
 				}
 			}
 
+			ligen.remove(0);
+			
 			// Update des Ladestandes
 			TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
-			double ladestatus = iteration / numberOfIterations;
+			double it = StartActivity.ITERATIONS;
+			double size = ligen.size();
+			double ladestatus = 1 - (size / it);
+			Log.d("load", "its: "+it+" size: "+size +" status: "+ladestatus+" test: "+(size / it));
 			ladestatus = ladestatus * 100;
 			ladestatus = Math.round(ladestatus);
 			loadingText.setText("Loading (" + ladestatus + "%)");
 			
-			ligen.remove(0);
+			
 			if(ligen.size() != 0){
 				new AsyncHttpTask(ligen.get(0).getLigaNr(), false, activity, ligen).execute(ligen.get(0).getLink());
 			}else{

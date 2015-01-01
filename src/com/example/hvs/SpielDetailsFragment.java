@@ -1,24 +1,18 @@
 package com.example.hvs;
 
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.SortedSet;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Halle;
-import com.example.datahandling.Spiel;
-import com.example.datahandling.Tabellenrang;
-
-import android.support.v4.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.provider.CalendarContract.Events;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Halle;
+import com.example.datahandling.Spiel;
 
 public class SpielDetailsFragment extends Fragment{
 	

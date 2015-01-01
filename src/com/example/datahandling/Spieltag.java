@@ -1,6 +1,5 @@
 package com.example.datahandling;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Spieltag {

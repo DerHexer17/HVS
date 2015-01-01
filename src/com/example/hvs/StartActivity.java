@@ -11,7 +11,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +26,8 @@ import com.example.datahandling.Liga;
 import com.example.internet.AsyncHttpTask;
 
 public class StartActivity extends ActionBarActivity {
-
+	
+	public static int ITERATIONS;
 	DatabaseHelper dbh;
 	int ladestatus;
 	List<Liga> ligenGlobal;
@@ -225,6 +225,7 @@ public class StartActivity extends ActionBarActivity {
 		
 		//nur erste Liga,
 		if(initialLigen.size() != 0){
+			ITERATIONS = initialLigen.size();
 			new AsyncHttpTask(initialLigen.get(0).getLigaNr(), false, this, initialLigen).execute(initialLigen.get(0).getLink());
 		}
 

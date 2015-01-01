@@ -9,22 +9,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.HTMLParser;
-import com.example.datahandling.Halle;
-
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class AsyncHttpTaskHallenFinal extends AsyncTask<String, Void, Integer> {
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.HTMLParser;
+import com.example.datahandling.Halle;
+
+public class AsyncHttpTaskHallen extends AsyncTask<String, Void, Integer> {
 
 	DatabaseHelper dbh;
 	Activity activity;
 	int hallenNr;
 	Halle halle;
 
-	public AsyncHttpTaskHallenFinal(Activity a, int i) {
+	public AsyncHttpTaskHallen(Activity a, int i) {
 		this.activity = a;
 		this.hallenNr = i;
 	}

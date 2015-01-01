@@ -5,13 +5,6 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Spiel;
-import com.example.datahandling.TabellenplatzComparator;
-import com.example.datahandling.Tabellenrang;
-import com.example.hvs.LigaSpieleFragment.CustomOnItemSelectedListener;
-
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,11 +12,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Spiel;
+import com.example.datahandling.TabellenplatzComparator;
+import com.example.datahandling.Tabellenrang;
 
 public class LigaTabelleFragment extends Fragment {
 

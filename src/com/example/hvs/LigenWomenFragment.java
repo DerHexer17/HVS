@@ -2,12 +2,8 @@ package com.example.hvs;
 
 import java.util.List;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Liga;
-
 import android.R.drawable;
 import android.app.ActionBar.LayoutParams;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Liga;
 
 public class LigenWomenFragment extends Fragment {
 	DatabaseHelper dbh;

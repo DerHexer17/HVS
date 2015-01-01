@@ -2,12 +2,8 @@ package com.example.hvs;
 
 import java.util.List;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Liga;
-
 import android.R.drawable;
 import android.app.ActionBar.LayoutParams;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,11 +12,12 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Liga;
 
 public class LigenMenFragment extends Fragment {
 	

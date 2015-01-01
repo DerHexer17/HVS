@@ -7,23 +7,16 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Spiel;
-import com.example.datahandling.Spieltag;
-
-
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,7 +25,10 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Spiel;
+import com.example.datahandling.Spieltag;
 
 public class LigaSpieleFragment extends Fragment {
 	
