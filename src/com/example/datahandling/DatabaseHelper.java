@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 63;
+	private static final int DATABASE_VERSION = 72;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -76,8 +76,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String SPIELTAG_DATUM_BEGINN = "spieltag_datum_beginn";
 	private static final String SPIELTAG_DATUM_ENDE = "spieltag_datum_ende";
 	private static final String SPIELTAG_SAISON = "spieltag_saison";
-	
-	//HALLE Table - column names
+
+	// HALLE Table - column names
 	private static final String HALLE_NR = "halle_nr";
 	private static final String HALLE_NAME = "halle_name";
 	private static final String HALLE_STRASSE = "halle_strasse";
@@ -86,8 +86,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String HALLE_ORT = "halle_ort";
 
 	// Table Create Statements
-	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE " + TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR + " INTEGER, " + SPIEL_DATE + " DATE, " + SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, " + SPIEL_TORE_HEIM + " INTEGER, "
-			+ SPIEL_TORE_GAST + " INTEGER, " + SPIEL_PUNKTE_HEIM + " INTEGER, " + SPIEL_PUNKTE_GAST + " INTEGER, " + SPIEL_SR + " TEXT, " + SPIEL_HALLE + " INTEGER, " + SPIEL_LIGA_NR + " INTEGER, " + SPIEL_SPIELTAG_NR + " INTEGER, " + SPIEL_SPIELTAG_ID + " INTEGER, " + KEY_CREATED_AT + " TEXT" + ")";
+	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE " + TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR + " INTEGER, " + SPIEL_DATE + " DATE, " + SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, " + SPIEL_TORE_HEIM + " INTEGER, " + SPIEL_TORE_GAST
+			+ " INTEGER, " + SPIEL_PUNKTE_HEIM + " INTEGER, " + SPIEL_PUNKTE_GAST + " INTEGER, " + SPIEL_SR + " TEXT, " + SPIEL_HALLE + " INTEGER, " + SPIEL_LIGA_NR + " INTEGER, " + SPIEL_SPIELTAG_NR + " INTEGER, " + SPIEL_SPIELTAG_ID + " INTEGER, " + KEY_CREATED_AT + " TEXT" + ")";
 
 	private static final String CREATE_TABLE_LOG = "CREATE TABLE " + TABLE_LOG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LOG_ACTIVITY + " TEXT, " + LOG_DATE + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
@@ -97,10 +97,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_SPIELTAG = "CREATE TABLE " + TABLE_SPIELTAG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIELTAG_ID + " INTEGER, " + SPIELTAG_LIGA_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NAME + " TEXT, " + SPIELTAG_DATUM_BEGINN
 			+ " TEXT, " + SPIELTAG_DATUM_ENDE + " TEXT, " + SPIELTAG_SAISON + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
-	private static final String CREATE_TABLE_HALLE = "CREATE TABLE " + TABLE_HALLE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + 
-			HALLE_NR + " INTEGER, " + HALLE_NAME + " TEXT, " + HALLE_STRASSE + " TEXT, " + HALLE_HAUSNUMMER + " INTEGER, " + 
-			HALLE_PLZ + " TEXT, " + HALLE_ORT + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
-	
+	private static final String CREATE_TABLE_HALLE = "CREATE TABLE " + TABLE_HALLE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + HALLE_NR + " INTEGER, " + HALLE_NAME + " TEXT, " + HALLE_STRASSE + " TEXT, " + HALLE_HAUSNUMMER + " INTEGER, " + HALLE_PLZ + " TEXT, " + HALLE_ORT + " TEXT, "
+			+ KEY_CREATED_AT + " TEXT" + ")";
+
 	public static DatabaseHelper getInstance(Context context) {
 		if (sInstance == null) {
 			sInstance = new DatabaseHelper(context.getApplicationContext());
@@ -215,7 +214,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.close();
 		return liga_id;
 	}
-	
+
 	public long addHalle(Halle halle) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
@@ -248,10 +247,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				try{
+				try {
 					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
 					s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
-				}catch(Exception ex){
+				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 				s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
@@ -275,24 +274,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		c.close();
 		return ligaSpiele;
 	}
-	
-	public Spiel getGame(int ligaNr, int spielNr){
+
+	public Spiel getGame(int ligaNr, int spielNr) {
 		Spiel s = new Spiel();
-		
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr +
-				" AND " + SPIEL_NR + " = " + spielNr;
+
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_NR + " = " + spielNr;
 
 		Log.d(TAG, selectQuery);
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
-		
+
 		if (c.moveToFirst()) {
 
-			try{
+			try {
 				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
 				s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
-			}catch(Exception ex){
+			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 			s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
@@ -314,7 +312,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			return s;
 		}
 		c.close();
-			
+
 		return s;
 	}
 
@@ -351,10 +349,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				try{
+				try {
 					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
 					s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
-				}catch(Exception ex){
+				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 				s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
@@ -381,10 +379,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	public List<Spiel> getAllTeamGames(int ligaNr, String teamname) {
 		List<Spiel> ligaSpieleTeam = new ArrayList<Spiel>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_TEAM_HEIM + " = '" + teamname +
-        		"' AND " + SPIEL_LIGA_NR + " = " + ligaNr + " OR " + SPIEL_TEAM_GAST + " = '" + teamname +
-        		"' AND " + SPIEL_LIGA_NR + " = " + ligaNr;
-        		
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_TEAM_HEIM + " = '" + teamname + "' AND " + SPIEL_LIGA_NR + " = " + ligaNr + " OR " + SPIEL_TEAM_GAST + " = '" + teamname + "' AND " + SPIEL_LIGA_NR + " = " + ligaNr;
+
 		Log.d(TAG, selectQuery);
 
 		SQLiteDatabase db = this.getReadableDatabase();
@@ -394,10 +390,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (c.moveToFirst()) {
 			do {
 				Spiel s = new Spiel();
-				try{
+				try {
 					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
 					s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
-				}catch(Exception ex){
+				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 				s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
@@ -521,11 +517,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				s.setLigaNr(c.getInt(c.getColumnIndex(SPIELTAG_LIGA_NR)));
 				s.setSpieltags_Nr(c.getInt(c.getColumnIndex(SPIELTAG_SPIELTAG_NR)));
 				s.setSpieltags_Name(c.getString(c.getColumnIndex(SPIELTAG_SPIELTAG_NAME)));
-				try{
+				try {
 					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
 					s.setDatumBeginn(formatter.parse(c.getString(c.getColumnIndex(SPIELTAG_DATUM_BEGINN))));
 					s.setDatumEnde(formatter.parse(c.getString(c.getColumnIndex(SPIELTAG_DATUM_ENDE))));
-				}catch(Exception ex){
+				} catch (Exception ex) {
 					ex.printStackTrace();
 				}
 				s.setSaison(c.getString(c.getColumnIndex(SPIELTAG_SAISON)));
@@ -538,19 +534,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		c.close();
 		return ligaSpieltage;
 	}
-
-/*	// TODO: Keine Cursor weitergeben!
-	public Cursor getAllPlayedGames(int ligaNr) {
-		List<Spiel> ligaSpiele = new ArrayList<Spiel>();
-		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_LIGA_NR + " = " + ligaNr + " AND " + SPIEL_TORE_HEIM + " != 0";
-
-		Log.d(TAG, selectQuery);
-
-		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor c = db.rawQuery(selectQuery, null);
-		c.close();
-		return c;
-	}*/
 
 	// GETTER
 	public Liga getLiga(int ligaNr) {
@@ -579,13 +562,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		c.close();
 		return l;
 	}
-	
+
 	public Halle getHalle(int hallenNr) {
 		String selectQuery = "SELECT * FROM " + TABLE_HALLE + " WHERE " + HALLE_NR + " = " + hallenNr;
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
-		Halle h = new Halle();;
+		Halle h = new Halle();
+		;
 		// looping through all rows and adding to list
 		if (c.moveToFirst()) {
 
@@ -603,15 +587,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		c.close();
 		return h;
 	}
-	
-	public List<Halle> getAlleHallen(){
+
+	public List<Halle> getAlleHallen() {
 		List<Halle> alleHallen = new ArrayList<Halle>();
 		String selectQuery = "SELECT * FROM " + TABLE_HALLE;
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
-		
-		if(c.moveToFirst()){
-			do{
+
+		if (c.moveToFirst()) {
+			do {
 				Halle h = new Halle();
 				h.setHallenNr(c.getInt(c.getColumnIndex(HALLE_NR)));
 				h.setName(c.getString(c.getColumnIndex(HALLE_NAME)));
@@ -620,12 +604,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				h.setPlz(c.getString(c.getColumnIndex(HALLE_PLZ)));
 				h.setOrt(c.getString(c.getColumnIndex(HALLE_ORT)));
 				alleHallen.add(h);
-			}while(c.moveToNext());
+			} while (c.moveToNext());
 		}
 		c.close();
 		return alleHallen;
 	}
-
 
 	// CHECKER
 	public boolean gameAlreadyExists(Spiel spiel) {

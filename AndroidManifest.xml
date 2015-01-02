@@ -36,20 +36,12 @@
             android:label="@string/title_activity_alle_ligen" >
         </activity>
         <activity
-            android:name=".LigaActivity"
-            android:label="@string/title_activity_liga"
-            android:parentActivityName=".AlleLigenActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hvs.AlleLigenActivity" />
-        </activity>
-        <activity
             android:name=".TabelleActivity"
             android:label="@string/title_activity_tabelle"
-            android:parentActivityName=".LigaActivity" >
+            android:parentActivityName=".LigaTabActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hvs.LigaActivity" />
+                android:value="com.example.hvs.LigaTabActivity" />
         </activity>
         <activity
             android:name=".LigawahlActivity"
@@ -58,6 +50,7 @@
         <activity
             android:name=".LigaTabActivity"
             android:label="@string/title_activity_liga_tab"
+            android:launchMode="singleTop"
             android:parentActivityName=".LigawahlActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -42,7 +42,7 @@ public class AsyncHttpTaskHallen extends AsyncTask<String, Void, Integer> {
 			/* forming the java.net.URL object */
 			String urlStr = params[0].replace("index", "Anzeige_home");
 			Log.d("Benni", "urlStr");
-			
+
 			URL url = new URL(urlStr);
 
 			urlConnection = (HttpURLConnection) url.openConnection();
@@ -93,7 +93,7 @@ public class AsyncHttpTaskHallen extends AsyncTask<String, Void, Integer> {
 		dbh = DatabaseHelper.getInstance(activity);
 		if (result == 1) {
 			dbh.addHalle(halle);
-			Log.d("Benni","Halle: "+halle);
+			Log.d("Benni", "Halle: " + halle);
 		} else {
 			String TAG = "PostExecute";
 			Log.e(TAG, "Failed to fetch data!");

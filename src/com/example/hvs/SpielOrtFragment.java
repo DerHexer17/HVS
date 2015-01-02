@@ -20,24 +20,21 @@ public class SpielOrtFragment extends Fragment {
 	Halle halle;
 
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-        View rootView = inflater.inflate(R.layout.fragment_spiel_ort, container, false);
-         
-        this.ligaNr = getActivity().getIntent().getIntExtra("liganummer", 0);
-        this.spielNr = getActivity().getIntent().getIntExtra("spielnummer", 0);
-        
-        dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
-        spiel = dbh.getGame(ligaNr, spielNr);
-        halle = dbh.getHalle(spiel.getHalle());
-        
-        TextView titel = (TextView) rootView.findViewById(R.id.spielOrtTitel);
-        
-        titel.setText(halle.getName());
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+		View rootView = inflater.inflate(R.layout.fragment_spiel_ort, container, false);
 
+		this.ligaNr = getActivity().getIntent().getIntExtra("liganummer", 0);
+		this.spielNr = getActivity().getIntent().getIntExtra("spielnummer", 0);
+
+		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
+		spiel = dbh.getGame(ligaNr, spielNr);
+		halle = dbh.getHalle(spiel.getHalle());
+
+		TextView titel = (TextView) rootView.findViewById(R.id.spielOrtTitel);
+
+		titel.setText(halle.getName());
 
 		return rootView;
-    }
+	}
 }

@@ -1,4 +1,5 @@
 package com.example.datahandling;
+
 import java.util.Date;
 
 public class Spiel {

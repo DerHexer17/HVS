@@ -25,8 +25,7 @@ import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Halle;
 import com.example.datahandling.Spiel;
 
-public class SpielActivity extends ActionBarActivity implements
-		ActionBar.TabListener {
+public class SpielActivity extends ActionBarActivity implements ActionBar.TabListener {
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -43,7 +42,7 @@ public class SpielActivity extends ActionBarActivity implements
 	ViewPager mViewPager;
 	DatabaseHelper dbh;
 	int ligaNr;
-	int spielNr;	
+	int spielNr;
 	Spiel spiel;
 	Halle halle;
 
@@ -51,15 +50,15 @@ public class SpielActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_spiel);
-		
-		this.setTitle("Spiel Nr. "+getIntent().getIntExtra("spielnummer", 0));
-		
+
+		this.setTitle("Spiel Nr. " + getIntent().getIntExtra("spielnummer", 0));
+
 		this.ligaNr = getIntent().getIntExtra("liganummer", 0);
-        this.spielNr = getIntent().getIntExtra("spielnummer", 0);
-        
-        dbh = DatabaseHelper.getInstance(getApplicationContext());
-        spiel = dbh.getGame(ligaNr, spielNr);
-        halle = dbh.getHalle(spiel.getHalle());
+		this.spielNr = getIntent().getIntExtra("spielnummer", 0);
+
+		dbh = DatabaseHelper.getInstance(getApplicationContext());
+		spiel = dbh.getGame(ligaNr, spielNr);
+		halle = dbh.getHalle(spiel.getHalle());
 
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
@@ -67,8 +66,7 @@ public class SpielActivity extends ActionBarActivity implements
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -77,13 +75,12 @@ public class SpielActivity extends ActionBarActivity implements
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
 		// a reference to the Tab.
-		mViewPager
-				.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
+		mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+			@Override
+			public void onPageSelected(int position) {
+				actionBar.setSelectedNavigationItem(position);
+			}
+		});
 
 		// For each of the sections in the app, add a tab to the action bar.
 		for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
@@ -91,9 +88,7 @@ public class SpielActivity extends ActionBarActivity implements
 			// the adapter. Also specify this Activity object, which implements
 			// the TabListener interface, as the callback (listener) for when
 			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(mSectionsPagerAdapter.getPageTitle(i))
-					.setTabListener(this));
+			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
 	}
 
@@ -117,21 +112,18 @@ public class SpielActivity extends ActionBarActivity implements
 	}
 
 	@Override
-	public void onTabSelected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 		// When the given tab is selected, switch to the corresponding page in
 		// the ViewPager.
 		mViewPager.setCurrentItem(tab.getPosition());
 	}
 
 	@Override
-	public void onTabUnselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 	}
 
 	@Override
-	public void onTabReselected(ActionBar.Tab tab,
-			FragmentTransaction fragmentTransaction) {
+	public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
 	}
 
 	/**
@@ -149,7 +141,7 @@ public class SpielActivity extends ActionBarActivity implements
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
-			switch(position){
+			switch (position) {
 			case 0:
 				return new SpielDetailsFragment();
 			case 1:
@@ -204,60 +196,54 @@ public class SpielActivity extends ActionBarActivity implements
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_spiel,
-					container, false);
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			View rootView = inflater.inflate(R.layout.fragment_spiel, container, false);
 			return rootView;
 		}
 	}
-	
-	public void insertIntoCalendar(View v){
+
+	public void insertIntoCalendar(View v) {
 		Intent intent = new Intent(Intent.ACTION_INSERT);
 		intent.setType("vnd.android.cursor.item/event");
-		intent.putExtra(Events.TITLE, spiel.getTeamHeim()+" - "+spiel.getTeamGast());
+		intent.putExtra(Events.TITLE, spiel.getTeamHeim() + " - " + spiel.getTeamGast());
 		intent.putExtra(Events.EVENT_LOCATION, halle.kompletteAdresse());
-		//intent.putExtra(Events.DESCRIPTION, "Download Examples");
+		// intent.putExtra(Events.DESCRIPTION, "Download Examples");
 
 		// Setting dates
 		GregorianCalendar calDate = new GregorianCalendar();
 		calDate.setTime(spiel.getDate());
-		intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-		  calDate.getTimeInMillis());
-		intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
-		  calDate.getTimeInMillis()+7200000);
-		
+		intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calDate.getTimeInMillis());
+		intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calDate.getTimeInMillis() + 7200000);
 
 		/*
-		// make it a full day event
-		intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
-
-		// make it a recurring Event
-		intent.putExtra(Events.RRULE, "FREQ=WEEKLY;COUNT=11;WKST=SU;BYDAY=TU,TH");
-
-		// Making it private and shown as busy
-		intent.putExtra(Events.ACCESS_LEVEL, Events.ACCESS_PRIVATE);
-		intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);*/
+		 * // make it a full day event
+		 * intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+		 * 
+		 * // make it a recurring Event intent.putExtra(Events.RRULE,
+		 * "FREQ=WEEKLY;COUNT=11;WKST=SU;BYDAY=TU,TH");
+		 * 
+		 * // Making it private and shown as busy
+		 * intent.putExtra(Events.ACCESS_LEVEL, Events.ACCESS_PRIVATE);
+		 * intent.putExtra(Events.AVAILABILITY, Events.AVAILABILITY_BUSY);
+		 */
 		startActivity(intent);
 	}
-	
-	public void goToMaps(View v){
+
+	public void goToMaps(View v) {
 		Intent intent = new Intent(Intent.ACTION_VIEW);
 		String mapsString = "";
 		String[] temp = halle.getStrasse().split(" ");
-		for(int i = 0; i<temp.length; i++){
-			mapsString = mapsString+"+"+temp[i];
+		for (int i = 0; i < temp.length; i++) {
+			mapsString = mapsString + "+" + temp[i];
 		}
-		if(halle.getHausnummer()==0){
-			mapsString = "geo:0,0?q="+mapsString+"+"+"+"+halle.getOrt();
-		}else{
-			mapsString = "geo:0,0?q="+mapsString+"+"+halle.getHausnummer()+"+"+halle.getOrt();
+		if (halle.getHausnummer() == 0) {
+			mapsString = "geo:0,0?q=" + mapsString + "+" + "+" + halle.getOrt();
+		} else {
+			mapsString = "geo:0,0?q=" + mapsString + "+" + halle.getHausnummer() + "+" + halle.getOrt();
 		}
-		//geo:0,0?q=my+street+address
+		// geo:0,0?q=my+street+address
 		intent.setData(Uri.parse(mapsString));
 		startActivity(intent);
 	}
-	
-	
 
 }

@@ -25,60 +25,60 @@ public class LigaTabelleFragment extends Fragment {
 
 	int ligaNr;
 	DatabaseHelper dbh;
+
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-        View rootView = inflater.inflate(R.layout.fragment_liga_tabelle, container, false);
-         
-        this.ligaNr = getActivity().getIntent().getIntExtra("nummer", 0);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+		View rootView = inflater.inflate(R.layout.fragment_liga_tabelle, container, false);
+
+		this.ligaNr = getActivity().getIntent().getIntExtra("liganummer", 0);
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
-		
+
 		SortedSet<Tabellenrang> tabellenPositionen = (SortedSet<Tabellenrang>) getTabellenPositionen();
-		
+
 		createTabelle(tabellenPositionen, rootView);
 		return rootView;
-    }
-	
-	public Set<Tabellenrang> getTabellenPositionen(){
+	}
+
+	public Set<Tabellenrang> getTabellenPositionen() {
 		TabellenplatzComparator comp = new TabellenplatzComparator();
 		SortedSet<Tabellenrang> tabellenPositionen = new TreeSet<Tabellenrang>(comp);
-		for(String team : dbh.getAllLeagueTeams(ligaNr)){
+		for (String team : dbh.getAllLeagueTeams(ligaNr)) {
 			Tabellenrang tr = new Tabellenrang();
 			tr.setTeam(team);
 			int anzahlGespielt = 0;
-			for(Spiel s : dbh.getAllTeamGames(ligaNr, team)){
-				if(s.getToreHeim()>0){
-					if(s.getTeamHeim().equals(team)){
-						tr.setPunktePositiv(tr.getPunktePositiv()+s.getPunkteHeim());
-						tr.setPunkteNegativ(tr.getPunkteNegativ()+s.getPunkteGast());
-						tr.setTorePositiv(tr.getTorePositiv()+s.getToreHeim());
-						tr.setToreNegativ(tr.getToreNegativ()+s.getToreGast());
-						
-					}else{
-						tr.setPunktePositiv(tr.getPunktePositiv()+s.getPunkteGast());
-						tr.setPunkteNegativ(tr.getPunkteNegativ()+s.getPunkteHeim());
-						tr.setTorePositiv(tr.getTorePositiv()+s.getToreGast());
-						tr.setToreNegativ(tr.getToreNegativ()+s.getToreHeim());
+			for (Spiel s : dbh.getAllTeamGames(ligaNr, team)) {
+				if (s.getToreHeim() > 0) {
+					if (s.getTeamHeim().equals(team)) {
+						tr.setPunktePositiv(tr.getPunktePositiv() + s.getPunkteHeim());
+						tr.setPunkteNegativ(tr.getPunkteNegativ() + s.getPunkteGast());
+						tr.setTorePositiv(tr.getTorePositiv() + s.getToreHeim());
+						tr.setToreNegativ(tr.getToreNegativ() + s.getToreGast());
+
+					} else {
+						tr.setPunktePositiv(tr.getPunktePositiv() + s.getPunkteGast());
+						tr.setPunkteNegativ(tr.getPunkteNegativ() + s.getPunkteHeim());
+						tr.setTorePositiv(tr.getTorePositiv() + s.getToreGast());
+						tr.setToreNegativ(tr.getToreNegativ() + s.getToreHeim());
 					}
 					anzahlGespielt++;
 				}
-				
+
 			}
 			tr.setAnzahlGespielt(anzahlGespielt);
 			tabellenPositionen.add(tr);
 		}
-		
+
 		return tabellenPositionen;
 	}
-	
-	public void createTabelle(SortedSet<Tabellenrang> positionen, View v){
+
+	public void createTabelle(SortedSet<Tabellenrang> positionen, View v) {
 		TableLayout table = (TableLayout) v.findViewById(R.id.tableTabelle);
-		if(table.getChildCount()>1){
-			table.removeViews(1, table.getChildCount()-1);
+		if (table.getChildCount() > 1) {
+			table.removeViews(1, table.getChildCount() - 1);
 		}
-		int rang = positionen.size()+1;
-		for(Tabellenrang tr : positionen){
+		int rang = positionen.size() + 1;
+		for (Tabellenrang tr : positionen) {
 			TableRow row = new TableRow(getActivity().getApplicationContext());
 			TextView field1 = new TextView(getActivity().getApplicationContext());
 			ArrayList<TextView> formatArray = new ArrayList<TextView>();
@@ -89,13 +89,13 @@ public class LigaTabelleFragment extends Fragment {
 			field2.setText(tr.getTeam());
 			formatArray.add(field2);
 			TextView field3 = new TextView(getActivity().getApplicationContext());
-			field3.setText(tr.getPunktePositiv()+":"+tr.getPunkteNegativ());
+			field3.setText(tr.getPunktePositiv() + ":" + tr.getPunkteNegativ());
 			formatArray.add(field3);
 			TextView field4 = new TextView(getActivity().getApplicationContext());
-			field4.setText(String.valueOf(tr.getTorePositiv()-tr.getToreNegativ()));
+			field4.setText(String.valueOf(tr.getTorePositiv() - tr.getToreNegativ()));
 			formatArray.add(field4);
-			
-			for(TextView t : formatArray){
+
+			for (TextView t : formatArray) {
 				t.setTextColor(Color.BLACK);
 				t.setPadding(5, 5, 5, 5);
 				t.setGravity(Gravity.CENTER);

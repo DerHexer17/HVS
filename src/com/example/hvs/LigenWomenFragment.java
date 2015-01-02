@@ -24,30 +24,25 @@ public class LigenWomenFragment extends Fragment {
 
 	List<Liga> alleLigenWomen;
 
-	
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-        View rootView = inflater.inflate(R.layout.fragment_liga_women, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-	
-        
-		
+		View rootView = inflater.inflate(R.layout.fragment_liga_women, container, false);
+
 		ligenAnzeigen(rootView);
-        return rootView;
-    }
-	
-	public void ligenAnzeigen(View view){
+		return rootView;
+	}
+
+	public void ligenAnzeigen(View view) {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 
 		// Alle Ligen bedeutet nur Ligen, die initialisiert wurden
 		alleLigenWomen = dbh.getAlleLigen();
-		
+
 		TableLayout table = (TableLayout) view.findViewById(R.id.tabelleAlleLigenWomen);
-		
+
 		for (Liga l : alleLigenWomen) {
-			if(l.getGeschlecht().contains("weiblich")){
+			if (l.getGeschlecht().contains("weiblich")) {
 				TextView bt = new TextView(getActivity().getApplicationContext());
 				TableRow row = new TableRow(getActivity().getApplicationContext());
 				LayoutParams lp = new LayoutParams(-1, -2);
@@ -55,7 +50,7 @@ public class LigenWomenFragment extends Fragment {
 				row.setPadding(20, 10, 20, 10);
 				row.setLayoutParams(lp);
 				row.setGravity(Gravity.CENTER);
-				
+
 				bt.setText(l.getName());
 				bt.setHint("ligaNr:" + l.getLigaNr());
 				bt.setTextColor(Color.BLACK);
@@ -72,9 +67,8 @@ public class LigenWomenFragment extends Fragment {
 						Intent intent = new Intent(getActivity().getApplicationContext(), LigaTabActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putString("liganame", (String) b.getText());
-						bundle.putInt("nummer", ligaNr);
+						bundle.putInt("liganummer", ligaNr);
 						intent.putExtras(bundle);
-						dbh.getLiga(ligaNr);
 						startActivity(intent);
 					}
 				});

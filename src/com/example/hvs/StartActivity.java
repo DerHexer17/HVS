@@ -26,7 +26,7 @@ import com.example.datahandling.Liga;
 import com.example.internet.AsyncHttpTask;
 
 public class StartActivity extends ActionBarActivity {
-	
+
 	public static int ITERATIONS;
 	DatabaseHelper dbh;
 	int ladestatus;
@@ -165,7 +165,7 @@ public class StartActivity extends ActionBarActivity {
 			return;
 		}
 		initial();
-		
+
 	}
 
 	// Einfacher Check, ob das Internet zur Verfügung steht (Hilfsmethode)
@@ -201,7 +201,7 @@ public class StartActivity extends ActionBarActivity {
 				ligenGlobal.get(i).setInitial("Ja");
 			}
 		}
-		
+
 		for (Liga l : ligenGlobal) {
 			dbh.addLiga(l);
 		}
@@ -218,13 +218,13 @@ public class StartActivity extends ActionBarActivity {
 		Button keinDatenabgleich = (Button) findViewById(R.id.button2);
 		keinDatenabgleich.setVisibility(View.INVISIBLE);
 
-		//Screen Rotation aus gestellt. Per default wird sonst nämlich die Activity neu gestartet, springt dann also
-		//direkt zur Ligenübersicht, ohne aber die Daten schon geholt zu haben
+		// Screen Rotation aus gestellt. Per default wird sonst nämlich die
+		// Activity neu gestartet, springt dann also
+		// direkt zur Ligenübersicht, ohne aber die Daten schon geholt zu haben
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
-		
-		
-		//nur erste Liga,
-		if(initialLigen.size() != 0){
+
+		// nur erste Liga,
+		if (initialLigen.size() != 0) {
 			ITERATIONS = initialLigen.size();
 			new AsyncHttpTask(initialLigen.get(0).getLigaNr(), false, this, initialLigen).execute(initialLigen.get(0).getLink());
 		}

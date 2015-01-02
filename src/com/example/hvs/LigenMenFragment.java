@@ -20,35 +20,30 @@ import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
 
 public class LigenMenFragment extends Fragment {
-	
+
 	DatabaseHelper dbh;
 
 	List<Liga> alleLigenMen;
 
-	
 	@Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
- 
-        View rootView = inflater.inflate(R.layout.fragment_liga_men, container, false);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-	
-        
-		
+		View rootView = inflater.inflate(R.layout.fragment_liga_men, container, false);
+
 		ligenAnzeigen(rootView);
-        return rootView;
-    }
-	
-	public void ligenAnzeigen(View view){
+		return rootView;
+	}
+
+	public void ligenAnzeigen(View view) {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 
 		// Alle Ligen bedeutet nur Ligen, die initialisiert wurden
 		alleLigenMen = dbh.getAlleLigen();
-		
+
 		TableLayout table = (TableLayout) view.findViewById(R.id.tabelleAlleLigenMen);
-		
+
 		for (Liga l : alleLigenMen) {
-			if(l.getGeschlecht().contains("männlich")){
+			if (l.getGeschlecht().contains("männlich")) {
 				TextView bt = new TextView(getActivity().getApplicationContext());
 				TableRow row = new TableRow(getActivity().getApplicationContext());
 				LayoutParams lp = new LayoutParams(-1, -2);
@@ -56,7 +51,7 @@ public class LigenMenFragment extends Fragment {
 				row.setPadding(20, 10, 20, 10);
 				row.setLayoutParams(lp);
 				row.setGravity(Gravity.CENTER);
-				
+
 				bt.setText(l.getName());
 				bt.setHint("ligaNr:" + l.getLigaNr());
 				bt.setTextColor(Color.BLACK);
@@ -74,9 +69,8 @@ public class LigenMenFragment extends Fragment {
 						Intent intent = new Intent(getActivity().getApplicationContext(), LigaTabActivity.class);
 						Bundle bundle = new Bundle();
 						bundle.putString("liganame", (String) b.getText());
-						bundle.putInt("nummer", ligaNr);
+						bundle.putInt("liganummer", ligaNr);
 						intent.putExtras(bundle);
-						dbh.getLiga(ligaNr);
 						startActivity(intent);
 					}
 				});

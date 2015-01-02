@@ -54,20 +54,19 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	}
 
-
 	@Override
 	protected Integer doInBackground(String... params) {
 		InputStream inputStream = null;
 		HttpURLConnection urlConnection = null;
 
 		int result = 0;
-		
+
 		String response = "Keine Daten";
 
 		try {
 			/* forming the java.net.URL object */
 			URL url = new URL(params[0]);
-			
+
 			urlConnection = (HttpURLConnection) url.openConnection();
 
 			/* optional request header */
@@ -130,40 +129,39 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	@Override
 	protected void onPostExecute(Integer result) {
-		Log.d("BENNI","Gateway start");
+		Log.d("BENNI", "Gateway start");
 		if (result == 1) {
 			if (update == false) {
-				
+
 				DBGateway gate = new DBGateway(activity);
 				gate.saveGamesIntoDB(spiele);
 
-				for (Entry<Integer, String> e: neueHallen.entrySet()) {
+				for (Entry<Integer, String> e : neueHallen.entrySet()) {
 					new AsyncHttpTaskHallen(activity, e.getKey()).execute(e.getValue());
 					Log.d("Benni", "Iteration Async: " + e.getKey());
 				}
 			}
 
 			ligen.remove(0);
-			
+
 			// Update des Ladestandes
 			TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
 			double it = StartActivity.ITERATIONS;
 			double size = ligen.size();
 			double ladestatus = 1 - (size / it);
-			Log.d("load", "its: "+it+" size: "+size +" status: "+ladestatus+" test: "+(size / it));
+			Log.d("load", "its: " + it + " size: " + size + " status: " + ladestatus + " test: " + (size / it));
 			ladestatus = ladestatus * 100;
 			ladestatus = Math.round(ladestatus);
 			loadingText.setText("Loading (" + ladestatus + "%)");
-			
-			
-			if(ligen.size() != 0){
+
+			if (ligen.size() != 0) {
 				new AsyncHttpTask(ligen.get(0).getLigaNr(), false, activity, ligen).execute(ligen.get(0).getLink());
-			}else{
+			} else {
 				Intent intent = new Intent(activity.getApplicationContext(), LigawahlActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				activity.getApplicationContext().startActivity(intent);
 			}
-			
+
 		} else {
 			String TAG = "PostExecute";
 			Log.e(TAG, "Failed to fetch data!");
