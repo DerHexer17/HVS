@@ -43,4 +43,6 @@
     <string name="goToMaps">Zeig die Halle in Google Maps an</string>
     <string name="naechsterSpieltag">Nächster Spieltag</string>
     <string name="vorherigerSpieltag">Vorheriger Spieltag</string>
+    <string name="small_update">Einfaches Update</string>
+    <string name="full_update">Volles Update</string>
 </resources>

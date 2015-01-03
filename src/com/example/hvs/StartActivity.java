@@ -37,11 +37,8 @@ public class StartActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 
-		// Wir brauchen von Beginn an unsere Datenbank
 		dbh = DatabaseHelper.getInstance(getApplicationContext());
 
-		// Erster Logeintrag. Vorerst rudimentär, aber wichtig, um zu prüfen, ob
-		// wir die Daten vom HVS einmal komplett holen müssen
 		dbh.addLog("App gestartet");
 
 		// Vorläufige Liste aller Ligen, die wir anbieten
@@ -149,14 +146,6 @@ public class StartActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public int getLadestatus() {
-		return ladestatus;
-	}
-
-	public void setLadestatus(int ladestatus) {
-		this.ladestatus = ladestatus;
-	}
-
 	// Diese Methode startet die Datenabfrage und ist mit einem Button
 	// verknüpft. Vielleicht später auch ohne Button automatisierbar
 	public void dataTest(View view) {
@@ -226,7 +215,7 @@ public class StartActivity extends ActionBarActivity {
 		// nur erste Liga,
 		if (initialLigen.size() != 0) {
 			ITERATIONS = initialLigen.size();
-			new AsyncHttpTask(initialLigen.get(0).getLigaNr(), false, this, initialLigen).execute(initialLigen.get(0).getLink());
+			new AsyncHttpTask(0, this, initialLigen).execute(initialLigen.get(0).getLink());
 		}
 
 	}

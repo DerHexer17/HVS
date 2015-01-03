@@ -71,4 +71,22 @@ public class DBGateway {
 		Log.d("BENNI", "DB Exec Time: " + Long.toString(diff) + "ms");
 
 	}
+
+	public void updateResults(List<Spiel> spiele) {
+		long startTime = System.currentTimeMillis();
+		for (Spiel s : spiele) {
+			dbh.updateSpiel(s, true);
+		}
+		long diff = System.currentTimeMillis() - startTime;
+		Log.d("BENNI", "DB Exec Time: " + Long.toString(diff) + "ms");
+	}
+
+	public void updateGamesInDB(List<Spiel> spiele) {
+		long startTime = System.currentTimeMillis();
+		for (Spiel s : spiele) {
+			dbh.updateSpiel(s, false);
+		}
+		long diff = System.currentTimeMillis() - startTime;
+		Log.d("BENNI", "DB Exec Time: " + Long.toString(diff) + "ms");
+	}
 }

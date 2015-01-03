@@ -1,16 +1,26 @@
 package com.example.hvs;
 
+import java.util.List;
+
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Liga;
+import com.example.internet.AsyncHttpTask;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class UpdateActivity extends ActionBarActivity {
+	private DatabaseHelper dbh;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update);
+		dbh = DatabaseHelper.getInstance(this);
 	}
 
 	@Override
@@ -30,5 +40,21 @@ public class UpdateActivity extends ActionBarActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	public void startSmallUpdate(View view) {
+		List<Liga> ligen = dbh.getAlleLigen();
+
+		new AsyncHttpTask(1, this, ligen).execute(ligen.get(0).getLink());
+
+		Log.d("Benni", "einfaches Update gestartet");
+	}
+
+	public void startFullUpdate(View view) {
+		List<Liga> ligen = dbh.getAlleLigen();
+
+		new AsyncHttpTask(2, this, ligen).execute(ligen.get(0).getLink());
+
+		Log.d("Benni", "volles Update gestartet");
 	}
 }

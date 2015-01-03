@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +39,6 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 
 		ligaNr = getIntent().getIntExtra("liganummer", 0);
 		this.setTitle(getIntent().getStringExtra("liganame"));
-		Log.d("Bundle", ligaNr + ", " + getIntent().getStringExtra("liganame"));
 
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();

@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 
+import android.app.Activity;
 import android.util.Log;
 
 public class HTMLParser {
@@ -17,11 +17,17 @@ public class HTMLParser {
 	private ArrayList<Spiel> alleSpiele;
 	private ArrayList<String> trimHTMLList;
 	private Map<Integer, String> hallenMap;
+	private int update;
+	private int ligaNr;
 
-	DatabaseHelper dbh;
+	private DatabaseHelper dbh;
 
 	/* Main Method for Parsing the HTML from "Liste aller Spiele" */
-	public ArrayList<Spiel> initialHTMLParsing(String source, int ligaNr) {
+	public ArrayList<Spiel> startParsing(int update, String source, int ligaNr, Activity activity) {
+		this.update = update;
+		this.ligaNr = ligaNr;
+		dbh = DatabaseHelper.getInstance(activity);
+
 		// Split the Source into the Rows of the Table of all Games
 		String[] trimHTML = source.split("</tr>");
 		trimHTML = trimHTML[1].split("</TR>");
@@ -38,11 +44,13 @@ public class HTMLParser {
 		// Call splitTableRow for every Game-Object
 		for (String s : trimHTMLList) {
 			Spiel spiel = splitTableRow(s);
-			spiel.setLigaNr(ligaNr);
-			alleSpiele.add(spiel);
+			if (spiel != null) {
+				spiel.setLigaNr(ligaNr);
+				alleSpiele.add(spiel);
+			}
 		}
 
-		Log.d(TAG, "Size von alleSpiele: " + alleSpiele.size());
+		Log.d("Benni", "Size von alleSpiele: " + alleSpiele.size());
 
 		return alleSpiele;
 	}
@@ -59,7 +67,17 @@ public class HTMLParser {
 		String goalOrRefStr = tds[5];
 		String fieldStr;
 
-		spiel.setDate(new java.sql.Date(parseDate(dateStr, timeStr).getTime()));
+		Date spielDate = new Date(parseDate(dateStr, timeStr).getTime());
+
+		if (update != 0) {
+			Date date = dbh.getUpdate(ligaNr);
+
+			if (spielDate.before(date)) {
+				return null;
+			}
+		}
+
+		spiel.setDate(spielDate);
 
 		spiel.setSpielNr(parseNumber(numberStr));
 
@@ -67,12 +85,19 @@ public class HTMLParser {
 		spiel.setTeamGast(parseTeam(teamGuestStr));
 
 		if (!goalOrRefStr.contains(":")) {
+			if (update == 1) {
+				return null;
+			}
 			parseReferee(goalOrRefStr);
 			fieldStr = tds[6];
 			spiel.setHalle(parseField(fieldStr));
 		} else {
 			int[] goals = parseGoals(goalOrRefStr);
-			if (goals[0] != -1) {
+			if (goals[0] == -1) {
+				if (update == 1) {
+					return null;
+				}
+			} else {
 				String pointsStr = tds[6];
 				int[] points = parsePoints(pointsStr);
 				spiel.setToreHeim(goals[0]);
@@ -176,13 +201,9 @@ public class HTMLParser {
 	public Map<Integer, String> getUnsavedHallenLinkListe(List<Halle> alleHallen) {
 
 		for (Halle h : alleHallen) {
-			Log.d("Benni", "removed halle: " + h.getHallenNr());
 			hallenMap.remove(h.getHallenNr());
 		}
 
-		for (Entry<Integer, String> e : hallenMap.entrySet()) {
-			Log.d("Hallenmap", e.getKey() + ", " + e.getValue());
-		}
 		return hallenMap;
 	}
 
@@ -201,7 +222,6 @@ public class HTMLParser {
 		 */
 		try {
 			h.setHausnummer(Integer.parseInt(tempHausnummer[tempHausnummer.length - 1]));
-			Log.d("Benni", "Hausnummer " + h.getHausnummer());
 			Integer hs = Integer.valueOf(h.getHausnummer());
 			h.setStrasse(tempAdresse.split(",")[0].split(hs.toString())[0].trim());
 		} catch (NumberFormatException ex) {

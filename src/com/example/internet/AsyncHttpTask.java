@@ -33,14 +33,14 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	private ArrayList<Spiel> spiele;
 	private List<Liga> ligen;
 	private Map<Integer, String> neueHallen;
-	private int ligaNr;
-	private boolean update;
+	private int update;
 	private Activity activity;
 	private DatabaseHelper dbh;
 
-	public AsyncHttpTask(int ligaNr, boolean update, Activity activity, List<Liga> ligen) {
-
-		this.ligaNr = ligaNr;
+	// update = 0 -> initial
+	// update = 1 -> nur Ergebnisse
+	// update = 2 -> volles Update
+	public AsyncHttpTask(int update, Activity activity, List<Liga> ligen) {
 		this.update = update;
 		this.activity = activity;
 		this.ligen = ligen;
@@ -89,28 +89,24 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 				response = convertInputStreamToString(inputStream);
 
-				// Wenn update == false, sind wir in der initalen Phase, holen
-				// also daten komplett
-				// Wenn update == true führen wir nur ein Ergebnis Update durch,
-				// brauchen also einen anderen HTML Parser
-				if (update == false) {
-					HTMLParser htmlparser = new HTMLParser();
-					long startTime = System.currentTimeMillis();
-					spiele = htmlparser.initialHTMLParsing(response, ligaNr);
+				HTMLParser htmlparser = new HTMLParser();
 
-					// Hier holen wir uns nur eine Map der Hallen, die noch neu
-					// hinzukommen sollen
-					// Das eigentliche Parsen findet weiter unten in PostExecute
-					// statt
-					neueHallen = htmlparser.getUnsavedHallenLinkListe(dbh.getAlleHallen());
-
-					long diff = System.currentTimeMillis() - startTime;
-					Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff) + "ms");
+				long startTime = System.currentTimeMillis();
+				if (update == 0) {
+					spiele = htmlparser.startParsing(0, response, ligen.get(0).getLigaNr(), activity);
+				} else if (update == 1) {
+					spiele = htmlparser.startParsing(1, response, ligen.get(0).getLigaNr(), activity);
+				} else if (update == 2) {
+					spiele = htmlparser.startParsing(2, response, ligen.get(0).getLigaNr(), activity);
 				} else {
-					/*
-					 * TODO: Update noch nicht implementiert!
-					 */
+					Log.d("Error", "unclear update mode");
 				}
+
+				long diff = System.currentTimeMillis() - startTime;
+				Log.d("BENNI", "Parser Exec Time: " + Long.toString(diff) + "ms");
+
+				neueHallen = htmlparser.getUnsavedHallenLinkListe(dbh.getAlleHallen());
+
 				result = 1; // Successful
 
 			} else {
@@ -129,43 +125,55 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 
 	@Override
 	protected void onPostExecute(Integer result) {
-		Log.d("BENNI", "Gateway start");
 		if (result == 1) {
-			if (update == false) {
-
-				DBGateway gate = new DBGateway(activity);
+			DBGateway gate = new DBGateway(activity);
+			if (update == 0) {
 				gate.saveGamesIntoDB(spiele);
+				dbh.addUpdate(ligen.get(0).getLigaNr());
+			} else if (update == 1) {
+				gate.updateResults(spiele);
+				dbh.updateUpdate(ligen.get(0).getLigaNr());
+			} else if (update == 2) {
+				gate.updateGamesInDB(spiele);
+				dbh.updateUpdate(ligen.get(0).getLigaNr());
+			} else {
+				Log.d("Error", "unclear update mode");
+			}
 
-				for (Entry<Integer, String> e : neueHallen.entrySet()) {
-					new AsyncHttpTaskHallen(activity, e.getKey()).execute(e.getValue());
-					Log.d("Benni", "Iteration Async: " + e.getKey());
-				}
+			for (Entry<Integer, String> e : neueHallen.entrySet()) {
+				new AsyncHttpTaskHallen(activity, e.getKey()).execute(e.getValue());
 			}
 
 			ligen.remove(0);
 
 			// Update des Ladestandes
-			TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
-			double it = StartActivity.ITERATIONS;
-			double size = ligen.size();
-			double ladestatus = 1 - (size / it);
-			Log.d("load", "its: " + it + " size: " + size + " status: " + ladestatus + " test: " + (size / it));
-			ladestatus = ladestatus * 100;
-			ladestatus = Math.round(ladestatus);
-			loadingText.setText("Loading (" + ladestatus + "%)");
+			updateLoadingStatus();
 
-			if (ligen.size() != 0) {
-				new AsyncHttpTask(ligen.get(0).getLigaNr(), false, activity, ligen).execute(ligen.get(0).getLink());
+			if (update == 0 && ligen.size() != 0) {
+				new AsyncHttpTask(0, activity, ligen).execute(ligen.get(0).getLink());
+			} else if (update == 1 && ligen.size() != 0) {
+				new AsyncHttpTask(1, activity, ligen).execute(ligen.get(0).getLink());
+			} else if (update == 2 && ligen.size() != 0) {
+				new AsyncHttpTask(2, activity, ligen).execute(ligen.get(0).getLink());
 			} else {
 				Intent intent = new Intent(activity.getApplicationContext(), LigawahlActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 				activity.getApplicationContext().startActivity(intent);
 			}
-
 		} else {
 			String TAG = "PostExecute";
 			Log.e(TAG, "Failed to fetch data!");
 		}
+	}
+
+	private void updateLoadingStatus() {
+		TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
+		double it = StartActivity.ITERATIONS;
+		double size = ligen.size();
+		double ladestatus = 1 - (size / it);
+		ladestatus = ladestatus * 100;
+		ladestatus = Math.round(ladestatus);
+		loadingText.setText("Loading (" + ladestatus + "%)");
 	}
 
 	private String convertInputStreamToString(InputStream inputStream) throws IOException {
