@@ -88,7 +88,7 @@ public class HTMLParser {
 			if (update == 1) {
 				return null;
 			}
-			parseReferee(goalOrRefStr);
+			spiel.setSchiedsrichter(parseReferee(goalOrRefStr));
 			fieldStr = tds[6];
 			spiel.setHalle(parseField(fieldStr));
 		} else {
@@ -168,6 +168,7 @@ public class HTMLParser {
 	private String parseReferee(String refStr) {
 		String[] temp = refStr.split("</FONT");
 		temp = temp[0].split(">");
+		Log.d("Schiri", temp[temp.length - 1]);
 		return temp[temp.length - 1];
 	}
 
