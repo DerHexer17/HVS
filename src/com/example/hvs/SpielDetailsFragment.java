@@ -40,13 +40,14 @@ public class SpielDetailsFragment extends Fragment {
 		TextView textSR = (TextView) rootView.findViewById(R.id.spielDetailsSR);
 
 		titel.setText(spiel.getTeamHeim() + " - " + spiel.getTeamGast());
+		
 		try {
 			SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
-			datum.setText("Datum: " + formatter.format(spiel.getDate()) + " Uhr");
+			datum.setText("Datum :" + formatter.format(spiel.getDate()) + " Uhr");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		datum.setText("Datum: " + spiel.getDate() + " Uhr");
+	
 		textHalle.setText("Spielhalle: " + halle.getName() + " (" + halle.kompletteAdresse() + ")");
 		textSR.setText("Schiedsrichter: " + spiel.getSchiedsrichter());
 
