@@ -45,4 +45,5 @@
     <string name="vorherigerSpieltag">Vorheriger Spieltag</string>
     <string name="small_update">Einfaches Update</string>
     <string name="full_update">Volles Update</string>
+    <string name="laden">Lädt...</string>
 </resources>
