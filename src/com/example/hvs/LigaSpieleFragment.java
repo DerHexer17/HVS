@@ -52,7 +52,7 @@ public class LigaSpieleFragment extends Fragment {
 		int positionAktuellerSpieltag = addSpieltageToSpinner(dbh.getAllSpieltageForLiga(ligaNr), dbh.getAllLeagueTeams(ligaNr), rootView);
 		Spinner spinnerSpieltage = (Spinner) rootView.findViewById(R.id.spinnerSpieltage);
 		spinnerSpieltage.setOnItemSelectedListener(new CustomOnItemSelectedListener(dbh, ligaNr, rootView));
-		spinnerSpieltage.setSelection(positionAktuellerSpieltag + 2);
+		spinnerSpieltage.setSelection(positionAktuellerSpieltag);
 		this.rootView = rootView;
 		return rootView;
 	}

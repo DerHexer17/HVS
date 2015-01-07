@@ -1,5 +1,6 @@
 package com.example.hvs;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.datahandling.DatabaseHelper;
@@ -15,12 +16,19 @@ import android.view.View;
 
 public class UpdateActivity extends ActionBarActivity {
 	private DatabaseHelper dbh;
+	private int ligaNr;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update);
 		dbh = DatabaseHelper.getInstance(this);
+		ligaNr = getIntent().getIntExtra("liga", 0);
+		List<Liga> ligen = new ArrayList<Liga>();
+		ligen.add(dbh.getLiga(ligaNr));
+		if(getIntent().getIntExtra("update", 0) == 1){
+			startSmallUpdate(null, ligen);
+		}
 	}
 
 	@Override
@@ -42,8 +50,8 @@ public class UpdateActivity extends ActionBarActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void startSmallUpdate(View view) {
-		List<Liga> ligen = dbh.getAlleLigen();
+	public void startSmallUpdate(View view, List<Liga> ligen) {
+		//List<Liga> ligen = dbh.getAlleLigen();
 
 		new AsyncHttpTask(1, this, ligen).execute(ligen.get(0).getLink());
 

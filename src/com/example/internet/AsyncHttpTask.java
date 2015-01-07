@@ -133,6 +133,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			} else if (update == 1) {
 				gate.updateResults(spiele);
 				dbh.updateUpdate(ligen.get(0).getLigaNr());
+				activity.finish();
 			} else if (update == 2) {
 				gate.updateGamesInDB(spiele);
 				dbh.updateUpdate(ligen.get(0).getLigaNr());
@@ -156,9 +157,9 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			} else if (update == 2 && ligen.size() != 0) {
 				new AsyncHttpTask(2, activity, ligen).execute(ligen.get(0).getLink());
 			} else {
-				Intent intent = new Intent(activity.getApplicationContext(), LigawahlActivity.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-				activity.getApplicationContext().startActivity(intent);
+				//Intent intent = new Intent(activity.getApplicationContext(), LigawahlActivity.class);
+				//intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+				//activity.getApplicationContext().startActivity(intent);
 			}
 		} else {
 			String TAG = "PostExecute";
@@ -167,6 +168,9 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	}
 
 	private void updateLoadingStatus() {
+		if(update == 1){
+			return;
+		}
 		TextView loadingText = (TextView) activity.findViewById(R.id.textView1);
 		double it = StartActivity.ITERATIONS;
 		double size = ligen.size();
