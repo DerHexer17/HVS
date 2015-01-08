@@ -68,7 +68,7 @@ public class LigaSpieleFragment extends Fragment {
 			TextView field1 = new TextView(getActivity().getApplicationContext());
 			ArrayList<TextView> formatArray = new ArrayList<TextView>();
 			try {
-				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy HH:mm", Locale.GERMANY);
 				field1.setText(formatter.format(s.getDate()).split(" ")[0]+"\n"+formatter.format(s.getDate()).split(" ")[1]);
 			} catch (Exception ex) {
 				ex.printStackTrace();
@@ -132,7 +132,7 @@ public class LigaSpieleFragment extends Fragment {
 			Date datumEnde = sp.getDatumEnde();
 
 			try {
-				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy", Locale.GERMANY);
 				if (datumBeginn.equals(datumEnde)) {
 					spieltageText.add(sp.getSpieltags_Name() + " (" + formatter.format(datumBeginn) + ")");
 				} else {
