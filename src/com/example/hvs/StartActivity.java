@@ -48,6 +48,11 @@ public class StartActivity extends ActionBarActivity {
 
 		if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 0) {
 			callAlleLigen(findViewById(R.id.button1));
+		} else if(getIntent().getIntExtra("add", 0) == 1){
+			ligen = dbh.getAlleLigenNochNichtVorhanden();
+			if(ligen.size() == 0){
+				this.finish();
+			}
 		} else {
 			Liga sac = new Liga();
 			sac.setLigaNr(10000);
@@ -118,6 +123,7 @@ public class StartActivity extends ActionBarActivity {
 
 		// Anzeige der verfügbaren Liste in Tabelle mit CheckBox
 		TableLayout ligenauswahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
+		
 		for (Liga l : ligen) {
 			TableRow tr = new TableRow(getApplicationContext());
 			CheckBox cb = new CheckBox(getApplicationContext());
@@ -238,9 +244,15 @@ public class StartActivity extends ActionBarActivity {
 				ligenGlobal.get(i).setInitial("Ja");
 			}
 		}
-
-		for (Liga l : ligenGlobal) {
-			dbh.addLiga(l);
+		
+		if(getIntent().getIntExtra("add", 0) == 0){
+			for (Liga l : ligenGlobal) {
+				dbh.addLiga(l);
+			}
+		}else{
+			for (Liga l : ligenGlobal) {
+				dbh.updateLiga(l);
+			}
 		}
 
 		Toast.makeText(getApplicationContext(), "Anzahl ausgewählter Ligen: " + initialLigen.size() + " Anzahl Ligen insgesamt: " + ligenGlobal.size(), Toast.LENGTH_SHORT).show();

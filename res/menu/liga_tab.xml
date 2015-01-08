@@ -4,12 +4,18 @@
     tools:context="com.example.hvs.LigaTabActivity" >
 
     <item
-        android:id="@+id/liga_refresh"
+        android:id="@+id/liga_refresh_small"
         android:orderInCategory="100"
         android:icon="@drawable/abc_ic_search"
 		android:title="@string/small_update"
 
-        app:showAsAction="always" />s
+        app:showAsAction="always" />
+    
+    <item
+        android:id="@+id/liga_refresh_full"
+        android:orderInCategory="100"
+		android:title="@string/full_update"
+        app:showAsAction="never" />
     
     <item
         android:id="@+id/action_settings"

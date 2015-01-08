@@ -99,8 +99,10 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		switch(id){
 		case R.id.action_settings:
 			return true;
-		case R.id.liga_refresh:
+		case R.id.liga_refresh_small:
 			kleinesUpdate();
+		case R.id.liga_refresh_full:
+			groﬂesUpdate();
 		}
 		
 		if (id == R.id.action_settings) {
@@ -218,15 +220,14 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		intent.putExtra("liga", ligaNr);
 		intent.putExtra("update", 1);
 		startActivity(intent);
-		
-		
-		//DatabaseHelper dbh = DatabaseHelper.getInstance(getApplicationContext());
-		
-		//List<Liga> ligen = new ArrayList<Liga>();
-		//ligen.add(dbh.getLiga(ligaNr));
 
-		//new AsyncHttpTask(1, this, ligen).execute(ligen.get(0).getLink());
-		
-		//Toast.makeText(getApplicationContext(), "Der AsyncTask wurde gestartet. Und zwar mit LigaNr = "+ligen.get(0).getLigaNr(), Toast.LENGTH_SHORT).show();
+	}
+	
+	public void groﬂesUpdate(){
+		Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
+		intent.putExtra("liga", ligaNr);
+		intent.putExtra("update", 2);
+		startActivity(intent);
+
 	}
 }

@@ -669,6 +669,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		return i;
 	}
+	
+	public int updateLiga(Liga liga) {
+		SQLiteDatabase db = this.getReadableDatabase();
+
+		ContentValues values = new ContentValues();
+		values.put(LIGA_NR, liga.getLigaNr());
+		values.put(LIGA_NAME, liga.getName());
+		values.put(LIGA_EBENE, liga.getEbene());
+		values.put(LIGA_GESCHLECHT, liga.getGeschlecht());
+		values.put(LIGA_JUGEND, liga.getJugend());
+		values.put(LIGA_SAISON, liga.getSaison());
+		values.put(LIGA_LINK, liga.getLink());
+		values.put(LIGA_POKAL, liga.getPokal());
+		values.put(LIGA_INITIAL, liga.getInitial());;
+
+
+		int i = db.update(TABLE_LIGA, values, LIGA_NR + " = " + liga.getLigaNr(), null);
+
+		db.close();
+
+		return i;
+	}
 
 	@Override
 	public synchronized void close() {

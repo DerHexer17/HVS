@@ -59,6 +59,7 @@
         <activity
             android:name=".UpdateActivity"
             android:label="@string/title_activity_update"
+			android:theme="@android:style/Theme.DeviceDefault.Light.NoActionBar"
 
             android:parentActivityName=".LigawahlActivity" >
             <meta-data
