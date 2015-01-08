@@ -83,7 +83,7 @@ public class LigawahlActivity extends ActionBarActivity implements ActionBar.Tab
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		switch(id){
+		switch (id) {
 		case R.id.action_settings:
 			return true;
 		case R.id.add_liga:
@@ -91,7 +91,7 @@ public class LigawahlActivity extends ActionBarActivity implements ActionBar.Tab
 			intent.putExtra("add", 1);
 			startActivity(intent);
 		}
-		
+
 		return super.onOptionsItemSelected(item);
 	}
 

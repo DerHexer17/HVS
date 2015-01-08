@@ -669,7 +669,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		return i;
 	}
-	
+
 	public int updateLiga(Liga liga) {
 		SQLiteDatabase db = this.getReadableDatabase();
 
@@ -682,8 +682,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put(LIGA_SAISON, liga.getSaison());
 		values.put(LIGA_LINK, liga.getLink());
 		values.put(LIGA_POKAL, liga.getPokal());
-		values.put(LIGA_INITIAL, liga.getInitial());;
-
+		values.put(LIGA_INITIAL, liga.getInitial());
+		;
 
 		int i = db.update(TABLE_LIGA, values, LIGA_NR + " = " + liga.getLigaNr(), null);
 

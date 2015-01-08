@@ -69,7 +69,7 @@ public class LigaSpieleFragment extends Fragment {
 			ArrayList<TextView> formatArray = new ArrayList<TextView>();
 			try {
 				SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yy HH:mm", Locale.GERMANY);
-				field1.setText(formatter.format(s.getDate()).split(" ")[0]+"\n"+formatter.format(s.getDate()).split(" ")[1]);
+				field1.setText(formatter.format(s.getDate()).split(" ")[0] + "\n" + formatter.format(s.getDate()).split(" ")[1]);
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

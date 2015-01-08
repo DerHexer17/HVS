@@ -48,9 +48,9 @@ public class StartActivity extends ActionBarActivity {
 
 		if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 0) {
 			callAlleLigen(findViewById(R.id.button1));
-		} else if(getIntent().getIntExtra("add", 0) == 1){
+		} else if (getIntent().getIntExtra("add", 0) == 1) {
 			ligen = dbh.getAlleLigenNochNichtVorhanden();
-			if(ligen.size() == 0){
+			if (ligen.size() == 0) {
 				this.finish();
 			}
 		} else {
@@ -123,7 +123,7 @@ public class StartActivity extends ActionBarActivity {
 
 		// Anzeige der verfügbaren Liste in Tabelle mit CheckBox
 		TableLayout ligenauswahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
-		
+
 		for (Liga l : ligen) {
 			TableRow tr = new TableRow(getApplicationContext());
 			CheckBox cb = new CheckBox(getApplicationContext());
@@ -158,9 +158,9 @@ public class StartActivity extends ActionBarActivity {
 	// verknüpft. Vielleicht später auch ohne Button automatisierbar
 	public void dataTest(View view) {
 
-		if (isConnectedFast()){
+		if (isConnectedFast()) {
 			initial();
-		}else{
+		} else {
 			Toast.makeText(getApplicationContext(), "INTERNET ZU LANGSAM!!!!", Toast.LENGTH_SHORT).show();
 			Log.d("Benni", "INTERNET ZU LANGSAM!!!!");
 		}
@@ -244,12 +244,12 @@ public class StartActivity extends ActionBarActivity {
 				ligenGlobal.get(i).setInitial("Ja");
 			}
 		}
-		
-		if(getIntent().getIntExtra("add", 0) == 0){
+
+		if (getIntent().getIntExtra("add", 0) == 0) {
 			for (Liga l : ligenGlobal) {
 				dbh.addLiga(l);
 			}
-		}else{
+		} else {
 			for (Liga l : ligenGlobal) {
 				dbh.updateLiga(l);
 			}
