@@ -1,13 +1,5 @@
 package com.example.hvs;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Liga;
-import com.example.internet.AsyncHttpTask;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -23,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -49,7 +40,6 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 
 		ligaNr = getIntent().getIntExtra("liganummer", 0);
 		this.setTitle(getIntent().getStringExtra("liganame"));
-		
 
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
@@ -96,7 +86,7 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		switch(id){
+		switch (id) {
 		case R.id.action_settings:
 			return true;
 		case R.id.liga_refresh_small:
@@ -104,7 +94,7 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		case R.id.liga_refresh_full:
 			groﬂesUpdate();
 		}
-		
+
 		if (id == R.id.action_settings) {
 			return true;
 		}
@@ -214,16 +204,16 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		Spinner sp = (Spinner) findViewById(R.id.spinnerSpieltage);
 		sp.setSelection(sp.getSelectedItemPosition() + 1);
 	}
-	
-	public void kleinesUpdate(){
+
+	public void kleinesUpdate() {
 		Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
 		intent.putExtra("liga", ligaNr);
 		intent.putExtra("update", 1);
 		startActivity(intent);
 
 	}
-	
-	public void groﬂesUpdate(){
+
+	public void groﬂesUpdate() {
 		Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
 		intent.putExtra("liga", ligaNr);
 		intent.putExtra("update", 2);

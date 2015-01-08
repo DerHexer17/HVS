@@ -36,7 +36,6 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	private int update;
 	private Activity activity;
 	private DatabaseHelper dbh;
-	
 
 	// update = 0 -> initial
 	// update = 1 -> nur Ergebnisse
@@ -159,7 +158,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			} else if (update == 2 && ligen.size() != 0) {
 				new AsyncHttpTask(2, activity, ligen).execute(ligen.get(0).getLink());
 			} else {
-				if(update == 0){
+				if (update == 0) {
 					Intent intent = new Intent(activity.getApplicationContext(), LigawahlActivity.class);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 					activity.getApplicationContext().startActivity(intent);
@@ -172,7 +171,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 	}
 
 	private void updateLoadingStatus() {
-		if(update == 1 || update == 2){
+		if (update == 1 || update == 2) {
 			return;
 		}
 		TextView loadingText = (TextView) activity.findViewById(R.id.textView1);

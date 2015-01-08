@@ -3,38 +3,33 @@ package com.example.hvs;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.datahandling.DatabaseHelper;
-import com.example.datahandling.Liga;
-import com.example.internet.AsyncHttpTask;
-
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Liga;
+import com.example.internet.AsyncHttpTask;
+
 public class UpdateActivity extends Activity {
 	private DatabaseHelper dbh;
 	private int ligaNr;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update);
-		
 
 		dbh = DatabaseHelper.getInstance(this);
 		ligaNr = getIntent().getIntExtra("liga", 0);
 		List<Liga> ligen = new ArrayList<Liga>();
 		ligen.add(dbh.getLiga(ligaNr));
-		if(getIntent().getIntExtra("update", 0) == 1){
+		if (getIntent().getIntExtra("update", 0) == 1) {
 			startSmallUpdate(null, ligen);
-		}else if(getIntent().getIntExtra("update", 0) == 2){
+		} else if (getIntent().getIntExtra("update", 0) == 2) {
 			startFullUpdate(null, ligen);
 		}
 	}
@@ -57,11 +52,9 @@ public class UpdateActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-
 
 	public void startSmallUpdate(View view, List<Liga> ligen) {
-		//List<Liga> ligen = dbh.getAlleLigen();
+		// List<Liga> ligen = dbh.getAlleLigen();
 
 		new AsyncHttpTask(1, this, ligen).execute(ligen.get(0).getLink());
 
@@ -69,7 +62,6 @@ public class UpdateActivity extends Activity {
 	}
 
 	public void startFullUpdate(View view, List<Liga> ligen) {
-		
 
 		new AsyncHttpTask(2, this, ligen).execute(ligen.get(0).getLink());
 
