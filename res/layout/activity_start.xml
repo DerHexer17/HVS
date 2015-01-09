@@ -8,12 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     tools:context="com.example.hvs.StartActivity" >
-       
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
     
     <TextView
         android:id="@+id/textView2"
@@ -41,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="46dp"
-        android:text="@+id/weiterAlleLigen"
+        android:text="@string/add_no_liga"
         android:onClick="callAlleLigen" />
-
+	
 </LinearLayout>

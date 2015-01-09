@@ -119,6 +119,28 @@ public class StartActivity extends ActionBarActivity {
 			vbww.setPokal(0);
 			vbww.setInitial("Nein");
 			ligen.add(vbww);
+			
+			Liga bsmm = new Liga();
+			bsmm.setLigaNr(10048);
+			bsmm.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10048&titel=Bezirksliga%20Sachsen-Mitte%20M%E4nner%20%202014/15");
+			bsmm.setName("Bezirksliga Sachsen-Mitte");
+			bsmm.setEbene("Bezirk Sachsen-Mitte");
+			bsmm.setGeschlecht("männlich");
+			bsmm.setSaison("2014/2015");
+			bsmm.setPokal(0);
+			bsmm.setInitial("Nein");
+			ligen.add(bsmm);
+			
+			Liga bsmf = new Liga();
+			bsmf.setLigaNr(10049);
+			bsmf.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10049&titel=Bezirksliga%20Sachsen-Mitte%20Frauen%20%202014/15");
+			bsmf.setName("Bezirksliga Sachsen-Mitte");
+			bsmf.setEbene("Bezirk Sachsen-Mitte");
+			bsmf.setGeschlecht("weiblich");
+			bsmf.setSaison("2014/2015");
+			bsmf.setPokal(0);
+			bsmf.setInitial("Nein");
+			ligen.add(bsmf);
 		}
 
 		// Anzeige der verfügbaren Liste in Tabelle mit CheckBox
