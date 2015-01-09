@@ -15,7 +15,9 @@ public class TabellenplatzComparator implements Comparator<Tabellenrang> {
 			if (t1.getPunkteNegativ() < t2.getPunkteNegativ()) {
 				return 1;
 			} else if (t1.getPunkteNegativ() == t2.getPunkteNegativ()) {
-				if (t1.getTorePositiv() - t1.getToreNegativ() > t2.getTorePositiv() - t2.getToreNegativ()) {
+				int diff1 = t1.getTorePositiv() - t1.getToreNegativ();
+				int diff2 = t2.getTorePositiv() - t2.getToreNegativ();
+				if (diff1 > diff2) {
 					return 1;
 				} else if (t1.getTorePositiv() > t2.getTorePositiv()) {
 					return 1;
