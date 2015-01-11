@@ -9,6 +9,7 @@ import com.example.internet.AsyncHttpTask;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.app.ActionBarActivity;
@@ -20,6 +21,8 @@ import android.view.View;
 public class UpdateActivity extends Activity {
 	private DatabaseHelper dbh;
 	private int ligaNr;
+	private String liganame;
+	private int spinnerPos;
 
 
 	@Override
@@ -30,6 +33,8 @@ public class UpdateActivity extends Activity {
 
 		dbh = DatabaseHelper.getInstance(this);
 		ligaNr = getIntent().getIntExtra("liga", 0);
+		liganame = getIntent().getStringExtra("liganame");
+		spinnerPos = getIntent().getIntExtra("spinnerPos", 0);
 		List<Liga> ligen = new ArrayList<Liga>();
 		ligen.add(dbh.getLiga(ligaNr));
 		if(getIntent().getIntExtra("update", 0) == 1){
@@ -38,6 +43,23 @@ public class UpdateActivity extends Activity {
 			startFullUpdate(null, ligen);
 		}
 	}
+
+
+
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		
+		Intent intent = new Intent(getApplicationContext(), LigaTabActivity.class);
+		intent.putExtra("liganummer", ligaNr);
+		intent.putExtra("liganame", liganame);
+		intent.putExtra("spinnerPos", spinnerPos);
+		startActivity(intent);
+		
+		super.onDestroy();
+	}
+
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

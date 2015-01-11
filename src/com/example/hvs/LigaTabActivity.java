@@ -219,7 +219,11 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
 		intent.putExtra("liga", ligaNr);
 		intent.putExtra("update", 1);
+		intent.putExtra("liganame", this.getTitle());
+		//Spinner spinner = (Spinner) findViewById(R.id.spinnerSpieltage);
+		//intent.putExtra("spinnerPos", spinner.getSelectedItemPosition());
 		startActivity(intent);
+		this.finish();
 
 	}
 	
@@ -227,7 +231,9 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
 		intent.putExtra("liga", ligaNr);
 		intent.putExtra("update", 2);
+		intent.putExtra("liganame", this.getTitle());
 		startActivity(intent);
+		this.finish();
 
 	}
 }
