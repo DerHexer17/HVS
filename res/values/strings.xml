@@ -47,4 +47,6 @@
     <string name="full_update">Volles Update</string>
     <string name="laden">Lädt...</string>
     <string name="add_liga">Liga hinzufügen</string>
+    <string name="dialog_start">Starten</string>
+    <string name="dialog_cancel">Abbrechen</string>
 </resources>

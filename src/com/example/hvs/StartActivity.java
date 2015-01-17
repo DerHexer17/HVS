@@ -3,7 +3,9 @@ package com.example.hvs;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -12,7 +14,6 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +47,7 @@ public class StartActivity extends ActionBarActivity {
 		// Vorläufige Liste aller Ligen, die wir anbieten
 		List<Liga> ligen = new ArrayList<Liga>();
 
-		if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 0) {
+		if (dbh.checkForAnyDataLoaded() && getIntent().getIntExtra("add", 0) == 0) {
 			callAlleLigen(findViewById(R.id.button1));
 		} else if (getIntent().getIntExtra("add", 0) == 1) {
 			ligen = dbh.getAlleLigenNochNichtVorhanden();
@@ -161,8 +162,21 @@ public class StartActivity extends ActionBarActivity {
 		if (isConnectedFast()) {
 			initial();
 		} else {
-			Toast.makeText(getApplicationContext(), "INTERNET ZU LANGSAM!!!!", Toast.LENGTH_SHORT).show();
-			Log.d("Benni", "INTERNET ZU LANGSAM!!!!");
+			new AlertDialog.Builder(this)
+		    .setTitle("Internetverbindung langsam")
+		    .setMessage("Sind sie sicher, dass sie die Datenabfrage nicht später mittels WLAN oder 3G starten wollen?")
+		    .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		        	initial();
+		        }
+		     })
+		    .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		            // do nothing
+		        }
+		     })
+		    .setIcon(android.R.drawable.ic_dialog_alert)
+		     .show();
 		}
 
 	}

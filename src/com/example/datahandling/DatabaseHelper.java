@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 15;
+	private static final int DATABASE_VERSION = 16;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -696,5 +696,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public synchronized void close() {
 		if (sInstance != null)
 			db.close();
+	}
+	
+	//Checker
+	public boolean checkForAnyDataLoaded(){
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		String selectQuery = "SELECT * FROM " + TABLE_LIGA;
+
+		Cursor c = db.rawQuery(selectQuery, null);
+		if (c.moveToFirst()) {
+			if(c.getString(c.getColumnIndex(LIGA_INITIAL)).equals("Ja")){
+				return true;
+			}
+
+		} else {
+			Log.d(TAG, "keine Ligen in der Datenbank!");
+			return false;
+		}
+		c.close();
+		return false;
 	}
 }
