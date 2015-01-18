@@ -53,7 +53,7 @@ public class LigaSpieleFragment extends Fragment {
 		Spinner spinnerSpieltage = (Spinner) rootView.findViewById(R.id.spinnerSpieltage);
 		spinnerSpieltage.setOnItemSelectedListener(new CustomOnItemSelectedListener(dbh, ligaNr, rootView));
 		spinnerSpieltage.setSelection(positionAktuellerSpieltag);
-		if(getActivity().getIntent().getIntExtra("spinnerPos", 0) != 0){
+		if (getActivity().getIntent().getIntExtra("spinnerPos", 0) != 0) {
 			spinnerSpieltage.setSelection(getActivity().getIntent().getIntExtra("spinnerPos", 0));
 		}
 		this.rootView = rootView;
@@ -149,7 +149,7 @@ public class LigaSpieleFragment extends Fragment {
 			spieltagCalendar.setTime(datumBeginn);
 			spieltag = spieltagCalendar.getTimeInMillis();
 			diff = jetzt - spieltag;
-			if (diff > 86400000*2) {// 86400000*2){
+			if (diff > 86400000 * 2) {// 86400000*2){
 				i++;
 			}
 		}

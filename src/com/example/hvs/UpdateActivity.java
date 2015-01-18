@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,22 +39,18 @@ public class UpdateActivity extends Activity {
 		}
 	}
 
-
-
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
-		
+
 		Intent intent = new Intent(getApplicationContext(), LigaTabActivity.class);
 		intent.putExtra("liganummer", ligaNr);
 		intent.putExtra("liganame", liganame);
 		intent.putExtra("spinnerPos", spinnerPos);
 		startActivity(intent);
-		
+
 		super.onDestroy();
 	}
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

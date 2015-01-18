@@ -697,16 +697,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		if (sInstance != null)
 			db.close();
 	}
-	
-	//Checker
-	public boolean checkForAnyDataLoaded(){
+
+	// Checker
+	public boolean checkForAnyDataLoaded() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		
+
 		String selectQuery = "SELECT * FROM " + TABLE_LIGA;
 
 		Cursor c = db.rawQuery(selectQuery, null);
 		if (c.moveToFirst()) {
-			if(c.getString(c.getColumnIndex(LIGA_INITIAL)).equals("Ja")){
+			if (c.getString(c.getColumnIndex(LIGA_INITIAL)).equals("Ja")) {
 				return true;
 			}
 

@@ -20,9 +20,9 @@ public class TabellenplatzComparator implements Comparator<Tabellenrang> {
 				if (diff1 > diff2) {
 					return 1;
 				} else if (diff1 == diff2) {
-					if(t1.getTorePositiv() > t2.getTorePositiv()){
+					if (t1.getTorePositiv() > t2.getTorePositiv()) {
 						return 1;
-					}else{
+					} else {
 						return -1;
 					}
 				} else {

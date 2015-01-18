@@ -120,7 +120,7 @@ public class StartActivity extends ActionBarActivity {
 			vbww.setPokal(0);
 			vbww.setInitial("Nein");
 			ligen.add(vbww);
-			
+
 			Liga bsmm = new Liga();
 			bsmm.setLigaNr(10048);
 			bsmm.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10048&titel=Bezirksliga%20Sachsen-Mitte%20M%E4nner%20%202014/15");
@@ -131,7 +131,7 @@ public class StartActivity extends ActionBarActivity {
 			bsmm.setPokal(0);
 			bsmm.setInitial("Nein");
 			ligen.add(bsmm);
-			
+
 			Liga bsmf = new Liga();
 			bsmf.setLigaNr(10049);
 			bsmf.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10049&titel=Bezirksliga%20Sachsen-Mitte%20Frauen%20%202014/15");
@@ -184,21 +184,17 @@ public class StartActivity extends ActionBarActivity {
 		if (isConnectedFast()) {
 			initial();
 		} else {
-			new AlertDialog.Builder(this)
-		    .setTitle("Internetverbindung langsam")
-		    .setMessage("Sind sie sicher, dass sie die Datenabfrage nicht später mittels WLAN oder 3G starten wollen?")
-		    .setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) { 
-		        	initial();
-		        }
-		     })
-		    .setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) { 
-		            // do nothing
-		        }
-		     })
-		    .setIcon(android.R.drawable.ic_dialog_alert)
-		     .show();
+			new AlertDialog.Builder(this).setTitle("Internetverbindung langsam").setMessage("Sind sie sicher, dass sie die Datenabfrage nicht später mittels WLAN oder 3G starten wollen?").setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					initial();
+				}
+			}).setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// do nothing
+				}
+			}).setIcon(android.R.drawable.ic_dialog_alert).show();
 		}
 
 	}
