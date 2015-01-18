@@ -145,7 +145,7 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		@Override
 		public int getCount() {
 			// Show 3 total pages.
-			return 3;
+			return 2;
 		}
 
 		@Override
@@ -209,7 +209,12 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
 		intent.putExtra("liga", ligaNr);
 		intent.putExtra("update", 1);
+		intent.putExtra("liganame", this.getTitle());
+		//Spinner spinner = (Spinner) findViewById(R.id.spinnerSpieltage);
+		//intent.putExtra("spinnerPos", spinner.getSelectedItemPosition());
+		this.finish();
 		startActivity(intent);
+		
 
 	}
 
@@ -217,7 +222,10 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		Intent intent = new Intent(getApplicationContext(), UpdateActivity.class);
 		intent.putExtra("liga", ligaNr);
 		intent.putExtra("update", 2);
+		intent.putExtra("liganame", this.getTitle());
+		this.finish();
 		startActivity(intent);
+		
 
 	}
 }
