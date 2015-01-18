@@ -52,7 +52,7 @@ public class SpielDetailsFragment extends Fragment {
 		textSR.setText("Schiedsrichter: " + spiel.getSchiedsrichter());
 
 		if (textSR.getText().toString().split(" ")[1].equals("null")) {
-			textSR.setText("Schiedsrichter: noch nicht angesetzt");
+			textSR.setText("Schiedsrichter: unbekannt");
 		}
 
 		return rootView;
