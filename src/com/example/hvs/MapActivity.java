@@ -68,7 +68,7 @@ public class MapActivity extends FragmentActivity {
 				}
 			}
 
-			googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLoc, 1));
+			googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLoc, 7));
 			googleMap.setMyLocationEnabled(true);
 
 			// Getting LocationManager object from System Service
