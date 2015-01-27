@@ -4,6 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.Dialog;
+import android.location.Address;
+import android.location.Criteria;
+import android.location.Geocoder;
+import android.location.LocationManager;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Halle;
 import com.example.datahandling.Spiel;
@@ -12,24 +23,9 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import android.support.v4.app.FragmentActivity;
-import android.app.Dialog;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 
 public class MapActivity extends FragmentActivity {
 
@@ -68,7 +64,7 @@ public class MapActivity extends FragmentActivity {
 				Halle halle = dbh.getHalle(g.getHalle());
 				LatLng location = getLocationFromAddress(halle.getStrasse() + ", " + halle.getHausnummer() + ", " + halle.getPlz() + ", " + halle.getOrt());
 				if (location != null) {
-					drawMarker(location, halle.getName(), g.getTeamHeim() +" vs "+ g.getTeamGast() + " - "+ formatter.format(g.getDate()), BitmapDescriptorFactory.HUE_AZURE);
+					drawMarker(location, halle.getName(), g.getTeamHeim() + " vs " + g.getTeamGast() + " - " + formatter.format(g.getDate()), BitmapDescriptorFactory.HUE_AZURE);
 				}
 			}
 
@@ -84,52 +80,58 @@ public class MapActivity extends FragmentActivity {
 			criteria.setAccuracy(Criteria.ACCURACY_FINE);
 			criteria.setBearingAccuracy(Criteria.ACCURACY_HIGH);
 			criteria.setSpeedAccuracy(Criteria.ACCURACY_HIGH);
-			
+
 			List<String> providers = locationManager.getProviders(criteria, true);
-			
-			if(providers.isEmpty()){
+
+			if (providers.isEmpty()) {
 				Log.d("Benni", "bad");
-			}else{
-				for(String s : providers){
+			} else {
+				for (String s : providers) {
 					Log.d("Benni", s);
 				}
 			}
 
-//
-//			// Getting Current Location
-//			Location location = locationManager.getLastKnownLocation(provider);
-//
-//			LocationListener locationListener = new LocationListener() {
-//				public void onLocationChanged(Location location) {
-//					// redraw the marker when get location update.
-//					Log.d("Benni", "changed");
-//					drawMarker(new LatLng(location.getLatitude(), location.getLongitude()), "Du", "hier befindest du dich", BitmapDescriptorFactory.HUE_GREEN);
-//				}
-//
-//				@Override
-//				public void onProviderDisabled(String arg0) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//
-//				@Override
-//				public void onProviderEnabled(String arg0) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//
-//				@Override
-//				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-//					// TODO Auto-generated method stub
-//
-//				}
-//			};
-//
-//			if (location != null) {
-//				// PLACE THE INITIAL MARKER
-//				drawMarker(new LatLng(location.getLatitude(), location.getLongitude()), "Du", "hier befindest du dich", BitmapDescriptorFactory.HUE_GREEN);
-//			}
-//			locationManager.requestLocationUpdates(provider, 20000, 0, locationListener);
+			//
+			// // Getting Current Location
+			// Location location =
+			// locationManager.getLastKnownLocation(provider);
+			//
+			// LocationListener locationListener = new LocationListener() {
+			// public void onLocationChanged(Location location) {
+			// // redraw the marker when get location update.
+			// Log.d("Benni", "changed");
+			// drawMarker(new LatLng(location.getLatitude(),
+			// location.getLongitude()), "Du", "hier befindest du dich",
+			// BitmapDescriptorFactory.HUE_GREEN);
+			// }
+			//
+			// @Override
+			// public void onProviderDisabled(String arg0) {
+			// // TODO Auto-generated method stub
+			//
+			// }
+			//
+			// @Override
+			// public void onProviderEnabled(String arg0) {
+			// // TODO Auto-generated method stub
+			//
+			// }
+			//
+			// @Override
+			// public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+			// // TODO Auto-generated method stub
+			//
+			// }
+			// };
+			//
+			// if (location != null) {
+			// // PLACE THE INITIAL MARKER
+			// drawMarker(new LatLng(location.getLatitude(),
+			// location.getLongitude()), "Du", "hier befindest du dich",
+			// BitmapDescriptorFactory.HUE_GREEN);
+			// }
+			// locationManager.requestLocationUpdates(provider, 20000, 0,
+			// locationListener);
 		}
 	}
 
