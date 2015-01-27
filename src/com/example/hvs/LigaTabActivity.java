@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
+import com.example.datahandling.Spieltag;
 import com.example.internet.AsyncHttpTask;
 
 import android.app.Activity;
@@ -17,6 +18,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,6 +50,7 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		setContentView(R.layout.activity_liga_tab);
 
 		ligaNr = getIntent().getIntExtra("liganummer", 0);
+		
 		this.setTitle(getIntent().getStringExtra("liganame"));
 		
 
@@ -103,6 +106,8 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 			kleinesUpdate();
 		case R.id.liga_refresh_full:
 			groﬂesUpdate();
+		case R.id.map:
+			openMap();
 		}
 		
 		if (id == R.id.action_settings) {
@@ -224,8 +229,6 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		//intent.putExtra("spinnerPos", spinner.getSelectedItemPosition());
 		this.finish();
 		startActivity(intent);
-		
-
 	}
 	
 	public void groﬂesUpdate(){
@@ -235,7 +238,14 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		intent.putExtra("liganame", this.getTitle());
 		this.finish();
 		startActivity(intent);
-		
-
+	}
+	
+	public void openMap(){
+		Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+		intent.putExtra("liga", ligaNr);
+		Spinner sp = (Spinner) findViewById(R.id.spinnerSpieltage);
+		intent.putExtra("spieltag", sp.getSelectedItemPosition()+1);
+		this.finish();
+		startActivity(intent);
 	}
 }
