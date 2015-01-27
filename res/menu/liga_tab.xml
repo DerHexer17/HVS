@@ -16,6 +16,12 @@
         android:orderInCategory="100"
 		android:title="@string/full_update"
         app:showAsAction="never" />
+    
+    <item
+        android:id="@+id/map"
+        android:orderInCategory="100"
+		android:title="@string/map"
+        app:showAsAction="never" />
     <!--  
     <item
         android:id="@+id/action_settings"
