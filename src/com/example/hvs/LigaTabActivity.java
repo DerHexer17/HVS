@@ -92,10 +92,13 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 			return true;
 		case R.id.liga_refresh_small:
 			kleinesUpdate();
+			return true;
 		case R.id.liga_refresh_full:
 			groﬂesUpdate();
+			return true;
 		case R.id.map:
 			openMap();
+			return true;
 		}
 
 		if (id == R.id.action_settings) {
