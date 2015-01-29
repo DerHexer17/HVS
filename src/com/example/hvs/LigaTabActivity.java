@@ -234,7 +234,6 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		intent.putExtra("liga", ligaNr);
 		Spinner sp = (Spinner) findViewById(R.id.spinnerSpieltage);
 		intent.putExtra("spieltag", sp.getSelectedItemPosition() + 1);
-		this.finish();
 		startActivity(intent);
 	}
 }
