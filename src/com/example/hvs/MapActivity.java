@@ -4,7 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -35,6 +37,103 @@ public class MapActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
+
+		// Getting LocationManager object from System Service
+		// LOCATION_SERVICE
+		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+		// Creating a criteria object to retrieve provider
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE);
+
+		List<String> providers = locationManager.getProviders(criteria, true);
+
+		if (providers.isEmpty()) {
+			new AlertDialog.Builder(this).setTitle("Standort ungenau").setMessage("Ihr Standort ist ungenau. Eine Navigation könnte unmöglich sein").setPositiveButton(R.string.dialog_start, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					showMap();
+				}
+			}).setNegativeButton(R.string.dialog_cancel, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					//MapActivity.this.finish();
+				}
+			}).setIcon(android.R.drawable.ic_dialog_alert).show();
+		} else {
+			showMap();
+		}
+
+		//
+		// // Getting Current Location
+		// Location location =
+		// locationManager.getLastKnownLocation(provider);
+		//
+		// LocationListener locationListener = new LocationListener() {
+		// public void onLocationChanged(Location location) {
+		// // redraw the marker when get location update.
+		// Log.d("Benni", "changed");
+		// drawMarker(new LatLng(location.getLatitude(),
+		// location.getLongitude()), "Du", "hier befindest du dich",
+		// BitmapDescriptorFactory.HUE_GREEN);
+		// }
+		//
+		// @Override
+		// public void onProviderDisabled(String arg0) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		//
+		// @Override
+		// public void onProviderEnabled(String arg0) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		//
+		// @Override
+		// public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// };
+		//
+		// if (location != null) {
+		// // PLACE THE INITIAL MARKER
+		// drawMarker(new LatLng(location.getLatitude(),
+		// location.getLongitude()), "Du", "hier befindest du dich",
+		// BitmapDescriptorFactory.HUE_GREEN);
+		// }
+		// locationManager.requestLocationUpdates(provider, 20000, 0,
+		// locationListener);
+
+	}
+
+	private void drawMarker(LatLng location, String title, String snippet, float color) {
+		googleMap.addMarker(new MarkerOptions().position(location).snippet(snippet).icon(BitmapDescriptorFactory.defaultMarker(color)).title(title));
+	}
+
+	public LatLng getLocationFromAddress(String strAddress) {
+
+		Geocoder coder = new Geocoder(this);
+		List<Address> address;
+		LatLng p1 = null;
+		try {
+			address = coder.getFromLocationName(strAddress, 5);
+			if (address == null) {
+				return null;
+			}
+			Address location = address.get(0);
+
+			p1 = new LatLng(location.getLatitude(), location.getLongitude());
+
+		} catch (Exception ex) {
+
+			ex.printStackTrace();
+		}
+		return p1;
+	}
+
+	public void showMap() {
 		int ligaNr = this.getIntent().getIntExtra("liga", 0);
 		int spieltagsNr = this.getIntent().getIntExtra("spieltag", 0);
 
@@ -64,100 +163,12 @@ public class MapActivity extends FragmentActivity {
 				Halle halle = dbh.getHalle(g.getHalle());
 				LatLng location = getLocationFromAddress(halle.getStrasse() + ", " + halle.getHausnummer() + ", " + halle.getPlz() + ", " + halle.getOrt());
 				if (location != null) {
-					drawMarker(location, halle.getName(), g.getTeamHeim() + " vs " + g.getTeamGast() + " - " + formatter.format(g.getDate()), BitmapDescriptorFactory.HUE_AZURE);
+					drawMarker(location, halle.getName(), formatter.format(g.getDate()) + " - " + g.getTeamHeim() + " vs " + g.getTeamGast()  , BitmapDescriptorFactory.HUE_AZURE);
 				}
 			}
-
 			googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(startLoc, 7));
 			googleMap.setMyLocationEnabled(true);
-
-			// Getting LocationManager object from System Service
-			// LOCATION_SERVICE
-			LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-			// Creating a criteria object to retrieve provider
-			Criteria criteria = new Criteria();
-			criteria.setAccuracy(Criteria.ACCURACY_FINE);
-			criteria.setBearingAccuracy(Criteria.ACCURACY_HIGH);
-			criteria.setSpeedAccuracy(Criteria.ACCURACY_HIGH);
-
-			List<String> providers = locationManager.getProviders(criteria, true);
-
-			if (providers.isEmpty()) {
-				Log.d("Benni", "bad");
-			} else {
-				for (String s : providers) {
-					Log.d("Benni", s);
-				}
-			}
-
-			//
-			// // Getting Current Location
-			// Location location =
-			// locationManager.getLastKnownLocation(provider);
-			//
-			// LocationListener locationListener = new LocationListener() {
-			// public void onLocationChanged(Location location) {
-			// // redraw the marker when get location update.
-			// Log.d("Benni", "changed");
-			// drawMarker(new LatLng(location.getLatitude(),
-			// location.getLongitude()), "Du", "hier befindest du dich",
-			// BitmapDescriptorFactory.HUE_GREEN);
-			// }
-			//
-			// @Override
-			// public void onProviderDisabled(String arg0) {
-			// // TODO Auto-generated method stub
-			//
-			// }
-			//
-			// @Override
-			// public void onProviderEnabled(String arg0) {
-			// // TODO Auto-generated method stub
-			//
-			// }
-			//
-			// @Override
-			// public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-			// // TODO Auto-generated method stub
-			//
-			// }
-			// };
-			//
-			// if (location != null) {
-			// // PLACE THE INITIAL MARKER
-			// drawMarker(new LatLng(location.getLatitude(),
-			// location.getLongitude()), "Du", "hier befindest du dich",
-			// BitmapDescriptorFactory.HUE_GREEN);
-			// }
-			// locationManager.requestLocationUpdates(provider, 20000, 0,
-			// locationListener);
 		}
-	}
-
-	private void drawMarker(LatLng location, String title, String snippet, float color) {
-		googleMap.addMarker(new MarkerOptions().position(location).snippet(snippet).icon(BitmapDescriptorFactory.defaultMarker(color)).title(title));
-	}
-
-	public LatLng getLocationFromAddress(String strAddress) {
-
-		Geocoder coder = new Geocoder(this);
-		List<Address> address;
-		LatLng p1 = null;
-		try {
-			address = coder.getFromLocationName(strAddress, 5);
-			if (address == null) {
-				return null;
-			}
-			Address location = address.get(0);
-
-			p1 = new LatLng(location.getLatitude(), location.getLongitude());
-
-		} catch (Exception ex) {
-
-			ex.printStackTrace();
-		}
-		return p1;
 	}
 
 	@Override
