@@ -38,6 +38,8 @@ public class MapActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_map);
 
+		setTitle("Spielorte");
+		
 		// Getting LocationManager object from System Service
 		// LOCATION_SERVICE
 		LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
