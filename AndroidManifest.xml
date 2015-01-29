@@ -88,13 +88,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hvs.LigaTabActivity" />
         </activity>
-
+        
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDm4IvwJ9KvGqwLbSl3EVYY5zhEI_gXVkM" />
+            android:value="AIzaSyBcHV3NlPjTGjaqDN01G8YiXcYm6p23jUU" />
     </application>
 
 </manifest>

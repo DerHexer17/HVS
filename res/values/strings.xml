@@ -52,5 +52,6 @@
     <string name="add_no_liga">Doch keine Liga hinzufügen</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="map">Öffne Karte</string>
+    
 
 </resources>
