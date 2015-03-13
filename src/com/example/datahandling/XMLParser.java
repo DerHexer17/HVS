@@ -12,6 +12,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -29,18 +33,15 @@ public class XMLParser {
 	
 	public XMLParser(Context context){
 		this.context = context;
-		Log.d(l, "XML Parser Objekt erfolgreich instanziiert");
 	}
 
-	public String LoadText() {
+	public String LoadLigenFile() {
 	    // The InputStream opens the resourceId and sends it to the buffer
 	    InputStream is = context.getResources().openRawResource(R.raw.ligen_xml);
-	    Log.d(l, "Input Stream");
 	    BufferedReader br = new BufferedReader(new InputStreamReader(is));
 	    String readLine = null;
 	    String result = null;
-	    
-	    Log.d(l, "Methode LoadText konnte normal gestartet werden");
+
 	    try {
 	        // While the BufferedReader readLine is not null 
 	        while ((readLine = br.readLine()) != null) {
@@ -54,8 +55,9 @@ public class XMLParser {
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-	    Log.d(l, result);
-	    result = result.replaceAll("[^\\x20-\\x7e]", "");
+	    
+	    result = "<?xml"+result.split("<?xml")[1];
+	    //result = result.replaceAll("[^\\x20-\\x7e]", "");
 	    return result;
 	    
 	}
@@ -66,12 +68,11 @@ public class XMLParser {
         try {
  
             DocumentBuilder db = dbf.newDocumentBuilder();
-            Log.d(l, "XML from file methode gestartet");
+            
             InputSource is = new InputSource();
-                is.setCharacterStream(new StringReader(LoadText()));
+            is.setCharacterStream(new StringReader(LoadLigenFile()));
 
-                doc = db.parse(is); 
-                Log.d(l, "Das Doc konnte geparset werden");
+            doc = db.parse(is); 
  
             } catch (ParserConfigurationException e) {
                 Log.e("Error: ", e.getMessage());
@@ -86,14 +87,49 @@ public class XMLParser {
             	Log.d(l, e.getMessage());
             }
                 // return DOM
-        Log.d(l, "doc: "+doc.toString());
         this.xmlLigen = doc;
 	}
 	
 	public List<Liga> createLigen(List<Liga> ligen){
 
 		setXMLLigenFromFile();
+		
 		Log.d(l, "Doc Nodes: "+xmlLigen.getElementsByTagName("liga").getLength());
+		NodeList nodes = xmlLigen.getElementsByTagName("liga");
+		for(int i = 0; i < nodes.getLength(); i++){
+			NodeList childNodes = nodes.item(i).getChildNodes();
+			Liga l = new Liga();
+			for(int k = 0; k < childNodes.getLength(); k++){
+				switch(childNodes.item(k).getNodeName()){
+				case "name":
+					l.setName(childNodes.item(k).getTextContent());
+					break;
+				case "nummer":
+					l.setLigaNr(Integer.parseInt(childNodes.item(k).getTextContent()));
+					break;
+				case "link":
+					l.setLink(childNodes.item(k).getTextContent());
+					break;
+				case "ebene":
+					l.setEbene(childNodes.item(k).getTextContent());
+					break;
+				case "geschlecht":
+					l.setGeschlecht(childNodes.item(k).getTextContent());
+					break;
+				case "saison":
+					l.setSaison(childNodes.item(k).getTextContent());
+					break;
+				case "pokal":
+					l.setPokal(Integer.parseInt(childNodes.item(k).getTextContent()));
+					break;
+				default: 	
+				}
+				
+			}
+			
+			l.setInitial("Nein");
+			ligen.add(l);
+		}
 		
 		return ligen;
 	}

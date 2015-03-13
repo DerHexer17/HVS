@@ -56,7 +56,7 @@ public class StartActivity extends ActionBarActivity {
 				this.finish();
 			}
 		} else {
-			new XMLParser(getApplicationContext()).createLigen(ligen);
+			ligen = new XMLParser(getApplicationContext()).createLigen(ligen);
 			/*
 			Liga sac = new Liga();
 			sac.setLigaNr(10000);
@@ -148,7 +148,7 @@ public class StartActivity extends ActionBarActivity {
 			*/
 		}
 
-		/*
+		
 		// Anzeige der verfügbaren Liste in Tabelle mit CheckBox
 		TableLayout ligenauswahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
 
@@ -164,7 +164,7 @@ public class StartActivity extends ActionBarActivity {
 
 		}
 
-		ligenGlobal = ligen;*/
+		ligenGlobal = ligen;
 	}
 
 	@Override
