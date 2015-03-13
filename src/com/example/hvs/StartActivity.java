@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
+import com.example.datahandling.XMLParser;
 import com.example.internet.AsyncHttpTask;
 
 public class StartActivity extends ActionBarActivity {
@@ -55,6 +56,8 @@ public class StartActivity extends ActionBarActivity {
 				this.finish();
 			}
 		} else {
+			new XMLParser(getApplicationContext()).createLigen(ligen);
+			/*
 			Liga sac = new Liga();
 			sac.setLigaNr(10000);
 			sac.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10000&titel=Sachsenliga%20%20M%E4nner%20%202014/15");
@@ -142,8 +145,10 @@ public class StartActivity extends ActionBarActivity {
 			bsmf.setPokal(0);
 			bsmf.setInitial("Nein");
 			ligen.add(bsmf);
+			*/
 		}
 
+		/*
 		// Anzeige der verfügbaren Liste in Tabelle mit CheckBox
 		TableLayout ligenauswahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
 
@@ -159,7 +164,7 @@ public class StartActivity extends ActionBarActivity {
 
 		}
 
-		ligenGlobal = ligen;
+		ligenGlobal = ligen;*/
 	}
 
 	@Override
