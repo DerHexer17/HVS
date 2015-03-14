@@ -35,6 +35,13 @@ public class SpielDetailsFragment extends Fragment {
 		halle = dbh.getHalle(spiel.getHalle());
 
 		TextView titel = (TextView) rootView.findViewById(R.id.textTitelSpielDetail);
+		TextView ergebnis = (TextView) rootView.findViewById(R.id.textErgebnisSpielDetail);
+		if(spiel.getToreHeim() > 0 || spiel.getToreGast() > 0){
+			
+			ergebnis.setText(spiel.getToreHeim()+" : "+spiel.getToreGast());
+		}else{
+			ergebnis.setHeight(1);
+		}
 		TextView datum = (TextView) rootView.findViewById(R.id.spielDetailsDatum);
 		TextView textHalle = (TextView) rootView.findViewById(R.id.spielDetailsHalle);
 		TextView textSR = (TextView) rootView.findViewById(R.id.spielDetailsSR);

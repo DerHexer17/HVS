@@ -20,27 +20,40 @@
         android:layout_height="wrap_content"
         android:text="@string/auswahl" />
     
-    <TableLayout
-	        android:id="@+id/tableLigaAuswahl"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content"
-	        android:shrinkColumns="2" >
-	</TableLayout>        
+    <ScrollView 
+        android:id="@+id/scrollTableLigaAuswahl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    <TableLayout
+		        android:id="@+id/tableLigaAuswahl"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:shrinkColumns="2" >
+		</TableLayout>
+	</ScrollView>        
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:text="@string/initialData"
-        android:onClick="dataTest" />
+    <LinearLayout 
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_marginBottom="15dp"
+    	android:layout_gravity="bottom"
+    	android:gravity="bottom" >
+	            
+        <Button
+	        android:id="@+id/button1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:text="@string/initialData"
+	        android:onClick="dataTest" />
     
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:text="@string/add_no_liga"
-        android:onClick="callAlleLigen" />
+	    <Button
+	        android:id="@+id/button2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="match_parent"
+	        android:text="@string/add_no_liga"
+	        android:onClick="callAlleLigen" />
+    </LinearLayout>
+    
 	
 </LinearLayout>

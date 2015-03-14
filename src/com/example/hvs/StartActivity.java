@@ -48,7 +48,7 @@ public class StartActivity extends ActionBarActivity {
 		// Vorläufige Liste aller Ligen, die wir anbieten
 		List<Liga> ligen = new ArrayList<Liga>();
 
-		if (dbh.checkForAnyDataLoaded() && getIntent().getIntExtra("add", 0) == 0) {
+		if (dbh.getAllLogs().size() > 0 && getIntent().getIntExtra("add", 0) == 0) {
 			callAlleLigen(findViewById(R.id.button1));
 		} else if (getIntent().getIntExtra("add", 0) == 1) {
 			ligen = dbh.getAlleLigenNochNichtVorhanden();
