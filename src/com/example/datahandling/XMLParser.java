@@ -122,6 +122,10 @@ public class XMLParser {
 				case "pokal":
 					l.setPokal(Integer.parseInt(childNodes.item(k).getTextContent()));
 					break;
+				case "jugend":
+					Log.d("XML", childNodes.item(k).getTextContent());
+					l.setJugend(childNodes.item(k).getTextContent());
+					break;
 				default: 	
 				}
 				

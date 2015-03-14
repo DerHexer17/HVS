@@ -8,6 +8,7 @@
         <ebene>HVS</ebene>
         <geschlecht>männlich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
@@ -17,6 +18,7 @@
         <ebene>HVS</ebene>
         <geschlecht>weiblich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
@@ -26,6 +28,7 @@
         <ebene>HVS</ebene>
         <geschlecht>männlich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
@@ -35,6 +38,7 @@
         <ebene>HVS</ebene>
         <geschlecht>männlich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
@@ -44,6 +48,7 @@
         <ebene>HVS</ebene>
         <geschlecht>weiblich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
@@ -53,6 +58,7 @@
         <ebene>HVS</ebene>
         <geschlecht>weiblich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
@@ -62,6 +68,7 @@
         <ebene>Sachsen-Mitte</ebene>
         <geschlecht>männlich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
@@ -71,6 +78,27 @@
         <ebene>Sachsen-Mitte</ebene>
         <geschlecht>weiblich</geschlecht>
         <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10037</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10037&amp;titel=Ostsachsenliga%20%20M%E4nner%20%202014/15</link>
+        <name>Ostsachsenliga</name>
+        <ebene>Ostsachsen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10002</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10002&amp;titel=Sachsenliga%20%20m%E4nnliche%20Jugend%20A%20%202014/15</link>
+        <name>Sachsenliga</name>
+        <ebene>HVS</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>A</jugend>
         <pokal>0</pokal>
     </liga>
     

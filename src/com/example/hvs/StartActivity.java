@@ -14,6 +14,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -48,7 +49,7 @@ public class StartActivity extends ActionBarActivity {
 		// Vorläufige Liste aller Ligen, die wir anbieten
 		List<Liga> ligen = new ArrayList<Liga>();
 
-		if (dbh.getAllLogs().size() > 0 && getIntent().getIntExtra("add", 0) == 0) {
+		if (dbh.getAllLogs().size() > 1 && getIntent().getIntExtra("add", 0) == 0) {
 			callAlleLigen(findViewById(R.id.button1));
 		} else if (getIntent().getIntExtra("add", 0) == 1) {
 			ligen = dbh.getAlleLigenNochNichtVorhanden();
@@ -56,96 +57,9 @@ public class StartActivity extends ActionBarActivity {
 				this.finish();
 			}
 		} else {
+			Log.d("?", "Er geht aber schon ins Else rein");
 			ligen = new XMLParser(getApplicationContext()).createLigen(ligen);
-			/*
-			Liga sac = new Liga();
-			sac.setLigaNr(10000);
-			sac.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10000&titel=Sachsenliga%20%20M%E4nner%20%202014/15");
-			sac.setName("Sachsenliga");
-			sac.setEbene("HVS");
-			sac.setGeschlecht("männlich");
-			sac.setSaison("2014/2015");
-			sac.setPokal(0);
-			sac.setInitial("Nein");
-			ligen.add(sac);
-
-			Liga sacw = new Liga();
-			sacw.setLigaNr(10001);
-			sacw.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10001&titel=Sachsenliga%20%20Frauen%20%202014/15");
-			sacw.setName("Sachsenliga");
-			sacw.setEbene("HVS");
-			sacw.setGeschlecht("weiblich");
-			sacw.setSaison("2014/2015");
-			sacw.setPokal(0);
-			sacw.setInitial("Nein");
-			ligen.add(sacw);
-
-			Liga vbo = new Liga();
-			vbo.setLigaNr(10007);
-			vbo.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10007&titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20Ost%202014/15");
-			vbo.setName("Verbandsliga Sachsen-Ost");
-			vbo.setEbene("HVS");
-			vbo.setGeschlecht("männlich");
-			vbo.setSaison("2014/2015");
-			vbo.setPokal(0);
-			vbo.setInitial("Nein");
-			ligen.add(vbo);
-
-			Liga vbw = new Liga();
-			vbw.setLigaNr(10008);
-			vbw.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10008&titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20West%202014/15");
-			vbw.setName("Verbandsliga Sachsen-West");
-			vbw.setEbene("HVS");
-			vbw.setGeschlecht("männlich");
-			vbw.setSaison("2014/2015");
-			vbw.setPokal(0);
-			vbw.setInitial("Nein");
-			ligen.add(vbw);
-
-			Liga vbow = new Liga();
-			vbow.setLigaNr(10009);
-			vbow.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10009&titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20Ost%202014/15");
-			vbow.setName("Verbandsliga Sachsen-Ost");
-			vbow.setEbene("HVS");
-			vbow.setGeschlecht("weiblich");
-			vbow.setSaison("2014/2015");
-			vbow.setPokal(0);
-			vbow.setInitial("Nein");
-			ligen.add(vbow);
-
-			Liga vbww = new Liga();
-			vbww.setLigaNr(10010);
-			vbww.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10010&titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20West%202014/15");
-			vbww.setName("Verbandsliga Sachsen-West");
-			vbww.setEbene("HVS");
-			vbww.setGeschlecht("weiblich");
-			vbww.setSaison("2014/2015");
-			vbww.setPokal(0);
-			vbww.setInitial("Nein");
-			ligen.add(vbww);
-
-			Liga bsmm = new Liga();
-			bsmm.setLigaNr(10048);
-			bsmm.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10048&titel=Bezirksliga%20Sachsen-Mitte%20M%E4nner%20%202014/15");
-			bsmm.setName("Bezirksliga Sachsen-Mitte");
-			bsmm.setEbene("Bezirk Sachsen-Mitte");
-			bsmm.setGeschlecht("männlich");
-			bsmm.setSaison("2014/2015");
-			bsmm.setPokal(0);
-			bsmm.setInitial("Nein");
-			ligen.add(bsmm);
-
-			Liga bsmf = new Liga();
-			bsmf.setLigaNr(10049);
-			bsmf.setLink("http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10049&titel=Bezirksliga%20Sachsen-Mitte%20Frauen%20%202014/15");
-			bsmf.setName("Bezirksliga Sachsen-Mitte");
-			bsmf.setEbene("Bezirk Sachsen-Mitte");
-			bsmf.setGeschlecht("weiblich");
-			bsmf.setSaison("2014/2015");
-			bsmf.setPokal(0);
-			bsmf.setInitial("Nein");
-			ligen.add(bsmf);
-			*/
+			
 		}
 
 		
@@ -156,6 +70,15 @@ public class StartActivity extends ActionBarActivity {
 			TableRow tr = new TableRow(getApplicationContext());
 			CheckBox cb = new CheckBox(getApplicationContext());
 			TextView text = new TextView(getApplicationContext());
+			if(l.getJugend()==""){
+				if(l.getGeschlecht().equals("männlich")){
+					text.setText(l.getName() + " (Herren)");
+				}else{
+					text.setText(l.getName() + " (Frauen)");
+				}
+			}else{
+				text.setText(l.getName() + " (" + l.getJugend() + "-Jugend " + l.getGeschlecht() + ")");
+			}
 			text.setText(l.getName() + " (" + l.getGeschlecht() + ")");
 			text.setTextColor(Color.BLACK);
 			tr.addView(cb);
