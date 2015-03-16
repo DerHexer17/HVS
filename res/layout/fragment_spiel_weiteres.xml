@@ -20,6 +20,7 @@
         android:layout_weight="1"
         android:layout_width="wrap_content"
     	android:layout_height="fill_parent"
+    	android:padding="5dp"
     	android:orientation="vertical" >
         
             <TextView 
@@ -32,14 +33,28 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
+                android:layout_marginTop="10dp"
                 android:text="@string/spielWeiteresHeimteamToreImSchnittTitel"
                 android:id="@+id/spielWeiteresHeimteamToreImSchnittTitel"/>
             <TextView 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="right"
-                android:layout_marginRight="5dp"
+ 
                 android:id="@+id/spielWeiteresHeimteamToreImSchnitt"/>
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginTop="10dp"
+                android:text="@string/spielWeiteresHeimteamSiegTitel"
+                android:id="@+id/spielWeiteresHeimteamSiegTitel"/>
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+
+                android:id="@+id/spielWeiteresHeimteamSieg"/>
         
     	</LinearLayout>
     	
@@ -48,6 +63,7 @@
         android:layout_weight="1"
         android:layout_width="wrap_content"
     	android:layout_height="fill_parent"
+    	android:padding="5dp"
     	android:orientation="vertical" >
         
             <TextView 
@@ -59,15 +75,29 @@
             <TextView 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="right"
+                android:layout_marginTop="10dp"
                 android:text="@string/spielWeiteresGastteamToreImSchnittTitel"
                 android:id="@+id/spielWeiteresGastteamToreImSchnittTitel"/>
             <TextView 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:layout_marginLeft="5dp"
+
                 android:id="@+id/spielWeiteresGastteamToreImSchnitt"/>
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginTop="10dp"
+                android:text="@string/spielWeiteresGastteamSiegTitel"
+                android:id="@+id/spielWeiteresGastteamSiegTitel"/>
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+
+                android:id="@+id/spielWeiteresGastteamSieg"/>
         
     	</LinearLayout>
         

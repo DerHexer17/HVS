@@ -60,5 +60,7 @@
     <string name="action_example">Example action</string>
     <string name="spielWeiteresHeimteamToreImSchnittTitel">Anzahl Heimtore im Schnitt:</string>
     <string name="spielWeiteresGastteamToreImSchnittTitel">Anzahl Auswärtstore im Schnitt:</string>
+    <string name="spielWeiteresHeimteamSiegTitel">Höchster Heimsieg:</string>
+    <string name="spielWeiteresGastteamSiegTitel">Höchster Auswärtssieg:</string>
 
 </resources>
