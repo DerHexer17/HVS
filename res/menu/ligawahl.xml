@@ -8,6 +8,18 @@
         android:orderInCategory="100"
         android:title="@string/add_liga"
         app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="101"
+        android:title="@string/help"
+        app:showAsAction="never"/>
+    
+    <item
+        android:id="@+id/about"
+        android:orderInCategory="102"
+        android:title="@string/about"
+        app:showAsAction="never"/>
     <!--
     <item
         android:id="@+id/action_settings"

@@ -36,7 +36,7 @@
     <string name="liga_tab3">Statistik</string>
     <string name="title_activity_update">UpdateActivity</string>
     <string name="spiel_tab1">Details</string>
-    <string name="spiel_tab2">Spielort</string>
+    <string name="spiel_tab2">Weiteres</string>
     <string name="title_activity_spiel">SpielActivity</string>
     <string name="title_section3">Section 3</string>
     <string name="kalenderApi">Spiel in Kalender übernehmen</string>
@@ -52,6 +52,13 @@
     <string name="add_no_liga">Doch keine Liga hinzufügen</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="map">Öffne Karte</string>
-    
+    <string name="help">Hilfe</string>
+    <string name="about">Über die App</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="spielWeiteresHeimteamToreImSchnittTitel">Anzahl Heimtore im Schnitt:</string>
+    <string name="spielWeiteresGastteamToreImSchnittTitel">Anzahl Auswärtstore im Schnitt:</string>
 
 </resources>

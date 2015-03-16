@@ -145,7 +145,7 @@ public class SpielActivity extends ActionBarActivity implements ActionBar.TabLis
 			case 0:
 				return new SpielDetailsFragment();
 			case 1:
-				return new SpielOrtFragment();
+				return new SpielWeiteresFragment();
 			default:
 				return PlaceholderFragment.newInstance(position + 1);
 			}

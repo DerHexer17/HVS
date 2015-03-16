@@ -84,12 +84,15 @@ public class LigawahlActivity extends ActionBarActivity implements ActionBar.Tab
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		switch (id) {
-		case R.id.action_settings:
-			return true;
+		case R.id.about:
+			Intent intent_about = new Intent(getApplicationContext(), AboutActivity.class);
+			startActivity(intent_about);
+			break;
 		case R.id.add_liga:
 			Intent intent = new Intent(getApplicationContext(), StartActivity.class);
 			intent.putExtra("add", 1);
 			startActivity(intent);
+			break;
 		}
 
 		return super.onOptionsItemSelected(item);
