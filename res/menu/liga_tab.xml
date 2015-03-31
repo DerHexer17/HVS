@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.hvs.LigaTabActivity" >
 
+    <!--  
     <item
         android:id="@+id/liga_refresh_small"
         android:orderInCategory="100"
@@ -10,12 +11,14 @@
 		android:title="@string/small_update"
 
         app:showAsAction="always" />
+        -->
     
     <item
         android:id="@+id/liga_refresh_full"
         android:orderInCategory="100"
+        android:icon="@drawable/ic_menu_refresh"
 		android:title="@string/full_update"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
     
     <item
         android:id="@+id/map"

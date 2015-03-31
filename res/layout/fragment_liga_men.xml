@@ -5,18 +5,13 @@
     android:padding="5dp"
     android:orientation="vertical" >
     
-    <ScrollView
-        android:id="@+id/scrollTabelleLigenMen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-        <TableLayout
-	        android:id="@+id/tabelleAlleLigenMen"
-	        android:layout_width="fill_parent"
-	        android:layout_height="wrap_content" >
-	        
-        </TableLayout>    
-        
-    </ScrollView>    
+    <Spinner 
+        android:id="@+id/spinnerEbenenMen"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <ListView 
+        android:id="@+id/listViewLigenMen"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" ></ListView>
     
-
 </LinearLayout>

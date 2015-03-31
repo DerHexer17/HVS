@@ -1,5 +1,12 @@
 package com.example.hvs;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.datahandling.DatabaseHelper;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabListener {
@@ -27,7 +35,8 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	int ligaNr;
-
+	List<String> alleEbenen;
+	
 	/**
 	 * The {@link ViewPager} that will host the section contents.
 	 */
@@ -72,6 +81,8 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 			// this tab is selected.
 			actionBar.addTab(actionBar.newTab().setText(mSectionsPagerAdapter.getPageTitle(i)).setTabListener(this));
 		}
+		
+		
 	}
 
 	@Override
@@ -90,9 +101,9 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		switch (id) {
 		case R.id.action_settings:
 			return true;
-		case R.id.liga_refresh_small:
+		/*case R.id.liga_refresh_small:
 			kleinesUpdate();
-			return true;
+			return true;*/
 		case R.id.liga_refresh_full:
 			groﬂesUpdate();
 			return true;
@@ -240,4 +251,6 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 
 		startActivity(intent);
 	}
+	
+	
 }

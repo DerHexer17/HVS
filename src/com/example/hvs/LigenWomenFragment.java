@@ -1,9 +1,13 @@
 package com.example.hvs;
 
+import helper.LigenAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import android.R.drawable;
 import android.app.ActionBar.LayoutParams;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,16 +16,23 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
+import com.example.hvs.LigenMenFragment.OnItemSelectedListenerSpinnerLigenMen;
 
 public class LigenWomenFragment extends Fragment {
 	DatabaseHelper dbh;
-
+	View rootView;
+	List<String> alleEbenen;
 	List<Liga> alleLigenWomen;
 
 	@Override
@@ -29,10 +40,28 @@ public class LigenWomenFragment extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.fragment_liga_women, container, false);
 
-		ligenAnzeigen(rootView);
+		alleEbenen = new ArrayList<String>();
+		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
+		
+		Spinner spinnerEbenenWomen = (Spinner) rootView.findViewById(R.id.spinnerEbenenWomen);
+		createEbenenListe(rootView);
+		ArrayAdapter<String> ebenenWomenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, alleEbenen);
+		ebenenWomenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		spinnerEbenenWomen.setAdapter(ebenenWomenAdapter);
+		
+		
+		//ListView lv = (ListView) rootView.findViewById(R.id.listViewLigenMen);
+		//lv.setAdapter(new LigenAdapter(getActivity().getApplicationContext(), dbh.getAlleLigenEbene("HVS")));
+		spinnerEbenenWomen.setOnItemSelectedListener(new OnItemSelectedListenerSpinnerLigenWomen(getActivity().getApplicationContext(), dbh));
+		
+		//ligenAnzeigen(rootView);
+		this.rootView = rootView;
+		
 		return rootView;
 	}
 
+	/*
 	public void ligenAnzeigen(View view) {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 
@@ -75,6 +104,61 @@ public class LigenWomenFragment extends Fragment {
 				row.addView(bt);
 				table.addView(row);
 			}
+
+		}
+	}*/
+	
+	public void createEbenenListe(View view){
+		//alleEbenen.add("Favoriten");
+		alleEbenen.add("HVS");
+		alleEbenen.add("- Sachsen Mitte");
+		alleEbenen.add("-- Kreis Dresden");
+		alleEbenen.add("-- Kreis Elbe/Röder");
+		alleEbenen.add("-- Kreis Pirna");
+		alleEbenen.add("- Leipzig");
+		alleEbenen.add("-- Kreis Leipzig");
+		alleEbenen.add("-- Kreis Leipzig-Land");
+		alleEbenen.add("-- Nordsachsen");
+		alleEbenen.add("- Chemnitz");
+		alleEbenen.add("-- Kreis Chemnitz");
+		alleEbenen.add("-- Kreis Mittelsachsen");
+		alleEbenen.add("-- Kreis Erzgebirge");
+		alleEbenen.add("-- Kreis Zwickau");
+		alleEbenen.add("-- Kreis Vogtland");
+		alleEbenen.add("- Ostsachsen");
+		alleEbenen.add("-- Kreis Bautzen");
+		alleEbenen.add("-- Kreis Oberlausitz");
+	}
+	
+	public class OnItemSelectedListenerSpinnerLigenWomen implements OnItemSelectedListener {
+
+		Context context;
+		DatabaseHelper dbh;
+
+		public OnItemSelectedListenerSpinnerLigenWomen(Context context, DatabaseHelper dbh) {
+			this.context = context;
+			this.dbh = dbh;
+			}
+
+		@Override
+		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+			// TODO Auto-generated method stub
+			//ListView lv = (ListView) view.findViewById(R.id.listViewLigenMen);
+			ListView lvv = (ListView) rootView.findViewById(R.id.listViewLigenWomen);
+			String ebene = null;
+			if(parent.getItemAtPosition(pos).toString().split(" ").length == 1){
+				ebene = parent.getItemAtPosition(pos).toString();
+			}else{
+				ebene = parent.getItemAtPosition(pos).toString().split(" ")[1];
+			}
+
+			lvv.setAdapter(new LigenAdapter(context, dbh.getAlleLigenEbene(ebene, "weiblich")));
+			
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
 
 		}
 	}
