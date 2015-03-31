@@ -45,8 +45,8 @@ public class LigenMenFragment extends Fragment {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 		
 		Spinner spinnerEbenenMen = (Spinner) rootView.findViewById(R.id.spinnerEbenenMen);
-		ArrayAdapter<String> ebenenMenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, alleEbenen);
-		ebenenMenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<String> ebenenMenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, alleEbenen);
+		ebenenMenAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		
 		spinnerEbenenMen.setAdapter(ebenenMenAdapter);
 		

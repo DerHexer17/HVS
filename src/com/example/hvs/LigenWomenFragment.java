@@ -44,8 +44,8 @@ public class LigenWomenFragment extends Fragment {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 		
 		Spinner spinnerEbenenWomen = (Spinner) rootView.findViewById(R.id.spinnerEbenenWomen);
-		ArrayAdapter<String> ebenenWomenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, alleEbenen);
-		ebenenWomenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		ArrayAdapter<String> ebenenWomenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, alleEbenen);
+		ebenenWomenAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
 		
 		spinnerEbenenWomen.setAdapter(ebenenWomenAdapter);
 		
