@@ -11,6 +11,7 @@ public class Liga {
 	private String link;
 	private int pokal;
 	private String initial;
+	private boolean favorit;
 
 	public int getLigaNr() {
 		return ligaNr;
@@ -82,6 +83,14 @@ public class Liga {
 
 	public void setInitial(String initial) {
 		this.initial = initial;
+	}
+
+	public boolean isFavorit() {
+		return favorit;
+	}
+
+	public void setFavorit(boolean favorit) {
+		this.favorit = favorit;
 	}
 
 }

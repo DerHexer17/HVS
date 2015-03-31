@@ -50,7 +50,7 @@ public class LigenAdapter extends BaseAdapter{
            }
 
            Button button = (Button) convertView.findViewById(R.id.buttonLiga);
-           button.setText(ligen.get(position).getName());
+           button.setText(ligen.get(position).getName()+" "+ligen.get(position).getJugend());
            button.setHint("ligaNr:" + ligen.get(position).getLigaNr());
            button.setOnClickListener(new View.OnClickListener() {
 				@Override

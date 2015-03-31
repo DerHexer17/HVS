@@ -72,6 +72,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String LIGA_LINK = "liga_link";
 	private static final String LIGA_POKAL = "liga_pokal";
 	private static final String LIGA_INITIAL = "liga_initial";
+	private static final String LIGA_FAVORIT = "liga_favorit";
 
 	// SPIELTAG Table - column names
 	private static final String SPIELTAG_ID = "spieltag_id";
@@ -97,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_LOG = "CREATE TABLE " + TABLE_LOG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LOG_ACTIVITY + " TEXT, " + LOG_DATE + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
 	private static final String CREATE_TABLE_LIGA = "CREATE TABLE " + TABLE_LIGA + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LIGA_NR + " INTEGER, " + LIGA_NAME + " TEXT, " + LIGA_EBENE + " TEXT, " + LIGA_GESCHLECHT + " TEXT, " + LIGA_JUGEND + " TEXT, " + LIGA_SAISON + " TEXT, " + LIGA_LINK
-			+ " TEXT, " + LIGA_POKAL + " INTEGER, " + LIGA_INITIAL + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
+			+ " TEXT, " + LIGA_POKAL + " INTEGER, " + LIGA_INITIAL + " TEXT, " + LIGA_FAVORIT + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
 
 	private static final String CREATE_TABLE_SPIELTAG = "CREATE TABLE " + TABLE_SPIELTAG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIELTAG_ID + " INTEGER, " + SPIELTAG_LIGA_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NR + " INTEGER, " + SPIELTAG_SPIELTAG_NAME + " TEXT, " + SPIELTAG_DATUM_BEGINN
 			+ " TEXT, " + SPIELTAG_DATUM_ENDE + " TEXT, " + SPIELTAG_SAISON + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
@@ -226,6 +227,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put(LIGA_LINK, liga.getLink());
 		values.put(LIGA_POKAL, liga.getPokal());
 		values.put(LIGA_INITIAL, liga.getInitial());
+		if(liga.isFavorit()){
+			values.put(LIGA_FAVORIT, "Ja");
+		}else{
+			values.put(LIGA_FAVORIT, "Nein");
+		}
+		
 		// values.put(KEY_CREATED_AT, new Date().);
 
 		// insert row
@@ -505,6 +512,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+					l.setFavorit(true);
+				}else{
+					l.setFavorit(false);
+				}
 
 				alleLigen.add(l);
 			} while (c.moveToNext());
@@ -535,6 +547,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+					l.setFavorit(true);
+				}else{
+					l.setFavorit(false);
+				}
 
 				alleLigen.add(l);
 			} while (c.moveToNext());
@@ -566,6 +583,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+					l.setFavorit(true);
+				}else{
+					l.setFavorit(false);
+				}
 
 				alleLigenNichtVorhanden.add(l);
 			} while (c.moveToNext());
@@ -668,6 +690,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 			l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 			l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
+			if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+				l.setFavorit(true);
+			}else{
+				l.setFavorit(false);
+			}
 
 		} else {
 			Log.d(TAG, "Liga nicht gefunden!");
@@ -756,7 +783,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		values.put(LIGA_LINK, liga.getLink());
 		values.put(LIGA_POKAL, liga.getPokal());
 		values.put(LIGA_INITIAL, liga.getInitial());
-		;
+		if(liga.isFavorit()){
+			values.put(LIGA_FAVORIT, "Ja");
+		}else{
+			values.put(LIGA_FAVORIT, "Nein");
+		}
 
 		int i = db.update(TABLE_LIGA, values, LIGA_NR + " = " + liga.getLigaNr(), null);
 

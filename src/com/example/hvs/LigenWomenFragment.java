@@ -32,7 +32,7 @@ import com.example.hvs.LigenMenFragment.OnItemSelectedListenerSpinnerLigenMen;
 public class LigenWomenFragment extends Fragment {
 	DatabaseHelper dbh;
 	View rootView;
-	List<String> alleEbenen;
+	String[] alleEbenen;
 	List<Liga> alleLigenWomen;
 
 	@Override
@@ -40,11 +40,10 @@ public class LigenWomenFragment extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.fragment_liga_women, container, false);
 
-		alleEbenen = new ArrayList<String>();
+		alleEbenen = getResources().getStringArray(R.array.ebenen);
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 		
 		Spinner spinnerEbenenWomen = (Spinner) rootView.findViewById(R.id.spinnerEbenenWomen);
-		createEbenenListe(rootView);
 		ArrayAdapter<String> ebenenWomenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, alleEbenen);
 		ebenenWomenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
@@ -106,7 +105,7 @@ public class LigenWomenFragment extends Fragment {
 			}
 
 		}
-	}*/
+	}
 	
 	public void createEbenenListe(View view){
 		//alleEbenen.add("Favoriten");
@@ -128,7 +127,7 @@ public class LigenWomenFragment extends Fragment {
 		alleEbenen.add("- Ostsachsen");
 		alleEbenen.add("-- Kreis Bautzen");
 		alleEbenen.add("-- Kreis Oberlausitz");
-	}
+	}*/
 	
 	public class OnItemSelectedListenerSpinnerLigenWomen implements OnItemSelectedListener {
 

@@ -32,7 +32,7 @@ import com.example.datahandling.Liga;
 public class LigenMenFragment extends Fragment {
 
 	DatabaseHelper dbh;
-	List<String> alleEbenen;
+	String[] alleEbenen;
 	List<Liga> alleLigenMen;
 	View rootView;
 
@@ -41,11 +41,10 @@ public class LigenMenFragment extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.fragment_liga_men, container, false);
 		
-		alleEbenen = new ArrayList<String>();
+		alleEbenen = getResources().getStringArray(R.array.ebenen);
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 		
 		Spinner spinnerEbenenMen = (Spinner) rootView.findViewById(R.id.spinnerEbenenMen);
-		createEbenenListe(rootView);
 		ArrayAdapter<String> ebenenMenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, alleEbenen);
 		ebenenMenAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
@@ -108,7 +107,7 @@ public class LigenMenFragment extends Fragment {
 			}
 
 		}
-	}*/
+	}
 	
 	public void createEbenenListe(View view){
 		//alleEbenen.add("Favoriten");
@@ -130,7 +129,7 @@ public class LigenMenFragment extends Fragment {
 		alleEbenen.add("- Ostsachsen");
 		alleEbenen.add("-- Kreis Bautzen");
 		alleEbenen.add("-- Kreis Oberlausitz");
-	}
+	}*/
 	
 	public class OnItemSelectedListenerSpinnerLigenMen implements OnItemSelectedListener {
 
