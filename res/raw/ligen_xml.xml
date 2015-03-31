@@ -101,5 +101,575 @@
 		<jugend>A</jugend>
         <pokal>0</pokal>
     </liga>
+	<liga>
+        <nummer>10279</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10003&amp;titel=Sachsenliga%20%20m%E4nnliche%20Jugend%20B%20%202014/15</link>
+        <name>Sachsenliga</name>
+        <ebene>HVS</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10004</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10004&amp;titel=Sachsenliga%20%20m%E4nnliche%20Jugend%20C%20%202014/15</link>
+        <name>Sachsenliga</name>
+        <ebene>HVS</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10224</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10224&amp;titel=Sachsenliga%20%20m%E4nnliche%20Jugend%20D%20%202014/15</link>
+        <name>Sachsenliga</name>
+        <ebene>HVS</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10005</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10005&amp;titel=Sachsenliga%20%20weibliche%20Jugend%20B%20%202014/15</link>
+        <name>Sachsenliga</name>
+        <ebene>HVS</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10006</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10006&amp;titel=Sachsenliga%20%20weibliche%20Jugend%20C%20%202014/15</link>
+        <name>Sachsenliga</name>
+        <ebene>HVS</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10228</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10228&amp;titel=Sachsenliga%20%20weibliche%20Jugend%20D%20%202014/15</link>
+        <name>Sachsenliga</name>
+        <ebene>HVS</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10050</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10050&amp;titel=Bezirksklasse%20Sachsen-Mitte%20M%E4nner%20%202014/15</link>
+        <name>Bezirksklasse Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10539</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10539&amp;titel=Bezirksliga%20Sachsen-Mitte%20m%E4nnliche%20Jugend%20A%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>A</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10052</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10052&amp;titel=Bezirksliga%20Sachsen-Mitte%20m%E4nnliche%20Jugend%20B%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10054</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10054&amp;titel=Bezirksliga%20Sachsen-Mitte%20m%E4nnliche%20Jugend%20C%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10055</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10055&amp;titel=Bezirksliga%20Sachsen-Mitte%20m%E4nnliche%20Jugend%20D%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10056</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10056&amp;titel=Bezirksliga%20Sachsen-Mitte%20m%E4nnliche%20Jugend%20E%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10057</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10057&amp;titel=Bezirksliga%20Sachsen-Mitte%20weibliche%20Jugend%20A%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>A</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10058</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10058&amp;titel=Bezirksliga%20Sachsen-Mitte%20weibliche%20Jugend%20B%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10059</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10059&amp;titel=Bezirksliga%20Sachsen-Mitte%20weibliche%20Jugend%20C%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10060</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10060&amp;titel=Bezirksliga%20Sachsen-Mitte%20weibliche%20Jugend%20D%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10061</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10061&amp;titel=Bezirksliga%20Sachsen-Mitte%20weibliche%20Jugend%20E%20%202014/15</link>
+        <name>Bezirksliga Sachsen-Mitte</name>
+        <ebene>Sachsen Mitte</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10076</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10076&amp;titel=1.%20Kreisliga%20Dresden%20M%E4nner%20%202014/15</link>
+        <name>1. Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10078</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10078&amp;titel=2.%20Kreisliga%20Dresden%20M%E4nner%20%202014/15</link>
+        <name>2. Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10080</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10080&amp;titel=3.%20Kreisliga%20Dresden%20M%E4nner%20%202014/15</link>
+        <name>3. Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10077</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10077&amp;titel=1.%20Kreisliga%20Dresden%20Frauen%20%202014/15</link>
+        <name>1. Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10079</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10079&amp;titel=2.%20Kreisliga%20Dresden%20Frauen%20%202014/15</link>
+        <name>2. Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10640</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10640&amp;titel=Kreisliga%20Dresden%20m%E4nnliche%20Jugend%20C%20%202014/15</link>
+        <name>Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10570</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10570&amp;titel=Kreisliga%20Dresden%20m%E4nnliche%20Jugend%20E%20%202014/15</link>
+        <name>Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10498</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10498&amp;titel=Kreisliga%20Dresden%20weibliche%20Jugend%20B%20%202014/15</link>
+        <name>Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10641</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10641&amp;titel=Kreisliga%20Dresden%20weibliche%20Jugend%20D%20%202014/15</link>
+        <name>Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10614</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10614&amp;titel=Kreisliga%20Dresden%20weibliche%20Jugend%20E%20%202014/15</link>
+        <name>Kreisliga Dresden</name>
+        <ebene>Kreis Dresden</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10237</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10237&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20m%E4nnliche%20Jugend%20B%20%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10119</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10119&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20m%E4nnliche%20Jugend%20C%20%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10121</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10121&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20m%E4nnliche%20Jugend%20D%20%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10123</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10123&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20m%E4nnliche%20Jugend%20E%20%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10642</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10642&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20weibliche%20Jugend%20B%20%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10286</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10286&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20weibliche%20Jugend%20D%20%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10124</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10124&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20weibliche%20Jugend%20E%20%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10183</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10183&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20gemischte%20Jugend%20F%20(Fortgeschrittene)%202014/15</link>
+        <name>Kreisliga Elbe/Röder</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>F (gemischt)</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10326</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10326&amp;titel=Kreisliga%20Elbe%20/%20R%F6der%20gemischte%20Jugend%20F%20(Anf%E4nger)%202014/15</link>
+        <name>Kreisliga Elbe/Röder (Anfänger)</name>
+        <ebene>Kreis Elbe/Röder</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>F (gemischt)</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10039</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10039&amp;titel=Ostsachsenklasse%20%20M%E4nner%20%202014/15</link>
+        <name>Ostsachsenklasse</name>
+        <ebene>Ostsachsen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10038</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10038&amp;titel=Ostsachsenliga%20%20Frauen%20%202014/15</link>
+        <name>Ostsachsenliga</name>
+        <ebene>Ostsachsen</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10041</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10041&amp;titel=Ostsachsenliga%20%20m%E4nnliche%20Jugend%20A%20%202014/15</link>
+        <name>Ostsachsenliga</name>
+        <ebene>Ostsachsen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>A</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10338</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10338&amp;titel=Ostsachsenliga%20%20%20m%E4nnliche%20Jugend%20B%20%202014/15</link>
+        <name>Ostsachsenliga</name>
+        <ebene>Ostsachsen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10043</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10043&amp;titel=Ostsachsenliga%20%20m%E4nnliche%20Jugend%20C%20%202014/15</link>
+        <name>Ostsachsenliga</name>
+        <ebene>Ostsachsen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10046</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10046&amp;titel=Ostsachsenliga%20%20weibliche%20Jugend%20B%20%202014/15</link>
+        <name>Ostsachsenliga</name>
+        <ebene>Ostsachsen</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>B</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10448</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10448&amp;titel=Westlausitzliga%20%20M%E4nner%20%202014/15</link>
+        <name>Westlausitzliga</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10450</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10450&amp;titel=Westlausitzklasse%20%20M%E4nner%20%202014/15</link>
+        <name>Westlausitzklasse</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10449</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10449&amp;titel=Westlausitzliga%20%20Frauen%20%202014/15</link>
+        <name>Westlausitzliga</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10453</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10453&amp;titel=Westlausitzliga%20%20m%E4nnliche%20Jugend%20D%20%202014/15</link>
+        <name>Westlausitzliga</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10454</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10454&amp;titel=Westlausitzliga%20%20m%E4nnliche%20Jugend%20E%20%202014/15</link>
+        <name>Westlausitzliga</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10454</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10456&amp;titel=Westlausitzliga%20%20weibliche%20Jugend%20C%20%202014/15</link>
+        <name>Westlausitzliga</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10458</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10458&amp;titel=Westlausitzliga%20%20weibliche%20Jugend%20E%20%202014/15</link>
+        <name>Westlausitzliga</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10503</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10503&amp;titel=Westlausitzliga%20%20Minis%20%202014/15</link>
+        <name>Westlausitzliga</name>
+        <ebene>Kreis Bautzen</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>Minis</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10166</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10166&amp;titel=Oberlausitzliga%20%20M%E4nner%20%202014/15</link>
+        <name>Oberlausitzliga</name>
+        <ebene>Kreis Oberlausitz</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend></jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10578</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10578&amp;titel=Oberlausitzliga%20%20weibliche%20Jugend%20C%20%202014/15</link>
+        <name>Oberlausitzliga</name>
+        <ebene>Kreis Oberlausitz</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>C</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10171</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10171&amp;titel=Oberlausitzliga%20%20m%E4nnliche%20Jugend%20D%20%202014/15</link>
+        <name>Oberlausitzliga</name>
+        <ebene>Kreis Oberlausitz</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10493</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10493&amp;titel=Oberlausitzliga%20%20weibliche%20Jugend%20D%20%202014/15</link>
+        <name>Oberlausitzliga</name>
+        <ebene>Kreis Oberlausitz</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>D</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10174</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10174&amp;titel=Oberlausitzliga%20%20m%E4nnliche%20Jugend%20E%20%202014/15</link>
+        <name>Oberlausitzliga</name>
+        <ebene>Kreis Oberlausitz</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10175</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10175&amp;titel=Oberlausitzliga%20%20weibliche%20Jugend%20E%20%202014/15</link>
+        <name>Oberlausitzliga</name>
+        <ebene>Kreis Oberlausitz</ebene>
+        <geschlecht>weiblich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>E</jugend>
+        <pokal>0</pokal>
+    </liga>
+	<liga>
+        <nummer>10325</nummer>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10325&amp;titel=Oberlausitzliga%20%20%20gemischte%20Jugend%20F%20%202014/15</link>
+        <name>Oberlausitzliga</name>
+        <ebene>Kreis Oberlausitz</ebene>
+        <geschlecht>männlich</geschlecht>
+        <saison>2014/2015</saison>
+		<jugend>F (gemischt)</jugend>
+        <pokal>0</pokal>
+    </liga>
     
 </ligen>

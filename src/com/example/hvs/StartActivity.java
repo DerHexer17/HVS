@@ -70,7 +70,7 @@ public class StartActivity extends ActionBarActivity {
 			TableRow tr = new TableRow(getApplicationContext());
 			CheckBox cb = new CheckBox(getApplicationContext());
 			TextView text = new TextView(getApplicationContext());
-			if(l.getJugend()==""){
+			if(l.getJugend().equals("")){
 				if(l.getGeschlecht().equals("männlich")){
 					text.setText(l.getName() + " (Herren)");
 				}else{
@@ -79,7 +79,7 @@ public class StartActivity extends ActionBarActivity {
 			}else{
 				text.setText(l.getName() + " (" + l.getJugend() + "-Jugend " + l.getGeschlecht() + ")");
 			}
-			text.setText(l.getName() + " (" + l.getGeschlecht() + ")");
+			
 			text.setTextColor(Color.BLACK);
 			tr.addView(cb);
 			tr.addView(text);

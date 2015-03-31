@@ -19,19 +19,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/auswahl" />
-    
-    <ScrollView 
-        android:id="@+id/scrollTableLigaAuswahl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-	    <TableLayout
-		        android:id="@+id/tableLigaAuswahl"
-		        android:layout_width="fill_parent"
-		        android:layout_height="wrap_content"
-		        android:shrinkColumns="2" >
-		</TableLayout>
-	</ScrollView>        
-
     <LinearLayout 
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -54,6 +41,20 @@
 	        android:text="@string/add_no_liga"
 	        android:onClick="callAlleLigen" />
     </LinearLayout>
+    <ScrollView 
+        android:id="@+id/scrollTableLigaAuswahl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+	    <TableLayout
+		        android:id="@+id/tableLigaAuswahl"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:shrinkColumns="2" >
+		</TableLayout>
+		
+	</ScrollView>        
+
+    
     
 	
 </LinearLayout>
