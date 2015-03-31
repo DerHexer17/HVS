@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 17;
+	private static final int DATABASE_VERSION = 18;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -530,6 +530,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		String selectQuery = "SELECT  * FROM " + TABLE_LIGA +
 				" WHERE " + LIGA_INITIAL + " = 'Ja'" +
 				" AND " + LIGA_EBENE + " = '" + ebene + "'" +
+				" AND " + LIGA_GESCHLECHT + " = '" + geschlecht + "'";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+				Liga l = new Liga();
+				l.setLigaNr(c.getInt(c.getColumnIndex(LIGA_NR)));
+				l.setName(c.getString(c.getColumnIndex(LIGA_NAME)));
+				l.setEbene(c.getString(c.getColumnIndex(LIGA_EBENE)));
+				l.setGeschlecht(c.getString(c.getColumnIndex(LIGA_GESCHLECHT)));
+				l.setJugend(c.getString(c.getColumnIndex(LIGA_JUGEND)));
+				l.setSaison(c.getString(c.getColumnIndex(LIGA_JUGEND)));
+				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
+				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
+				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+					l.setFavorit(true);
+				}else{
+					l.setFavorit(false);
+				}
+
+				alleLigen.add(l);
+			} while (c.moveToNext());
+		}
+		c.close();
+		return alleLigen;
+	}
+	
+	public List<Liga> getAlleLigenFavoriten(String geschlecht) {
+		List<Liga> alleLigen = new ArrayList<Liga>();
+		String selectQuery = "SELECT  * FROM " + TABLE_LIGA +
+				" WHERE " + LIGA_INITIAL + " = 'Ja'" +
+				" AND " + LIGA_FAVORIT + " = 'Ja'" +
 				" AND " + LIGA_GESCHLECHT + " = '" + geschlecht + "'";
 
 		SQLiteDatabase db = this.getReadableDatabase();

@@ -148,10 +148,14 @@ public class LigenWomenFragment extends Fragment {
 			if(parent.getItemAtPosition(pos).toString().split(" ").length == 1){
 				ebene = parent.getItemAtPosition(pos).toString();
 			}else{
-				ebene = parent.getItemAtPosition(pos).toString().split(" ")[1];
+				ebene = parent.getItemAtPosition(pos).toString().split("- ")[1];
 			}
 
-			lvv.setAdapter(new LigenAdapter(context, dbh.getAlleLigenEbene(ebene, "weiblich")));
+			if(ebene.equals("Favoriten")){
+				lvv.setAdapter(new LigenAdapter(context, dbh.getAlleLigenFavoriten("weiblich")));
+			}else{
+				lvv.setAdapter(new LigenAdapter(context, dbh.getAlleLigenEbene(ebene, "weiblich")));
+			}
 			
 		}
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.datahandling.DatabaseHelper;
+import com.example.datahandling.Liga;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -109,6 +110,9 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 			return true;
 		case R.id.map:
 			openMap();
+			return true;
+		case R.id.menueAddFavorit:
+			addLigaZuFavoriten(ligaNr);
 			return true;
 		}
 
@@ -250,6 +254,13 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		intent.putExtra("spieltag", sp.getSelectedItemPosition() + 1);
 
 		startActivity(intent);
+	}
+	
+	public void addLigaZuFavoriten(int ligaNr){
+		DatabaseHelper dbh = DatabaseHelper.getInstance(getApplicationContext());
+		Liga l = dbh.getLiga(ligaNr);
+		l.setFavorit(true);
+		dbh.updateLiga(l);
 	}
 	
 	

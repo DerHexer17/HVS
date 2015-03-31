@@ -62,8 +62,10 @@
     <string name="spielWeiteresGastteamToreImSchnittTitel">Anzahl Auswärtstore im Schnitt:</string>
     <string name="spielWeiteresHeimteamSiegTitel">Höchster Heimsieg:</string>
     <string name="spielWeiteresGastteamSiegTitel">Höchster Auswärtssieg:</string>
+    <string name="favoritHinzu">Liga zu Favoriten hinzufügen</string>
     
     <string-array name="ebenen">
+        <item>Favoriten</item>
         <item>HVS</item>
 		<item>- Sachsen Mitte</item>
 		<item>-- Kreis Dresden</item>

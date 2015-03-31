@@ -150,10 +150,14 @@ public class LigenMenFragment extends Fragment {
 			if(parent.getItemAtPosition(pos).toString().split(" ").length == 1){
 				ebene = parent.getItemAtPosition(pos).toString();
 			}else{
-				ebene = parent.getItemAtPosition(pos).toString().split(" ")[1];
+				ebene = parent.getItemAtPosition(pos).toString().split("- ")[1];
 			}
 
-			lvv.setAdapter(new LigenAdapter(context, dbh.getAlleLigenEbene(ebene, "männlich")));
+			if(ebene.equals("Favoriten")){
+				lvv.setAdapter(new LigenAdapter(context, dbh.getAlleLigenFavoriten("männlich")));
+			}else{
+				lvv.setAdapter(new LigenAdapter(context, dbh.getAlleLigenEbene(ebene, "männlich")));
+			}	
 			
 		}
 
