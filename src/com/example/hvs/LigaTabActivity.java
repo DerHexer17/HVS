@@ -137,9 +137,9 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		case R.id.menueRemoveFavorit:
 			removeLigaVonFavoriten(ligaNr);
 			return true;
-		case R.id.ligaKomplettNeu:
+		/*case R.id.ligaKomplettNeu:
 			liga.setInitial("Nein");
-			dbh.updateLiga(liga);
+			dbh.updateLiga(liga);*/
 		}
 
 		if (id == R.id.action_settings) {

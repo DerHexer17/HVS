@@ -32,7 +32,7 @@ import com.example.hvs.LigenMenFragment.OnItemSelectedListenerSpinnerLigenMen;
 public class LigenWomenFragment extends Fragment {
 	DatabaseHelper dbh;
 	View rootView;
-	String[] alleEbenen;
+	String[] alleEbenenArray;
 	List<Liga> alleLigenWomen;
 
 	@Override
@@ -40,8 +40,26 @@ public class LigenWomenFragment extends Fragment {
 
 		View rootView = inflater.inflate(R.layout.fragment_liga_women, container, false);
 
-		alleEbenen = getResources().getStringArray(R.array.ebenen);
+		alleEbenenArray = getResources().getStringArray(R.array.ebenen);
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
+		
+		List<String> alleEbenen = new ArrayList<String>();
+		alleEbenen.add("Favoriten");
+		for(int i = 0; i<alleEbenenArray.length; i++){
+			List<String> aktiveEbenen = dbh.getAlleAktivenEbenen("weiblich");
+			for(String s : aktiveEbenen){
+				String temp = null;
+				if(alleEbenenArray[i].split(" ").length == 1){
+					temp = alleEbenenArray[i];
+				}else{
+					temp = alleEbenenArray[i].split("- ")[1];
+				}
+				if(temp.equals(s)){
+					alleEbenen.add(alleEbenenArray[i]);
+				}
+			}
+			
+		}
 		
 		Spinner spinnerEbenenWomen = (Spinner) rootView.findViewById(R.id.spinnerEbenenWomen);
 		ArrayAdapter<String> ebenenWomenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, alleEbenen);
