@@ -9,6 +9,8 @@ import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
 import com.example.internet.AsyncHttpTask;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -59,8 +62,9 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		
 		//Toast.makeText(getApplicationContext(), "Anzahl aufrufe diese Liga: "+dbh.getCountLigaAufruf(ligaNr), Toast.LENGTH_SHORT).show();
 
-		if(dbh.getCountLigaAufruf(ligaNr) > 10){
-			addLigaZuFavoriten(ligaNr);
+	
+		if(dbh.getCountLigaAufruf(ligaNr) > 10 && liga.isFavorit()!=true && dbh.keineFavoritenAbfrage(ligaNr)==false){
+			dialogZuFavoritenHinzu();
 		}
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
@@ -288,5 +292,35 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		dbh.updateLiga(liga);
 	}
 	
-	
+	public void dialogZuFavoritenHinzu(){
+		AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Liga zu Favoriten hinzu?");
+        alert.setMessage("Ich merke, du guckst dir diese Liga öfter an. Soll ich sie zu deinen Favoriten hinzufügen?");
+
+        // Set an EditText view to get user input
+        final CheckBox cb = new CheckBox(this);
+        cb.setText("Nicht nochmal fragen");
+
+        alert.setView(cb);
+
+        alert.setNegativeButton("Ja", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                addLigaZuFavoriten(ligaNr);
+                // Do something with value!
+            }
+        });
+
+        alert.setPositiveButton("Nein", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            	if(cb.isChecked()){
+            		dbh.addLog("keinFavoritAbfrage", ligaNr);
+            	}
+            }
+        });
+
+
+        alert.show();
+	}
 }

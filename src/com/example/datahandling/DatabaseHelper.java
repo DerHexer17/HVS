@@ -513,6 +513,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		c.close();
 		return aufrufe;
 	}
+	
+	public boolean keineFavoritenAbfrage(int ligaNr){
+		boolean b = false;
+		String selectQuery = "SELECT * FROM " + TABLE_LOG + " WHERE " +
+				LOG_ACTIVITY + " = 'keinFavoritAbfrage' AND " + LOG_LIGA + " = " + ligaNr;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if(c.getCount() > 0){
+			b = true;
+		}
+		
+		c.close();
+		return b;
+	}
 
 	public List<Liga> getAlleLigen() {
 		List<Liga> alleLigen = new ArrayList<Liga>();
