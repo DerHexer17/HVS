@@ -1,0 +1,39 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hvs.LigaTabActivity" >
+
+    <!--  
+    <item
+        android:id="@+id/liga_refresh_small"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_menu_refresh"
+		android:title="@string/small_update"
+
+        app:showAsAction="always" />
+        -->
+    
+    <item
+        android:id="@+id/liga_refresh_full"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_menu_refresh"
+		android:title="@string/full_update"
+        app:showAsAction="always" />
+    
+    <item 
+        android:id="@+id/menueRemoveFavorit"
+        android:title="@string/favoritWeg"
+        app:showAsAction="never" />
+   	<item
+        android:id="@+id/map"
+        android:orderInCategory="100"
+		android:title="@string/map"
+        app:showAsAction="never" />
+    <!--  
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never"/>
+-->
+</menu>

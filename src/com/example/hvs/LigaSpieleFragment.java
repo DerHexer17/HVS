@@ -197,8 +197,9 @@ public class LigaSpieleFragment extends Fragment {
 
 				ll.setVisibility(View.VISIBLE);
 			} else if (parent.getItemAtPosition(pos).toString().contains("Teamauswahl")) {
-				Toast.makeText(parent.getContext(), "Die Auswahl führt zu nix", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(parent.getContext(), "Die Auswahl führt zu nix", Toast.LENGTH_SHORT).show();
 				ll.setVisibility(View.INVISIBLE);
+				parent.setSelection(pos-1);
 
 			} else {
 				listeSpiele(dbh.getAllTeamGames(ligaNr, parent.getItemAtPosition(pos).toString()));

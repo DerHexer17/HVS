@@ -62,7 +62,11 @@
     <string name="spielWeiteresGastteamToreImSchnittTitel">Anzahl Auswärtstore im Schnitt:</string>
     <string name="spielWeiteresHeimteamSiegTitel">Höchster Heimsieg:</string>
     <string name="spielWeiteresGastteamSiegTitel">Höchster Auswärtssieg:</string>
+    <string name="spielWeiteresHeimteamBilanzTitel">Heimbilanz:</string>
+    <string name="spielWeiteresGastteamBilanzTitel">Auswärtsbilanz:</string>
     <string name="favoritHinzu">Liga zu Favoriten hinzufügen</string>
+    <string name="favoritWeg">Liga von Favoriten entfernen</string>
+    <string name="ligaKomplettNeu">Liga komplett neu laden</string>
     
     <string-array name="ebenen">
         <item>Favoriten</item>

@@ -49,7 +49,12 @@ public class SpielWeiteresFragment extends Fragment {
 		TextView gastteamSieg = (TextView) rootView.findViewById(R.id.spielWeiteresGastteamSieg);
 		gastteamSieg.setText(hoechsterAuswaertssieg(spiel.getTeamGast()));
 		
-
+		TextView heimteamBilanz = (TextView) rootView.findViewById(R.id.spielWeiteresHeimteamBilanz);
+		heimteamBilanz.setText(heimbilanz());
+		
+		TextView gastteamBilanz = (TextView) rootView.findViewById(R.id.spielWeiteresGastteamBilanz);
+		gastteamBilanz.setText(gastbilanz());
+		
 		return rootView;
 	}
 	
@@ -106,7 +111,11 @@ public class SpielWeiteresFragment extends Fragment {
 			}
 		}
 		
-		return "- gegen "+heimsieg.getTeamGast()+" ("+heimsieg.getToreHeim()+":"+heimsieg.getToreGast()+")";
+		try{
+			return "- gegen "+heimsieg.getTeamGast()+" ("+heimsieg.getToreHeim()+":"+heimsieg.getToreGast()+")";
+		}catch (Exception e){
+			return "- Noch ohne Heimsieg";
+		}
 	}
 	
 	public String hoechsterAuswaertssieg(String gastteam){
@@ -121,6 +130,46 @@ public class SpielWeiteresFragment extends Fragment {
 			}
 		}
 		
-		return "- bei "+gastsieg.getTeamHeim()+" ("+gastsieg.getToreHeim()+":"+gastsieg.getToreGast()+")";
+		try{
+			return "- bei "+gastsieg.getTeamHeim()+" ("+gastsieg.getToreHeim()+":"+gastsieg.getToreGast()+")";
+		}catch (Exception e){
+			return "- Noch ohne Auswärtssieg";
+		}
+	}
+	
+	public String heimbilanz(){
+		String heimbilanz = null;
+		int positivpunkte = 0;
+		int negativpunkte = 0;
+		int positivtore = 0;
+		int negativtore = 0;
+		for(Spiel s : dbh.getAllTeamGames(ligaNr, spiel.getTeamHeim())){
+			if(s.getTeamHeim().equals(spiel.getTeamHeim()) && s.getToreHeim() > 0){
+				positivpunkte += s.getPunkteHeim();
+				negativpunkte += s.getPunkteGast();
+				positivtore += s.getToreHeim();
+				negativtore += s.getToreGast();
+			}
+		}
+		heimbilanz = positivpunkte+":"+negativpunkte+" Punkte"+"\n"+positivtore+":"+negativtore+" Tore";
+		return heimbilanz;
+	}
+	
+	public String gastbilanz(){
+		String gastbilanz = null;
+		int positivpunkte = 0;
+		int negativpunkte = 0;
+		int positivtore = 0;
+		int negativtore = 0;
+		for(Spiel s : dbh.getAllTeamGames(ligaNr, spiel.getTeamGast())){
+			if(s.getTeamGast().equals(spiel.getTeamGast()) && s.getToreGast() > 0){
+				positivpunkte += s.getPunkteGast();
+				negativpunkte += s.getPunkteHeim();
+				positivtore += s.getToreGast();
+				negativtore += s.getToreHeim();
+			}
+		}
+		gastbilanz = positivpunkte+":"+negativpunkte+" Punkte"+"\n"+positivtore+":"+negativtore+" Tore";
+		return gastbilanz;
 	}
 }

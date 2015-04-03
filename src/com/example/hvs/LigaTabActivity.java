@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
+import com.example.internet.AsyncHttpTask;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabListener {
 
@@ -36,6 +38,8 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 	 */
 	SectionsPagerAdapter mSectionsPagerAdapter;
 	int ligaNr;
+	Liga liga;
+	DatabaseHelper dbh;
 	List<String> alleEbenen;
 	
 	/**
@@ -49,7 +53,8 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		setContentView(R.layout.activity_liga_tab);
 
 		ligaNr = getIntent().getIntExtra("liganummer", 0);
-
+		dbh = DatabaseHelper.getInstance(getApplicationContext());
+		liga = dbh.getLiga(ligaNr);
 		this.setTitle(getIntent().getStringExtra("liganame"));
 
 		// Set up the action bar.
@@ -89,7 +94,13 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.liga_tab, menu);
+		//Toast.makeText(getApplicationContext(), "Ist Liga Favorit? "+liga.isFavorit(), Toast.LENGTH_SHORT).show();
+
+		if(liga.isFavorit()){
+			getMenuInflater().inflate(R.menu.liga_tab_remove_favorit, menu);
+		}else{
+			getMenuInflater().inflate(R.menu.liga_tab_add_favorit, menu);
+		}
 		return true;
 	}
 
@@ -114,6 +125,10 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		case R.id.menueAddFavorit:
 			addLigaZuFavoriten(ligaNr);
 			return true;
+		case R.id.menueRemoveFavorit:
+			removeLigaVonFavoriten(ligaNr);
+			return true;
+		
 		}
 
 		if (id == R.id.action_settings) {
@@ -257,10 +272,13 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 	}
 	
 	public void addLigaZuFavoriten(int ligaNr){
-		DatabaseHelper dbh = DatabaseHelper.getInstance(getApplicationContext());
-		Liga l = dbh.getLiga(ligaNr);
-		l.setFavorit(true);
-		dbh.updateLiga(l);
+		liga.setFavorit(true);
+		dbh.updateLiga(liga);
+	}
+	
+	public void removeLigaVonFavoriten(int ligaNr){
+		liga.setFavorit(false);
+		dbh.updateLiga(liga);
 	}
 	
 	

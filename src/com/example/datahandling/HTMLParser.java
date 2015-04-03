@@ -144,9 +144,13 @@ public class HTMLParser {
 
 	private String parseTeam(String teamStr) {
 		String[] temp = teamStr.split("</FONT");
-		temp = temp[0].split("</a>");
 		temp = temp[0].split(">");
-		return temp[temp.length - 1];
+		String team = temp[temp.length-2].split("</a")[0]+" "+temp[temp.length-1].trim();
+		team.trim();
+		//temp = temp[0].split("</a>");
+		//temp = temp[0].split(">");
+		//return temp[temp.length - 1];
+		return team;
 	}
 
 	private int[] parseGoals(String goalStr) {

@@ -512,7 +512,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
-				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)).equals("Ja")){
 					l.setFavorit(true);
 				}else{
 					l.setFavorit(false);
@@ -547,7 +547,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
-				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)).equals("Ja")){
 					l.setFavorit(true);
 				}else{
 					l.setFavorit(false);
@@ -582,7 +582,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
-				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)).equals("Ja")){
 					l.setFavorit(true);
 				}else{
 					l.setFavorit(false);
@@ -618,7 +618,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 				l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 				l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
-				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+				if(c.getString(c.getColumnIndex(LIGA_FAVORIT)).equals("Ja")){
 					l.setFavorit(true);
 				}else{
 					l.setFavorit(false);
@@ -725,7 +725,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			l.setLink(c.getString(c.getColumnIndex(LIGA_LINK)));
 			l.setPokal(c.getInt(c.getColumnIndex(LIGA_POKAL)));
 			l.setInitial(c.getString(c.getColumnIndex(LIGA_INITIAL)));
-			if(c.getString(c.getColumnIndex(LIGA_FAVORIT)) == "Ja"){
+			if(c.getString(c.getColumnIndex(LIGA_FAVORIT)).equals("Ja")){
 				l.setFavorit(true);
 			}else{
 				l.setFavorit(false);
