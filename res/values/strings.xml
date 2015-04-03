@@ -67,6 +67,7 @@
     <string name="favoritHinzu">Liga zu Favoriten hinzufügen</string>
     <string name="favoritWeg">Liga von Favoriten entfernen</string>
     <string name="ligaKomplettNeu">Liga komplett neu laden</string>
+    <string name="startSelectAll">Alle Ligen auswählen</string>
     
     <string-array name="ebenen">
         <item>Favoriten</item>

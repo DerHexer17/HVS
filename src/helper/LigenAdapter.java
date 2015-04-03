@@ -2,6 +2,7 @@ package helper;
 
 import java.util.List;
 
+import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
 import com.example.hvs.LigaTabActivity;
 import com.example.hvs.R;
@@ -20,11 +21,13 @@ import android.widget.TextView;
 
 public class LigenAdapter extends BaseAdapter{
 	
+	DatabaseHelper dbh;
 	Context context;
     List<Liga> ligen;
     public LigenAdapter(Context context, List<Liga> ligen){
          this.context = context;
          this.ligen = ligen;
+         dbh = DatabaseHelper.getInstance(context);
        }
        @Override
        public int getCount() {
@@ -68,6 +71,7 @@ public class LigenAdapter extends BaseAdapter{
 					bundle.putString("liganame", (String) b.getText());
 					bundle.putInt("liganummer", ligaNr);
 					intent.putExtras(bundle);
+					dbh.addLog("Liga gestartet", ligaNr);
 					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 					context.startActivity(intent);
 				}

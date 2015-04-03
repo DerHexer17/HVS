@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 19;
+	private static final int DATABASE_VERSION = 20;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -57,6 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	// LOG Table - column names
 	private static final String LOG_ACTIVITY = "log_activity";
 	private static final String LOG_DATE = "log_date";
+	private static final String LOG_LIGA = "log_liga";
 
 	// UPDATE Table - column names
 	private static final String UPDATE_LIGA = "update_liga";
@@ -95,7 +96,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String CREATE_TABLE_SPIELE = "CREATE TABLE " + TABLE_SPIELE + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + SPIEL_NR + " INTEGER, " + SPIEL_DATE + " DATE, " + SPIEL_TEAM_HEIM + " TEXT, " + SPIEL_TEAM_GAST + " TEXT, " + SPIEL_TORE_HEIM + " INTEGER, " + SPIEL_TORE_GAST
 			+ " INTEGER, " + SPIEL_PUNKTE_HEIM + " INTEGER, " + SPIEL_PUNKTE_GAST + " INTEGER, " + SPIEL_SR + " TEXT, " + SPIEL_HALLE + " INTEGER, " + SPIEL_LIGA_NR + " INTEGER, " + SPIEL_SPIELTAG_NR + " INTEGER, " + SPIEL_SPIELTAG_ID + " INTEGER, " + KEY_CREATED_AT + " TEXT" + ")";
 
-	private static final String CREATE_TABLE_LOG = "CREATE TABLE " + TABLE_LOG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LOG_ACTIVITY + " TEXT, " + LOG_DATE + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
+	private static final String CREATE_TABLE_LOG = "CREATE TABLE " + TABLE_LOG + "(" + KEY_ID + " INTEGER PRIMARY KEY, " +
+			LOG_ACTIVITY + " TEXT, " + LOG_DATE + " TEXT, " +
+			LOG_LIGA + " INTEGER, " + KEY_CREATED_AT + " TEXT" + ")";
 
 	private static final String CREATE_TABLE_LIGA = "CREATE TABLE " + TABLE_LIGA + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + LIGA_NR + " INTEGER, " + LIGA_NAME + " TEXT, " + LIGA_EBENE + " TEXT, " + LIGA_GESCHLECHT + " TEXT, " + LIGA_JUGEND + " TEXT, " + LIGA_SAISON + " TEXT, " + LIGA_LINK
 			+ " TEXT, " + LIGA_POKAL + " INTEGER, " + LIGA_INITIAL + " TEXT, " + LIGA_FAVORIT + " TEXT, " + KEY_CREATED_AT + " TEXT" + ")";
@@ -189,11 +192,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return spiel_id;
 	}
 
-	public long addLog(String activity) {
+	public long addLog(String activity, int ligaNr) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
 		values.put(LOG_ACTIVITY, activity);
+		values.put(LOG_LIGA, ligaNr);
+		SimpleDateFormat sf = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+		Date d = new Date();
+		values.put(KEY_CREATED_AT, sf.format(d));
 
 		long log_id = db.insert(TABLE_LOG, null, values);
 		db.close();
@@ -491,6 +498,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		}
 		c.close();
 		return alleLogs;
+	}
+	
+	public int getCountLigaAufruf(int ligaNr){
+		int aufrufe = 0;
+		
+		String selectQuery = "SELECT * FROM " + TABLE_LOG + " WHERE " +
+				LOG_ACTIVITY + " = 'Liga gestartet' AND " + LOG_LIGA + " = " + ligaNr;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		aufrufe = c.getCount();
+		
+		c.close();
+		return aufrufe;
 	}
 
 	public List<Liga> getAlleLigen() {

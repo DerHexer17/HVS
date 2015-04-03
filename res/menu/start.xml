@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.hvs.StartActivity" >
 
+    <item 
+        android:id="@+id/startSelectAll"
+        android:title="@string/startSelectAll"
+        app:showAsAction="never" />"
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

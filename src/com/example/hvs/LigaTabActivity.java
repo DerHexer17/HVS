@@ -56,7 +56,12 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		dbh = DatabaseHelper.getInstance(getApplicationContext());
 		liga = dbh.getLiga(ligaNr);
 		this.setTitle(getIntent().getStringExtra("liganame"));
+		
+		//Toast.makeText(getApplicationContext(), "Anzahl aufrufe diese Liga: "+dbh.getCountLigaAufruf(ligaNr), Toast.LENGTH_SHORT).show();
 
+		if(dbh.getCountLigaAufruf(ligaNr) > 10){
+			addLigaZuFavoriten(ligaNr);
+		}
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);

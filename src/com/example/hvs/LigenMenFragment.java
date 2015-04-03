@@ -44,6 +44,7 @@ public class LigenMenFragment extends Fragment {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 		alleEbenenArray = getResources().getStringArray(R.array.ebenen);
 		List<String> alleEbenen = new ArrayList<String>();
+		alleEbenen.add("Favoriten");
 		for(int i = 0; i<alleEbenenArray.length; i++){
 			List<String> aktiveEbenen = dbh.getAlleAktivenEbenen("männlich");
 			for(String s : aktiveEbenen){

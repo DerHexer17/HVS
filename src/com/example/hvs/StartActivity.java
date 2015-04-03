@@ -44,7 +44,7 @@ public class StartActivity extends ActionBarActivity {
 
 		dbh = DatabaseHelper.getInstance(getApplicationContext());
 
-		dbh.addLog("App gestartet");
+		dbh.addLog("App gestartet", 0);
 
 		// Vorläufige Liste aller Ligen, die wir anbieten
 		List<Liga> ligen = new ArrayList<Liga>();
@@ -99,9 +99,14 @@ public class StartActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		switch(id){
+		case R.id.action_settings:
+			return true;
+		case R.id.startSelectAll:
+			selectAlleLigen();
 			return true;
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -238,5 +243,15 @@ public class StartActivity extends ActionBarActivity {
 			new AsyncHttpTask(0, this, initialLigen).execute(initialLigen.get(0).getLink());
 		}
 
+	}
+	
+	public void selectAlleLigen(){
+		TableLayout ligenwahl = (TableLayout) findViewById(R.id.tableLigaAuswahl);
+
+		for (int i = 0; i < ligenwahl.getChildCount(); i++) {
+			TableRow temptr = (TableRow) ligenwahl.getChildAt(i);
+			CheckBox tempcb = (CheckBox) temptr.getChildAt(0);
+			tempcb.setChecked(true);
+		}
 	}
 }
