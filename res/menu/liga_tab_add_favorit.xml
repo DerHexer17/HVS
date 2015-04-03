@@ -29,12 +29,12 @@
         android:orderInCategory="100"
 		android:title="@string/map"
         app:showAsAction="never" />
-   	<!-- 
+   	
    	<item 
    	    android:id="@+id/ligaKomplettNeu"
    	    android:title="@string/ligaKomplettNeu"
    	    app:showAsAction="never" />"
-     
+     <!-- 
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

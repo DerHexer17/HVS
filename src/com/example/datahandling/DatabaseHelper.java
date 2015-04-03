@@ -560,6 +560,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		return alleLigen;
 	}
 	
+	public List<String> getAlleAktivenEbenen(String geschlecht){
+		List<String> aktiveEbenen = new ArrayList<String>();
+		
+		String selectQuery = "SELECT " + LIGA_EBENE + " FROM " + TABLE_LIGA +
+				" WHERE " + LIGA_INITIAL + " = 'Ja'" +
+				" AND " + LIGA_GESCHLECHT + " = '" + geschlecht + "'" +
+				" GROUP BY " + LIGA_EBENE;
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+
+		if (c.moveToFirst()) {
+			do {
+				aktiveEbenen.add(c.getString(c.getColumnIndex(LIGA_EBENE)));
+				
+			} while (c.moveToNext());
+		}
+		c.close();
+		return aktiveEbenen;
+	}
+	
 	public List<Liga> getAlleLigenFavoriten(String geschlecht) {
 		List<Liga> alleLigen = new ArrayList<Liga>();
 		String selectQuery = "SELECT  * FROM " + TABLE_LIGA +

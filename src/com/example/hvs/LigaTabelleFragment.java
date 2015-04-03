@@ -101,7 +101,7 @@ public class LigaTabelleFragment extends Fragment {
 				t.setGravity(Gravity.CENTER);
 				row.addView(t);
 			}
-			row.setPadding(0, 0, 0, 10);
+			row.setPadding(0, 20, 0, 20);
 			row.setBackgroundResource(R.drawable.table_back);
 			table.addView(row, 1);
 		}

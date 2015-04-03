@@ -110,7 +110,8 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 				result = 1; // Successful
 
 			} else {
-				result = 0; // "Failed to fetch data!";
+				result = 0;
+				Log.d("Async", "Statuscode: "+statusCode); // "Failed to fetch data!";
 			}
 
 		} catch (Exception e) {
@@ -166,7 +167,7 @@ public class AsyncHttpTask extends AsyncTask<String, Void, Integer> {
 			}
 		} else {
 			String TAG = "PostExecute";
-			Log.e(TAG, "Failed to fetch data!");
+			Log.e(TAG, "Failed to fetch data!"+result);
 		}
 	}
 

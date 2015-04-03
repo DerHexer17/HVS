@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,7 +33,7 @@ import com.example.datahandling.Liga;
 public class LigenMenFragment extends Fragment {
 
 	DatabaseHelper dbh;
-	String[] alleEbenen;
+	String[] alleEbenenArray;
 	List<Liga> alleLigenMen;
 	View rootView;
 
@@ -40,10 +41,25 @@ public class LigenMenFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 		View rootView = inflater.inflate(R.layout.fragment_liga_men, container, false);
-		
-		alleEbenen = getResources().getStringArray(R.array.ebenen);
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
-		
+		alleEbenenArray = getResources().getStringArray(R.array.ebenen);
+		List<String> alleEbenen = new ArrayList<String>();
+		for(int i = 0; i<alleEbenenArray.length; i++){
+			List<String> aktiveEbenen = dbh.getAlleAktivenEbenen("männlich");
+			for(String s : aktiveEbenen){
+				String temp = null;
+				if(alleEbenenArray[i].split(" ").length == 1){
+					temp = alleEbenenArray[i];
+				}else{
+					temp = alleEbenenArray[i].split("- ")[1];
+				}
+				if(temp.equals(s)){
+					alleEbenen.add(alleEbenenArray[i]);
+				}
+			}
+			
+		}
+				
 		Spinner spinnerEbenenMen = (Spinner) rootView.findViewById(R.id.spinnerEbenenMen);
 		ArrayAdapter<String> ebenenMenAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), R.layout.spinner_item, alleEbenen);
 		ebenenMenAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);

@@ -115,7 +115,13 @@ public class HTMLParser {
 	private int parseNumber(String numberStr) {
 		String[] temp = numberStr.split("</FONT");
 		temp = temp[0].split(">");
-		return Integer.parseInt(temp[temp.length - 1]);
+		int number = 0;
+		try{
+			number = Integer.parseInt(temp[temp.length - 1]);
+		}catch (Exception e){
+			number = 0;
+		}
+		return number;
 	}
 
 	private Date parseDate(String dateStr, String timeStr) {
@@ -178,16 +184,21 @@ public class HTMLParser {
 
 	private int parseField(String fieldStr) {
 
-		String[] temp = fieldStr.split("</FONT>");
-		temp = temp[0].split("<a href=");
-		temp = temp[1].split(">");
-
-		int tempHallenNr = Integer.parseInt(temp[1].split("<")[0]);
-
-		String tempHallenLink = temp[0].split("\\.\\.")[1].split(" ")[0];
-		hallenMap.put(tempHallenNr, "http://hvs-handball.de" + tempHallenLink);
-
-		return tempHallenNr;
+		int tempHallenNr;
+		try{
+			String[] temp = fieldStr.split("</FONT>");
+			temp = temp[0].split("<a href=");
+			temp = temp[1].split(">");
+	
+			tempHallenNr = Integer.parseInt(temp[1].split("<")[0]);
+	
+			String tempHallenLink = temp[0].split("\\.\\.")[1].split(" ")[0];
+			hallenMap.put(tempHallenNr, "http://hvs-handball.de" + tempHallenLink);
+	
+			return tempHallenNr;
+		}catch (Exception e){
+			return 0;
+		}
 	}
 
 	private int[] parsePoints(String pointsStr) {
