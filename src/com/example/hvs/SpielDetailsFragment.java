@@ -1,5 +1,7 @@
 package com.example.hvs;
 
+import helper.SpieleAdapter;
+
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -8,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.datahandling.DatabaseHelper;
@@ -33,6 +36,7 @@ public class SpielDetailsFragment extends Fragment {
 		dbh = DatabaseHelper.getInstance(getActivity().getApplicationContext());
 		spiel = dbh.getGame(ligaNr, spielNr);
 		halle = dbh.getHalle(spiel.getHalle());
+		
 
 		TextView titel = (TextView) rootView.findViewById(R.id.textTitelSpielDetail);
 		TextView ergebnis = (TextView) rootView.findViewById(R.id.textErgebnisSpielDetail);
@@ -61,6 +65,10 @@ public class SpielDetailsFragment extends Fragment {
 		if (textSR.getText().toString().split(" ")[1].equals("null")) {
 			textSR.setText("Schiedsrichter: unbekannt");
 		}
+		
+		ListView lv = (ListView) rootView.findViewById(R.id.listWeitereSpieleInHalle);
+		SimpleDateFormat sf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+		lv.setAdapter(new SpieleAdapter(getActivity().getApplicationContext(), dbh.getAllSpieleInHalle(halle.getHallenNr(), sf.format(spiel.getDate())), dbh, 1));
 
 		return rootView;
 	}

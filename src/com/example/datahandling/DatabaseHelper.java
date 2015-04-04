@@ -446,7 +446,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		//SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
 		//String datum = formatter.parse(date);
 		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_HALLE +
-				" = " + hallenNr + " AND " + SPIEL_DATE + " = " + date;
+				" = " + hallenNr;
 
 		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor c = db.rawQuery(selectQuery, null);
@@ -474,13 +474,98 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 				s.setLigaNr(c.getInt(c.getColumnIndex(SPIEL_LIGA_NR)));
 				s.setSpieltagsNr(c.getInt(c.getColumnIndex(SPIEL_SPIELTAG_NR)));
 
+				SimpleDateFormat sf = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+				boolean added = false;
+				if(sf.format(s.getDate()).equals(date)){
+					try{
+						for (Spiel sp : spiele){
+					
+							if(s.getDate().before(sp.getDate())){
+								spiele.add(spiele.indexOf(sp), s);
+								added = true;
+							}
+						
+						}
+					}catch (Exception e){
+						Log.d("Hallenspiele", "Wahrscheinlich nur das eine Spiel in der Halle");
+					}
+					if(added == false){
+						spiele.add(s);
+						
+					}
+				}
 				// td.setCreatedAt(c.getString(c.getColumnIndex(KEY_CREATED_AT)));
 
 				// adding to todo list
-				spiele.add(s);
+				
 			} while (c.moveToNext());
 		}
 		c.close();
+		
+		return spiele;
+	}
+	
+	public List<Spiel> getAllSpieleSchiedsrichter(String sr){
+		List<Spiel> spiele = new ArrayList<Spiel>();
+		//SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMANY);
+		//String datum = formatter.parse(date);
+		String selectQuery = "SELECT  * FROM " + TABLE_SPIELE + " WHERE " + SPIEL_SR +
+				" = '" + sr + "'";
+
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor c = db.rawQuery(selectQuery, null);
+
+
+		// looping through all rows and adding to list
+		if (c.moveToFirst()) {
+			do {
+				Spiel s = new Spiel();
+				try {
+					SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.GERMANY);
+					s.setDate(formatter.parse(c.getString(c.getColumnIndex(SPIEL_DATE))));
+				} catch (Exception ex) {
+					ex.printStackTrace();
+				}
+				s.setSpielNr(c.getInt(c.getColumnIndex(SPIEL_NR)));
+				s.setTeamHeim(c.getString(c.getColumnIndex(SPIEL_TEAM_HEIM)));
+				s.setTeamGast(c.getString(c.getColumnIndex(SPIEL_TEAM_GAST)));
+				s.setToreHeim(c.getInt(c.getColumnIndex(SPIEL_TORE_HEIM)));
+				s.setToreGast(c.getInt(c.getColumnIndex(SPIEL_TORE_GAST)));
+				s.setPunkteHeim(c.getInt(c.getColumnIndex(SPIEL_PUNKTE_HEIM)));
+				s.setPunkteGast(c.getInt(c.getColumnIndex(SPIEL_PUNKTE_GAST)));
+				s.setSchiedsrichter(c.getString(c.getColumnIndex(SPIEL_SR)));
+				s.setHalle(c.getInt(c.getColumnIndex(SPIEL_HALLE)));
+				s.setLigaNr(c.getInt(c.getColumnIndex(SPIEL_LIGA_NR)));
+				s.setSpieltagsNr(c.getInt(c.getColumnIndex(SPIEL_SPIELTAG_NR)));
+
+				
+				boolean added = false;
+				
+				try{
+					for (Spiel sp : spiele){
+				
+						if(s.getDate().before(sp.getDate())){
+							spiele.add(spiele.indexOf(sp), s);
+							added = true;
+						}
+					
+					}
+				}catch (Exception e){
+					Log.d("Schiedsrichter Liste", "Unbekanntes Problem, kann man aber so abfangen");
+				}
+				if(added == false){
+					spiele.add(s);
+					
+				}
+				
+				// td.setCreatedAt(c.getString(c.getColumnIndex(KEY_CREATED_AT)));
+
+				// adding to todo list
+				
+			} while (c.moveToNext());
+		}
+		c.close();
+		
 		return spiele;
 	}
 

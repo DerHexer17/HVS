@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Halle;
@@ -105,7 +106,9 @@ public class SpielActivity extends ActionBarActivity implements ActionBar.TabLis
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		
+		if (id == R.id.zeigeSR) {
+			zeigeSR();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -243,6 +246,14 @@ public class SpielActivity extends ActionBarActivity implements ActionBar.TabLis
 		}
 		// geo:0,0?q=my+street+address
 		intent.setData(Uri.parse(mapsString));
+		startActivity(intent);
+	}
+	
+	public void zeigeSR(){
+		TextView tx = (TextView) findViewById(R.id.spielDetailsSR);
+		String sr = tx.getText().toString().split(": ")[1];
+		Intent intent = new Intent(getApplicationContext(), SchiedsrichterActivity.class);
+		intent.putExtra("sr", sr);
 		startActivity(intent);
 	}
 

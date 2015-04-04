@@ -104,6 +104,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hvs.LigawahlActivity" />
         </activity>
+        <activity
+            android:name=".SchiedsrichterActivity"
+            android:label="@string/title_activity_schiedsrichter"
+            android:parentActivityName=".SpielActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.hvs.SpielActivity" />
+        </activity>
     </application>
 
 </manifest>

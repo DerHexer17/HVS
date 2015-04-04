@@ -68,27 +68,31 @@
     <string name="favoritWeg">Liga von Favoriten entfernen</string>
     <string name="ligaKomplettNeu">Liga komplett neu laden</string>
     <string name="startSelectAll">Alle Ligen auswählen</string>
-    
+    <string name="weitereSpieleInHalleTitel">Alle Spiele an dem Tag in der Halle:</string>
+    <string name="zeigeSR">Alle Spiele der Schiedsrichter anzeigen</string>
+
     <string-array name="ebenen">
         <item>Favoriten</item>
         <item>HVS</item>
-		<item>- Sachsen Mitte</item>
-		<item>-- Kreis Dresden</item>
-		<item>-- Kreis Elbe/Röder</item>
-		<item>-- Kreis Pirna</item>
-		<item>- Leipzig</item>
-		<item>-- Kreis Leipzig</item>
-		<item>-- Kreis Leipzig-Land</item>
-		<item>-- Nordsachsen</item>
-		<item>- Chemnitz</item>
-		<item>-- Kreis Chemnitz</item>
-		<item>-- Kreis Mittelsachsen</item>
-		<item>-- Kreis Erzgebirge</item>
-		<item>-- Kreis Zwickau</item>
-		<item>-- Kreis Vogtland</item>
-		<item>- Ostsachsen</item>
-		<item>-- Kreis Bautzen</item>
-		<item>-- Kreis Oberlausitz</item>        
+        <item>- Sachsen Mitte</item>
+        <item>-- Kreis Dresden</item>
+        <item>-- Kreis Elbe/Röder</item>
+        <item>-- Kreis Pirna</item>
+        <item>- Leipzig</item>
+        <item>-- Kreis Leipzig</item>
+        <item>-- Kreis Leipzig-Land</item>
+        <item>-- Nordsachsen</item>
+        <item>- Chemnitz</item>
+        <item>-- Kreis Chemnitz</item>
+        <item>-- Kreis Mittelsachsen</item>
+        <item>-- Kreis Erzgebirge</item>
+        <item>-- Kreis Zwickau</item>
+        <item>-- Kreis Vogtland</item>
+        <item>- Ostsachsen</item>
+        <item>-- Kreis Bautzen</item>
+        <item>-- Kreis Oberlausitz</item>
     </string-array>
+
+    <string name="title_activity_schiedsrichter">SchiedsrichterActivity</string>
 
 </resources>
