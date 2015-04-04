@@ -1,5 +1,6 @@
 package com.example.hvs;
 
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
@@ -106,11 +107,15 @@ public class SpielActivity extends ActionBarActivity implements ActionBar.TabLis
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		
-		if (id == R.id.zeigeSR) {
+		switch(id){
+		case R.id.zeigeSR:
 			zeigeSR();
 			return true;
+		case R.id.teilenWhatsApp:
+			shareWithWhatsApp();
+			return true;
 		}
+		
 		return super.onOptionsItemSelected(item);
 	}
 
@@ -255,6 +260,21 @@ public class SpielActivity extends ActionBarActivity implements ActionBar.TabLis
 		Intent intent = new Intent(getApplicationContext(), SchiedsrichterActivity.class);
 		intent.putExtra("sr", sr);
 		startActivity(intent);
+	}
+	
+	public void shareWithWhatsApp(){
+		Intent sendIntent = new Intent();
+		sendIntent.setAction(Intent.ACTION_SEND);
+		SimpleDateFormat sf = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.GERMANY);
+		String text = "Nicht vergessen: "+sf.format(spiel.getDate())+" Uhr, "+spiel.getTeamHeim()+
+				" gegen "+spiel.getTeamGast()+" (In der Halle "+halle.getName()+", "+
+				halle.getStrasse()+" "+halle.getHausnummer()+" in "+
+				halle.getPlz()+" "+halle.getOrt()+")";
+		sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+		sendIntent.setType("text/plain");
+		sendIntent.setPackage("com.whatsapp");
+		startActivity(sendIntent);
+				
 	}
 
 }

@@ -70,6 +70,7 @@
     <string name="startSelectAll">Alle Ligen auswählen</string>
     <string name="weitereSpieleInHalleTitel">Alle Spiele an dem Tag in der Halle:</string>
     <string name="zeigeSR">Alle Spiele der Schiedsrichter anzeigen</string>
+    <string name="teilenWhatsApp">Über WhatsApp teilen</string>
 
     <string-array name="ebenen">
         <item>Favoriten</item>
