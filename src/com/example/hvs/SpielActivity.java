@@ -266,8 +266,14 @@ public class SpielActivity extends ActionBarActivity implements ActionBar.TabLis
 		Intent sendIntent = new Intent();
 		sendIntent.setAction(Intent.ACTION_SEND);
 		SimpleDateFormat sf = new SimpleDateFormat("dd.MM.yyyy, HH:mm", Locale.GERMANY);
-		String text = "Nicht vergessen: "+sf.format(spiel.getDate())+" Uhr, "+spiel.getTeamHeim()+
-				" gegen "+spiel.getTeamGast()+" (In der Halle "+halle.getName()+", "+
+		String Spielhalle = null;
+		if(halle.getName().toLowerCase().contains("halle")){
+			Spielhalle = halle.getName();
+		}else{
+			Spielhalle = "Halle "+halle.getName();
+		}
+		String text = "-- DIE HVS APP PRÄSENTIERT -- "+"\n"+sf.format(spiel.getDate())+" Uhr, "+spiel.getTeamHeim()+
+				" gegen "+spiel.getTeamGast()+" (In der "+Spielhalle+", "+
 				halle.getStrasse()+" "+halle.getHausnummer()+" in "+
 				halle.getPlz()+" "+halle.getOrt()+")";
 		sendIntent.putExtra(Intent.EXTRA_TEXT, text);

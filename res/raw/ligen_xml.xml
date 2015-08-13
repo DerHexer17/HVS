@@ -3,84 +3,85 @@
     
     <liga>
         <nummer>10000</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10000&amp;titel=Sachsenliga%20%20M%E4nner%20%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10000&amp;titel=Sachsenliga%20%20M%E4nner%20%202015/16</link>
         <name>Sachsenliga</name>
         <ebene>HVS</ebene>
         <geschlecht>männlich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
         <nummer>10001</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10001&amp;titel=Sachsenliga%20%20Frauen%20%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10001&amp;titel=Sachsenliga%20%20Frauen%20%202015/16</link>
         <name>Sachsenliga</name>
         <ebene>HVS</ebene>
         <geschlecht>weiblich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
         <nummer>10007</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10007&amp;titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20Ost%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10007&amp;titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20Ost%202015/16</link>
         <name>Verbandsliga Sachsen-Ost</name>
         <ebene>HVS</ebene>
         <geschlecht>männlich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
         <nummer>10008</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10008&amp;titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20West%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10008&amp;titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20West%202015/16</link>
         <name>Verbandsliga Sachsen-West</name>
         <ebene>HVS</ebene>
         <geschlecht>männlich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
         <nummer>10009</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10009&amp;titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20Ost%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10009&amp;titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20Ost%202015/16</link>
         <name>Verbandsliga Sachsen-Ost</name>
         <ebene>HVS</ebene>
         <geschlecht>weiblich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
         <nummer>10010</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10010&amp;titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20West%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10010&amp;titel=Verbandsliga%20Sachsen%20Frauen%20Staffel%20West%202015/16</link>
         <name>Verbandsliga Sachsen-West</name>
         <ebene>HVS</ebene>
         <geschlecht>weiblich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
         <nummer>10048</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10048&amp;titel=Bezirksliga%20Sachsen-Mitte%20M%E4nner%20%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10048&amp;titel=Bezirksliga%20Sachsen-Mitte%20M%E4nner%20%202015/16</link>
         <name>Bezirksliga Sachsen-Mitte</name>
         <ebene>Sachsen Mitte</ebene>
         <geschlecht>männlich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
 	<liga>
         <nummer>10049</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10049&amp;titel=Bezirksliga%20Sachsen-Mitte%20Frauen%20%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10049&amp;titel=Bezirksliga%20Sachsen-Mitte%20Frauen%20%202015/16</link>
         <name>Bezirksliga Sachsen-Mitte</name>
         <ebene>Sachsen Mitte</ebene>
         <geschlecht>weiblich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
+	<!--
 	<liga>
         <nummer>10037</nummer>
         <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10037&amp;titel=Ostsachsenliga%20%20M%E4nner%20%202014/15</link>
@@ -161,16 +162,18 @@
 		<jugend>D</jugend>
         <pokal>0</pokal>
     </liga>
+	-->
 	<liga>
         <nummer>10050</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10050&amp;titel=Bezirksklasse%20Sachsen-Mitte%20M%E4nner%20%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10050&amp;titel=Bezirksklasse%20Sachsen-Mitte%20M%E4nner%20%202015/16</link>
         <name>Bezirksklasse Sachsen-Mitte</name>
         <ebene>Sachsen Mitte</ebene>
         <geschlecht>männlich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
 		<jugend></jugend>
         <pokal>0</pokal>
     </liga>
+	<!--
 	<liga>
         <nummer>10539</nummer>
         <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10539&amp;titel=Bezirksliga%20Sachsen-Mitte%20m%E4nnliche%20Jugend%20A%20%202014/15</link>
@@ -671,5 +674,5 @@
 		<jugend>F (gemischt)</jugend>
         <pokal>0</pokal>
     </liga>
-    
+    -->
 </ligen>

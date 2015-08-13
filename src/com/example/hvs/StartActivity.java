@@ -1,7 +1,9 @@
 package com.example.hvs;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.FileHandler;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -32,6 +34,7 @@ import com.example.internet.AsyncHttpTask;
 
 public class StartActivity extends ActionBarActivity {
 
+	public static FileHandler handler;
 	public static int ITERATIONS;
 	DatabaseHelper dbh;
 	int ladestatus;
@@ -41,6 +44,15 @@ public class StartActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
+		
+		try {
+			handler = new FileHandler("test");
+			Log.d("Logging", "Filehandler wurde erstellt "+handler.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Log.d("Logging", "Filehandler konnte nicht erstellt werden");
+		}
 
 		dbh = DatabaseHelper.getInstance(getApplicationContext());
 

@@ -53,7 +53,7 @@
     <string name="title_activity_map">MapActivity</string>
     <string name="map">Öffne Karte</string>
     <string name="help">Hilfe</string>
-    <string name="about">Über die App</string>
+    <string name="about">Infos &amp; Hilfe</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -71,7 +71,15 @@
     <string name="weitereSpieleInHalleTitel">Alle Spiele an dem Tag in der Halle:</string>
     <string name="zeigeSR">Alle Spiele der Schiedsrichter anzeigen</string>
     <string name="teilenWhatsApp">Über WhatsApp teilen</string>
-
+    <string name="about_tab_title1">Über die App</string>
+    <string name="about_tab_title2">Changelog</string>
+    <string name="about_tab_title3">Impressum</string>
+    <string name="ligaEntfernen">Liga Zurücksetzen</string>
+    <string name="disclaimer">HINWEIS: Diese App ist kein offizielles Produkt des HVS sondern wurde privat und unabhängig entwickelt. Alle verwendeten Daten sind frei und öffentlich auf der Website des HVS zugänglich!</string>
+	<string name="impressum">Alle inhaltlichen Rechte an den Daten liegen beim Handball-Verband Sachsen e.V.\n\n
+	    Verantwortlich für Entwicklung und Support dieser App:\n\nHendrik Thüs\nSaxoniastr. 20\n01159 Dresden</string>
+	<string name="buttonImpressung">Email an Entwickler</string>    
+    
     <string-array name="ebenen">
         <item>Favoriten</item>
         <item>HVS</item>

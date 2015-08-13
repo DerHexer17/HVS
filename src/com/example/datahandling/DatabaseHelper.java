@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	private static final String TAG = "DatabaseHelper";
 
 	// Database Version
-	private static final int DATABASE_VERSION = 20;
+	private static final int DATABASE_VERSION = 22;
 
 	// Database Name
 	private static final String DATABASE_NAME = "hvsData";
@@ -970,6 +970,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 		db.close();
 
+		return i;
+	}
+	
+	public int deleteAllGamesFromLeague(int ligaNr){
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		int i = db.delete(TABLE_SPIELE, SPIEL_LIGA_NR + " = " + ligaNr, null);
+		
+		db.close();
+		
 		return i;
 	}
 

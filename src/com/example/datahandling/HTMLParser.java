@@ -81,8 +81,8 @@ public class HTMLParser {
 
 		spiel.setSpielNr(parseNumber(numberStr));
 
-		spiel.setTeamHeim(parseTeam(teamHomeStr));
-		spiel.setTeamGast(parseTeam(teamGuestStr));
+		spiel.setTeamHeim(parseTeam(teamHomeStr).trim());
+		spiel.setTeamGast(parseTeam(teamGuestStr).trim());
 
 		if (!goalOrRefStr.contains(":")) {
 			if (update == 1) {

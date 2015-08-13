@@ -4,6 +4,8 @@ package com.example.hvs;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.example.datahandling.DatabaseHelper;
 import com.example.datahandling.Liga;
@@ -20,6 +22,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +47,7 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 	Liga liga;
 	DatabaseHelper dbh;
 	List<String> alleEbenen;
+	String TAG = "logging";
 	
 	/**
 	 * The {@link ViewPager} that will host the section contents.
@@ -53,9 +57,12 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		//LOG = Logger.getLogger(this.getClass().getName());
+		//LOG.addHandler(StartActivity.handler);
 		setContentView(R.layout.activity_liga_tab);
 
 		ligaNr = getIntent().getIntExtra("liganummer", 0);
+		Log.d(TAG, "Liga geladen;ligaNr: "+ligaNr);
 		dbh = DatabaseHelper.getInstance(getApplicationContext());
 		liga = dbh.getLiga(ligaNr);
 		this.setTitle(getIntent().getStringExtra("liganame"));
@@ -101,6 +108,13 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 	}
 
 	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		
+		super.onStop();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		//Toast.makeText(getApplicationContext(), "Ist Liga Favorit? "+liga.isFavorit(), Toast.LENGTH_SHORT).show();
@@ -137,9 +151,10 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 		case R.id.menueRemoveFavorit:
 			removeLigaVonFavoriten(ligaNr);
 			return true;
-		/*case R.id.ligaKomplettNeu:
-			liga.setInitial("Nein");
-			dbh.updateLiga(liga);*/
+		case R.id.ligaZuruecksetzen:
+			ligaEntfernen();
+			return true;
+		
 		}
 
 		if (id == R.id.action_settings) {
@@ -322,5 +337,18 @@ public class LigaTabActivity extends ActionBarActivity implements ActionBar.TabL
 
 
         alert.show();
+	}
+	
+	public int ligaEntfernen(){
+		Liga l = dbh.getLiga(ligaNr);
+		l.setInitial("Nein");
+		dbh.updateLiga(l);
+		
+		int i = dbh.deleteAllGamesFromLeague(ligaNr);
+		Toast.makeText(getApplicationContext(), "Anzahl gelöschter Spiele: "+i, Toast.LENGTH_SHORT).show();
+		
+		Intent intent = new Intent(getApplicationContext(), LigawahlActivity.class);
+		startActivity(intent);
+		return i;
 	}
 }

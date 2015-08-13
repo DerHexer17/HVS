@@ -29,6 +29,11 @@
         android:orderInCategory="100"
 		android:title="@string/map"
         app:showAsAction="never" />
+   	
+   	<item 
+   	    android:id="@+id/ligaZuruecksetzen"
+   	    android:title="@string/ligaEntfernen"
+   	    app:showAsAction="never" />
    	<!-- 
    	<item 
    	    android:id="@+id/ligaKomplettNeu"

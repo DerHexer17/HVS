@@ -21,13 +21,14 @@
     </liga>
 	<liga>
         <nummer>10007</nummer>
-        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10007&amp;titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20Ost%202014/15</link>
+        <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10007&amp;titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20Ost%202015/16</link>
         <name>Verbandsliga Sachsen-Ost</name>
         <ebene>HVS</ebene>
         <geschlecht>männlich</geschlecht>
-        <saison>2014/2015</saison>
+        <saison>2015/2016</saison>
         <pokal>0</pokal>
     </liga>
+	<!--
 	<liga>
         <nummer>10008</nummer>
         <link>http://www.hvs-handball.de/_stdVerband/Liga_Spiele.asp?M_lfdNr=10008&amp;titel=Verbandsliga%20Sachsen%20M%E4nner%20Staffel%20West%202014/15</link>
@@ -73,5 +74,5 @@
         <saison>2014/2015</saison>
         <pokal>0</pokal>
     </liga>
-    
+    -->
 </ligen>
